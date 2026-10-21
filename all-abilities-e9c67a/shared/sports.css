@@ -1,0 +1,16 @@
+/* Main-site sports animations (from css/styles.css), reused */
+.aas-scene{width:100%;height:auto;display:block}
+.shot-b{transform:translate(40px,250px);opacity:0;animation:shotB 9s ease-in-out infinite}
+@keyframes shotB{0%,70%{transform:translate(40px,250px);opacity:0}72%{opacity:1}82%{transform:translate(150px,30px)}88%{transform:translate(180px,100px)}94%{transform:translate(180px,215px);opacity:1}100%{transform:translate(180px,215px);opacity:0}}
+.hoop-net{transform-origin:180px 104px;animation:netB 9s ease-in-out infinite}
+@keyframes netB{0%,87%,100%{transform:none}90%{transform:scaleY(1.18) scaleX(.94)}93%{transform:scaleY(.95)}}
+.shot-s{transform:translate(180px,285px);opacity:0;animation:shotS 11s cubic-bezier(.3,.6,.4,1) infinite;animation-delay:3s}
+@keyframes shotS{0%,70%{transform:translate(180px,285px) scale(1.7) rotate(0);opacity:0}72%{opacity:1}84%{transform:translate(206px,130px) scale(1.25) rotate(540deg);opacity:1}93%{transform:translate(204px,142px) scale(1.2) rotate(600deg);opacity:1}100%{transform:translate(204px,148px) scale(1.2);opacity:0}}
+.goal-net{transform-origin:180px 160px;transform-box:view-box;animation:ripple 11s ease-out infinite;animation-delay:3s}
+@keyframes ripple{0%,83%,100%{transform:none}86%{transform:scale(1.06,.9) translateY(-4px)}89%{transform:scale(.97,1.04)}92%{transform:scale(1.02,.98)}}
+.shot-b,.hoop-net{transform-box:view-box}
+.sp-ico{transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.sport:hover .sp-ico,.sport.in .sp-ico{animation:wiggle .9s ease}
+@keyframes wiggle{25%{transform:rotate(-12deg)}50%{transform:rotate(10deg) scale(1.08)}75%{transform:rotate(-5deg)}}
+[data-photo-slot]{position:relative;display:grid;place-items:center;text-align:center;border:2px dashed currentColor;border-radius:18px;font:600 13px/1.4 Inter,system-ui,sans-serif;letter-spacing:.04em;opacity:.85;padding:18px;min-height:180px}
+@media (prefers-reduced-motion:reduce){.shot-b,.shot-s{display:none}.hoop-net,.goal-net,.sport .sp-ico{animation:none!important}}
