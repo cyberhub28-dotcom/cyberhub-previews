@@ -21,7 +21,7 @@
     r.addEventListener('input',set);set();
   });
   var els=d.querySelectorAll('.rv');
-  if('IntersectionObserver' in window){
+  if('IntersectionObserver' in window&&!/[?&]static\b/.test(location.search)){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
     },{rootMargin:'0px 0px -8% 0px'});
