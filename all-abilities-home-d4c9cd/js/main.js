@@ -1,52 +1,187 @@
 document.documentElement.classList.add('js');
-document.addEventListener('DOMContentLoaded',function(){
-  var b=document.querySelector('.menu-btn'),n=document.getElementById('site-nav');
-  if(b&&n){b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){n.classList.remove('open');b.setAttribute('aria-expanded','false');b.focus()}})}
-  document.querySelectorAll('form[data-placeholder]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();
-    var m=f.querySelector('.form-msg');if(f.checkValidity()){m.textContent='Thanks! This is a draft form and nothing was sent. The club’s own form service will be connected before launch.';}m.focus()})});
+
+var EMAIL = 'amber.davidson@allabilitiessportsclub.com';
+
+document.addEventListener('DOMContentLoaded', function () {
+  setupMenu();
+  setupForms();
+  setupPrefill();
+  setupSticky();
+  setupIntro();
 });
-/* Home intro (added only by JS; once per session; skipped for reduced motion) */
-(function(){
-  var KEY='aascIntroSeen';
-  function seen(){try{return sessionStorage.getItem(KEY)}catch(e){return 1}}
-  function mark(){try{sessionStorage.setItem(KEY,'1')}catch(e){}}
-  if(seen()||!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  function run(){
-    var hero=document.querySelector('section.hero');if(!hero)return;mark();
-    var o=document.createElement('div');o.className='intro';o.setAttribute('aria-hidden','true');
-    var balls=hero.querySelectorAll('.ball-float svg'),bh='';
-    for(var i=0;i<balls.length;i++)bh+='<span class="ib ib'+i+'">'+balls[i].outerHTML+'</span>';
-    var conf='';for(var j=0;j<18;j++)conf+='<i style="--a:'+(j*20)+'deg;--d:'+(120+(j%3)*50)+'px;--c:'+['#F08A24','#A9DB86','#8FD0EE','#FFD166'][j%4]+'"></i>';
-    o.innerHTML='<div class="intro-balls">'+bh+'</div><div class="intro-logo"><img src="assets/img/logo-full.webp" alt=""><div class="intro-burst">'+conf+'</div></div>';
-    var s=document.createElement('button');s.type='button';s.className='intro-skip';s.textContent='Skip intro';
-    document.body.appendChild(o);document.body.appendChild(s);
-    var done=false,t;
-    function end(fast){if(done)return;done=true;clearTimeout(t);
-      document.removeEventListener('keydown',kd);
-      if(fast){o.remove();s.remove();return}
-      o.classList.add('out');s.remove();setTimeout(function(){o.remove()},650)}
-    function kd(e){if(e.key==='Escape')end(true)}
-    s.addEventListener('click',function(){end(true)});o.addEventListener('click',function(){end(true)});
-    document.addEventListener('keydown',kd);
-    t=setTimeout(function(){end(false)},1750);
+
+function setupMenu() {
+  var button = document.querySelector('.menu-btn');
+  var nav = document.getElementById('site-nav');
+  if (!button || !nav) return;
+
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    button.textContent = open ? 'Close' : 'Menu';
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
-})();
-/* Round 2: reveals, scroll progress, countdown ball (JS-only; no-ops for reduced motion) */
-document.addEventListener('DOMContentLoaded',function(){
-  if(!window.matchMedia||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  var ball=(document.querySelector('.ball-float svg')||{}).outerHTML||'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28" fill="#F08A24" stroke="#fff" stroke-width="3"/><path d="M4 32h56M32 4v56" stroke="#fff" stroke-width="3"/></svg>';
-  if('IntersectionObserver' in window){
-    var els=document.querySelectorAll('main h2, main .page-hero h1, main .page-hero p, main .grid>*, main .notice, main .sponsors>*, main fieldset, main .btns'),io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-    els.forEach(function(el){var p=el.parentElement,i=Array.prototype.indexOf.call(p.children,el);el.style.setProperty('--rd',Math.min(i,5)*0.08+'s');el.classList.add('rv');io.observe(el)});
+
+  button.addEventListener('click', function () {
+    setOpen(!nav.classList.contains('open'));
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && nav.classList.contains('open')) {
+      setOpen(false);
+      button.focus();
+    }
+  });
+}
+
+function setupForms() {
+  document.querySelectorAll('form[data-mail]').forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var status = form.querySelector('.form-msg');
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      var subject = form.getAttribute('data-subject') || 'All Abilities Sports Club';
+      var interest = valueOf(form, 'interest');
+      if (interest) subject = 'All Abilities Sports Club: ' + labelInterest(interest);
+      var topic = valueOf(form, 'topic');
+      if (topic) subject = 'All Abilities Sports Club: ' + topic;
+
+      var lines = [];
+      Array.prototype.forEach.call(form.elements, function (field) {
+        if (!field.name || field.type === 'submit' || field.type === 'button') return;
+        if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) return;
+        var label = field.name.replace(/[-_]/g, ' ');
+        lines.push(label + ': ' + field.value.trim());
+      });
+
+      var href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+      if (status) {
+        status.textContent = 'Your email app should open with this message addressed to ' + EMAIL + '. If it does not, copy your note and email the club directly.';
+        status.focus();
+      }
+      window.location.href = href;
+    });
+  });
+}
+
+function valueOf(form, name) {
+  var field = form.elements[name];
+  if (!field) return '';
+  if (field.value != null) return String(field.value).trim();
+  return '';
+}
+
+function labelInterest(value) {
+  if (value === 'athlete') return 'athlete sign-up';
+  if (value === 'volunteer') return 'volunteer';
+  if (value === 'both') return 'sign-up and volunteer';
+  return value;
+}
+
+function setupPrefill() {
+  var params = new URLSearchParams(window.location.search);
+  var message = document.getElementById('message');
+  var topic = document.getElementById('topic');
+  if (params.get('subject') === 'sponsor') {
+    if (topic) topic.value = 'Sponsorship';
+    if (message && !message.value) message.value = 'Sponsorship inquiry: ';
   }
-  var bar=document.createElement('div');bar.className='scroll-bar';bar.setAttribute('aria-hidden','true');
-  var sb=document.createElement('div');sb.className='scroll-ball';sb.setAttribute('aria-hidden','true');sb.innerHTML=ball;
-  document.body.appendChild(bar);document.body.appendChild(sb);
-  var tick=false;function upd(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight,p=m>0?h.scrollTop/m:0;bar.style.setProperty('--p',p);sb.style.setProperty('--p',p);tick=false}
-  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});upd();
-  var sc=document.querySelector('.score-in');if(sc){var s=document.createElement('span');s.className='score-ball';s.setAttribute('aria-hidden','true');s.innerHTML=ball;sc.appendChild(s)}
-});
-// prefill contact message from ?subject=sponsor
-(function(){var m=document.getElementById('cmsg');if(m&&/[?&]subject=sponsor\b/.test(location.search)&&!m.value){m.value='Sponsorship inquiry: ';}})();
+  if (window.location.hash === '#volunteer') {
+    var volunteer = document.querySelector('input[name="interest"][value="volunteer"]');
+    if (volunteer) volunteer.checked = true;
+  }
+  if (window.location.hash === '#athlete') {
+    var athlete = document.querySelector('input[name="interest"][value="athlete"]');
+    if (athlete) athlete.checked = true;
+  }
+}
+
+function setupSticky() {
+  var sticky = document.querySelector('.sticky-cta');
+  var footer = document.querySelector('.site-foot');
+  if (!sticky) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function update() {
+    var show = window.scrollY > window.innerHeight * 0.55;
+    if (footer) {
+      var rect = footer.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 20) show = false;
+    }
+    sticky.classList.toggle('on', show);
+    if (reduce) sticky.style.transition = 'none';
+  }
+
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+}
+
+function setupIntro() {
+  if (document.body.getAttribute('data-page') !== 'home') return;
+  var key = 'aascKickoffIntro';
+  var reduce = false;
+  try {
+    reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (error) {
+    reduce = true;
+  }
+  var seen = '1';
+  try { seen = sessionStorage.getItem(key); } catch (error) { seen = '1'; }
+  if (seen || reduce) return;
+  try { sessionStorage.setItem(key, '1'); } catch (error) { return; }
+
+  var intro = document.createElement('div');
+  intro.className = 'intro';
+  intro.setAttribute('aria-hidden', 'true');
+  intro.innerHTML =
+    '<svg class="intro-field" viewBox="0 0 1500 900" aria-hidden="true">' +
+    '<rect class="stripe" width="1500" height="900" fill="#1f4a3a"/>' +
+    '<g fill="#275743"><rect width="150" height="900"/><rect x="300" width="150" height="900"/><rect x="600" width="150" height="900"/><rect x="900" width="150" height="900"/><rect x="1200" width="150" height="900"/></g>' +
+    '<g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="4"><rect x="60" y="60" width="1380" height="780"/><path d="M750 60V840"/><circle cx="750" cy="450" r="130"/></g></svg>' +
+    '<div><div class="intro-ball"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28" fill="#fff"/><path d="M32 18l10 7-4 12H26l-4-12z" fill="#13294B"/><path d="M32 4v14M42 25l13-4M38 37l8 12M26 37l-8 12M22 25L9 21" stroke="#13294B" stroke-width="3" fill="none"/></svg></div>' +
+    '<div class="intro-copy"><p>Everybody <span>plays.</span></p></div></div>';
+
+  var skip = document.createElement('button');
+  skip.type = 'button';
+  skip.className = 'intro-skip';
+  skip.textContent = 'Skip intro';
+
+  var locked = [];
+  document.querySelectorAll('.draft-flag, .site-head, main, .site-foot, .sticky-cta').forEach(function (el) {
+    el.setAttribute('inert', '');
+    locked.push(el);
+  });
+  document.body.classList.add('intro-lock');
+  document.body.appendChild(intro);
+  document.body.appendChild(skip);
+  skip.focus();
+
+  var done = false;
+  var timer;
+  function end(fast) {
+    if (done) return;
+    done = true;
+    clearTimeout(timer);
+    document.removeEventListener('keydown', onKey);
+    locked.forEach(function (el) { el.removeAttribute('inert'); });
+    document.body.classList.remove('intro-lock');
+    skip.remove();
+    if (fast) {
+      intro.remove();
+    } else {
+      intro.classList.add('out');
+      setTimeout(function () { intro.remove(); }, 520);
+    }
+    var main = document.getElementById('main');
+    if (main) main.focus();
+  }
+  function onKey(event) {
+    if (event.key === 'Escape') end(true);
+  }
+  skip.addEventListener('click', function () { end(true); });
+  intro.addEventListener('click', function () { end(true); });
+  document.addEventListener('keydown', onKey);
+  timer = setTimeout(function () { end(false); }, 2300);
+}
