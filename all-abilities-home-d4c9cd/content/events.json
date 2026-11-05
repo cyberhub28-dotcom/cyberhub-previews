@@ -1,10 +1,16 @@
 {
   "events": [
     {
-      "title": "Family Fun Day (demo)",
-      "date": "2027-01-09",
-      "place": "Beavercreek, Ohio",
-      "details": "Edited in the admin form: games, music and snacks for the whole family."
+      "title": "Winter Indoor Soccer registration opens",
+      "date": "2026-11-20",
+      "place": "Beavercreek and the Dayton, Ohio area",
+      "details": "Registration opens November 20, 2026. It closes when 48 spots are filled or on December 18, 2026. The fee is $30 per participant."
+    },
+    {
+      "title": "Winter Indoor Soccer sessions",
+      "date": "2027-01-10",
+      "place": "Sundays, Beavercreek and the Dayton, Ohio area",
+      "details": "Six Sunday sessions from January 10 through February 14, 2027."
     }
   ]
 }
