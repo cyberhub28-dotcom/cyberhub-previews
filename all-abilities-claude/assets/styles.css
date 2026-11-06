@@ -486,8 +486,9 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 @media (max-width:1020px){.gallery{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.gallery{grid-template-columns:1fr 1fr;gap:10px}.g-tile figcaption{left:8px;bottom:8px;font-size:.62rem;padding:5px 9px}}
 /* ---------- preview review panel (preview only; remove review.js + this block at launch) ---------- */
-.rv-fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:80;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 20px 0 16px;border-radius:999px;border:0;background:var(--sage);color:var(--navy);font:800 1rem var(--f-body);box-shadow:0 14px 34px -12px rgba(10,35,66,.6);cursor:pointer}
-.rv-fab b{display:grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border-radius:999px;background:var(--navy);color:var(--cream);font-size:.8rem}
+.rv-fab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:80;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 6px;border-radius:12px 0 0 12px;border:0;background:var(--sage);color:var(--navy);font:800 .78rem var(--f-body);letter-spacing:.02em;box-shadow:-6px 8px 22px -10px rgba(10,35,66,.55);cursor:pointer}
+.rv-fab span{writing-mode:vertical-rl;transform:rotate(180deg)}
+.rv-fab b{display:block;padding:3px 4px;border-radius:6px;background:var(--navy);color:var(--cream);font-size:.68rem;line-height:1.2}
 .rv-scrim{position:fixed;inset:0;z-index:90;background:rgba(10,35,66,.45)}
 .rv-sheet{position:fixed;z-index:91;left:50%;bottom:0;transform:translateX(-50%);width:min(560px,100%);max-height:92vh;overflow:auto;background:var(--cream);color:var(--navy);border-radius:24px 24px 0 0;padding:20px 20px max(20px,env(safe-area-inset-bottom));box-shadow:0 -20px 60px -20px rgba(0,0,0,.5);display:grid;gap:14px}
 @media (min-width:700px){.rv-sheet{bottom:24px;border-radius:24px}}
@@ -509,3 +510,18 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .rv-close{justify-self:end;min-height:44px;min-width:44px;border:0;border-radius:999px;background:transparent;color:var(--navy);font:700 1rem var(--f-body);cursor:pointer}
 .rv-status{font-weight:700;color:var(--green)}
 @media print{.rv-fab,.rv-sheet,.rv-scrim{display:none!important}}
+
+/* Round 1 phone fixes: nothing may run past the screen edge */
+html,body{overflow-x:clip}
+fieldset{min-width:0}
+.form>*,.handoff>*,.ho-card>*,.panel>*,.copy-row>*{min-width:0}
+.btn{max-width:100%}
+@media (max-width:560px){.btn{white-space:normal;text-align:center;line-height:1.25;padding-block:12px}}
+.email,.copy-row code,.form-done span{overflow-wrap:anywhere;word-break:normal}
+/* Get Involved: calm two-option switch */
+.join-h{font-size:var(--fs-h3);margin:0}
+.tabs{display:grid;grid-template-columns:1fr 1fr;width:100%;padding:4px;gap:4px;margin:0;flex-wrap:nowrap}
+.tabs button{min-height:46px;padding:0 10px;color:var(--navy);font-size:1rem;white-space:nowrap;transition:background-color .2s ease,color .2s ease}
+.tabs button:not([aria-selected="true"]):hover{background:rgba(255,255,255,.75)}
+.tabs button[aria-selected="true"]{box-shadow:0 4px 12px -6px rgba(10,35,66,.6)}
+.handoff .ho-card strong{font-size:var(--fs-h4)}

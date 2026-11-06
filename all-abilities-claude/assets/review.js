@@ -17,7 +17,7 @@
   var fab = document.createElement('button');
   fab.type = 'button'; fab.className = 'rv-fab'; fab.setAttribute('aria-haspopup','dialog');
   document.body.appendChild(fab);
-  function paintFab(){ var n = count(load()); fab.innerHTML = 'Review <b>' + n + '/' + PAGES.length + '</b>'; fab.setAttribute('aria-label','Review this page. ' + n + ' of ' + PAGES.length + ' pages reviewed'); }
+  function paintFab(){ var n = count(load()); fab.innerHTML = '<span>Review</span><b>' + n + '/' + PAGES.length + '</b>'; fab.setAttribute('aria-label','Review this page. ' + n + ' of ' + PAGES.length + ' pages reviewed'); }
   paintFab();
 
   var scrim, sheet, last;
