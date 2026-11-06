@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>All Abilities Sports Club | Inclusive youth sports</title>
+<meta name="description" content="Inclusive youth sports for children of all abilities in the Dayton, Ohio area. Winter Indoor Soccer registration opens November 20, 2026.">
+<!-- PREVIEW ONLY: remove the robots line below at launch -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A2342">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="All Abilities Sports Club">
+<meta property="og:title" content="All Abilities Sports Club | Inclusive youth sports">
+<meta property="og:description" content="Inclusive youth sports for children of all abilities in the Dayton, Ohio area. Winter Indoor Soccer registration opens November 20, 2026.">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/site.js" defer></script>
+<!-- PREVIEW ONLY: remove review.js at launch -->
+<script src="assets/review.js" defer></script>
+</head>
+<body data-page="home">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Club pictograms, drawn in the style of sports pictograms. Body uses currentColor. -->
+    <symbol id="pg-soccer" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M56 33 L54 63"/>
+        <path d="M54 63 L49 107"/>
+        <path d="M54 63 L70 80 L84 88"/>
+        <path d="M56 39 L72 46 L84 38"/>
+        <path d="M56 39 L40 55"/>
+      </g>
+      <g fill="none" stroke="var(--pg-acc, #B7CFA9)" stroke-width="5" stroke-linecap="round">
+        <path d="M37 44 L27 110"/>
+        <path d="M33 56 L41 58"/>
+      </g>
+      <circle cx="57" cy="18" r="10" fill="currentColor"/>
+      <g class="bob">
+        <circle cx="100" cy="100" r="11" fill="#FFFFFF" stroke="#0A2342" stroke-width="2.5"/>
+        <path d="M100 94 L105.5 98 L103.5 104.5 L96.5 104.5 L94.5 98 Z" fill="#0A2342"/>
+      </g>
+    </symbol>
+    <symbol id="pg-wheel" viewBox="0 0 120 120">
+      <g fill="none" stroke="var(--pg-acc, #B7CFA9)" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="46" cy="88" r="24" stroke-width="6"/>
+        <path d="M30 50 L34 80 L82 80 L90 104" stroke-width="5"/>
+        <circle cx="92" cy="108" r="5" stroke-width="4"/>
+      </g>
+      <circle cx="46" cy="88" r="4" fill="var(--pg-acc, #B7CFA9)"/>
+      <g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M48 34 L44 70"/>
+        <path d="M44 70 L74 70 L80 94"/>
+        <path d="M48 41 L64 30 L70 15"/>
+        <path d="M47 42 L36 56 L44 64"/>
+      </g>
+      <circle cx="50" cy="20" r="10" fill="currentColor"/>
+      <g class="bob">
+        <circle cx="78" cy="9" r="8.5" fill="var(--ball)"/>
+        <path d="M70 9 H86 M78 1 V17" stroke="#0A2342" stroke-width="1.6" fill="none" opacity=".55"/>
+      </g>
+    </symbol>
+    <symbol id="pg-flag" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M62 30 L52 60"/>
+        <path d="M52 60 L70 72 L66 98 L76 100"/>
+        <path d="M52 60 L38 76"/>
+        <path d="M61 36 L76 46 L86 38"/>
+        <path d="M61 36 L46 46 L38 38"/>
+      </g>
+      <path d="M38 76 C28 86 26 100 38 104 L50 104" fill="none" stroke="var(--pg-acc, #B7CFA9)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M47 58 L31 52" stroke="var(--pg-flag, #0287B0)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="66" cy="16" r="10" fill="currentColor"/>
+      <ellipse cx="92" cy="33" rx="10" ry="6" transform="rotate(-30 92 33)" fill="#7A4A2A"/>
+      <path d="M88 33 L96 33" stroke="#FFFFFF" stroke-width="1.6" transform="rotate(-30 92 33)"/>
+    </symbol>
+    <symbol id="pg-base" viewBox="0 0 120 120">
+      <path d="M68 42 L94 12" stroke="#B9895A" stroke-width="7" stroke-linecap="round"/>
+      <g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M46 36 L50 66"/>
+        <path d="M50 66 L36 106"/>
+        <path d="M50 66 L66 106"/>
+        <path d="M47 42 L66 42"/>
+      </g>
+      <circle cx="44" cy="22" r="10" fill="currentColor"/>
+      <path d="M30 24 A14 14 0 0 1 58 24" fill="none" stroke="var(--pg-flag, #0287B0)" stroke-width="4" stroke-linecap="round"/>
+      <rect x="26" y="20" width="8" height="12" rx="3" fill="var(--pg-flag, #0287B0)"/>
+      <rect x="54" y="20" width="8" height="12" rx="3" fill="var(--pg-flag, #0287B0)"/>
+      <g class="bob">
+        <circle cx="104" cy="44" r="7" fill="#FFFFFF" stroke="#0A2342" stroke-width="2"/>
+        <path d="M100 40 Q103 44 100 48 M108 40 Q105 44 108 48" stroke="#C0392B" stroke-width="1.4" fill="none"/>
+      </g>
+    </symbol>
+    <symbol id="pg-buddy" viewBox="0 0 120 120">
+      <g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M40 30 L40 66"/>
+        <path d="M40 66 L30 106"/>
+        <path d="M40 66 L50 106"/>
+        <path d="M40 36 L22 18"/>
+        <path d="M40 36 L60 52"/>
+      </g>
+      <g fill="none" stroke="var(--pg-buddy, currentColor)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M80 52 L80 80"/>
+        <path d="M80 80 L72 106"/>
+        <path d="M80 80 L88 106"/>
+        <path d="M80 57 L96 41"/>
+        <path d="M80 57 L62 53"/>
+      </g>
+      <circle cx="40" cy="17" r="10" fill="currentColor"/>
+      <circle cx="80" cy="40" r="9" fill="var(--pg-buddy, currentColor)"/>
+    </symbol>
+    <symbol id="ic-heart" viewBox="0 0 32 32"><path d="M16 27s-11-6.6-11-14a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 7.4-11 14-11 14z" fill="#3F7D2A"/></symbol>
+    <symbol id="ic-hands" viewBox="0 0 32 32"><g fill="none" stroke="#0287B0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l6-6 5 3 4-2 5 5"/><path d="M29 15l-6-6"/><path d="M9 9l-1 9 6 6 3-1 3 2 4-4"/></g></symbol>
+    <symbol id="ic-group" viewBox="0 0 32 32"><g fill="#0A2342"><circle cx="16" cy="9" r="4.5"/><circle cx="7" cy="12" r="3.5"/><circle cx="25" cy="12" r="3.5"/><path d="M8 27a8 8 0 0 1 16 0z"/><path d="M1 26a6 6 0 0 1 8-5.6A10 10 0 0 0 6.6 26z"/><path d="M31 26a6 6 0 0 0-8-5.6A10 10 0 0 1 25.4 26z"/></g></symbol>
+    <symbol id="ic-rise" viewBox="0 0 32 32"><g fill="#0A2342"><rect x="4" y="20" width="5" height="8" rx="1"/><rect x="12" y="15" width="5" height="13" rx="1"/><rect x="20" y="10" width="5" height="18" rx="1"/></g><path d="M4 13l8-6 5 3 10-7" fill="none" stroke="#3F7D2A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to main content</a>
+<div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
+
+<header class="head on-navy">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html" aria-label="All Abilities Sports Club, home">
+      <span class="brand-mark"><img src="assets/mark.webp" alt="" width="42" height="30"></span>
+      <span class="brand-name">All Abilities<small>Sports Club</small></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="get-involved.html">Get Involved</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="nav-cta"><a href="get-involved.html">Register for soccer</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-sage btn-sm" href="get-involved.html">Register</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Menu
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="hero on-navy" aria-labelledby="home-h1">
+   <div class="hero-top">
+    <div class="hero-sky" aria-hidden="true">
+      <div class="light l"><div class="bank"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="beam"></div></div>
+      <div class="light r"><div class="bank"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="beam"></div></div>
+      <span class="ball b2"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#E07A2E"/><g fill="none" stroke="#0A2342" stroke-width="1.6"><path d="M2 20h36M20 2v36"/><path d="M7.5 7.5c5 5 5 20 0 25M32.5 7.5c-5 5-5 20 0 25"/></g></svg></span>
+      <span class="ball b4"><svg viewBox="0 0 56 36"><path d="M3 18C10 4 46 4 53 18 46 32 10 32 3 18z" fill="#8A4B2A"/><path d="M12 9.5c2 5 2 12 0 17M44 9.5c-2 5-2 12 0 17" stroke="#F7F4EC" stroke-width="1.6" fill="none"/><path d="M20 18h16M23 15v6M26.5 15v6M30 15v6M33.5 15v6" stroke="#F7F4EC" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker"><span class="live-dot" aria-hidden="true"></span>Winter Indoor Soccer · Sundays from Jan 10</p>
+        <h1 id="home-h1">
+          <span class="line">Everybody plays.</span>
+          <span class="line">Everybody <span class="mark-word">belongs.<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 50 4, 120 4, 197 10" pathLength="1" fill="none" stroke="#B7CFA9" stroke-width="6" stroke-linecap="round"/></svg></span></span>
+        </h1>
+        <p class="lead">Inclusive youth sports for children of all abilities in the Dayton, Ohio area. Soccer comes first, with basketball, baseball and flag football to follow. No experience needed.</p>
+        <div class="btns">
+          <a class="btn btn-sage" href="get-involved.html">Register for winter soccer <span class="arr" aria-hidden="true">→</span></a>
+          <a class="hero-link" href="index.html#story">Why we started</a>
+        </div>
+        <p class="count" id="reg-count"><span class="count-num" id="rc-num" hidden></span><span id="rc-text">Registration opens November 20</span></p>
+      </div>
+      <figure class="team-card">
+        <div class="team-pitch">
+          <svg class="pitch-lines" viewBox="0 0 100 80" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="rgba(247,244,236,.42)" stroke-width="1.6" vector-effect="non-scaling-stroke"><rect x="4" y="4" width="92" height="72" rx="2"/><path d="M4 40h92"/><ellipse cx="50" cy="40" rx="13" ry="11"/><path d="M38 76v-10h24v10M38 4v10h24V4"/></g></svg>
+          <span class="tm t4"><svg viewBox="0 0 120 120" role="img" aria-label="An athlete in a wheelchair shoots a basketball"><use href="#pg-wheel"/></svg></span>
+          <span class="tm t5"><svg viewBox="0 0 120 120" role="img" aria-label="An athlete wearing sensory headphones swings a baseball bat"><use href="#pg-base"/></svg></span>
+          <span class="tm t1"><svg viewBox="0 0 120 120" role="img" aria-label="An athlete using a forearm crutch kicks a soccer ball"><use href="#pg-soccer"/></svg></span>
+          <span class="tm t2" style="--pg-buddy:#B7CFA9"><svg viewBox="0 0 120 120" role="img" aria-label="A volunteer buddy and a young athlete hold hands and cheer"><use href="#pg-buddy"/></svg></span>
+          <span class="tm t3"><svg viewBox="0 0 120 120" role="img" aria-label="An athlete with a running prosthetic carries a football"><use href="#pg-flag"/></svg></span>
+        </div>
+        <figcaption><span class="tc-name">Team All Abilities<small>Winter Indoor Soccer · 48 spots</small></span><span class="tc-tag">Every ability welcome</span></figcaption>
+      </figure>
+    </div>
+   </div>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track"><ul><li>Soccer</li><li>Basketball</li><li>Baseball</li><li>Flag football</li><li>Every ability</li><li>Every athlete</li><li>Every opportunity</li></ul><ul><li>Soccer</li><li>Basketball</li><li>Baseball</li><li>Flag football</li><li>Every ability</li><li>Every athlete</li><li>Every opportunity</li></ul></div></div>
+  </section>
+
+  <section class="heart sec" id="story" aria-labelledby="story-h">
+    <div class="wrap">
+      <div class="story">
+        <div class="photo-slot reveal" role="img" aria-label="Space for a photo of Bennett">
+          <div class="ps-in">
+            <svg class="ps-art" viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#3F7D2A"><use href="#pg-buddy"/></svg>
+            <strong>Bennett's photo goes here</strong>
+            <span>If Amber sends one, it goes up once the photo release is signed.</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="kicker">Why we started</p>
+          <h2 id="story-h">It started with a team for Bennett.</h2>
+          <blockquote class="quote">
+            <p>As parents to a child with autism, we understand firsthand how difficult it can be to find recreational opportunities where children with different abilities feel truly welcomed, supported, and included. <mark>What began as a desire to create a place where our son Bennett could create the same friendships our older daughter experiences within her club sports</mark> has grown into a mission to provide those same opportunities to other families in our community.</p>
+            <footer>Amber Davidson, Founder</footer>
+          </blockquote>
+          <div class="btns" style="margin-top:var(--sp-6)"><a class="btn btn-navy" href="get-involved.html">Register for winter soccer <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-line-dark" href="about.html">Read our story</a></div>
+        </div>
+      </div>
+      <ul class="values reveal" aria-label="What the club is for">
+        <li><svg aria-hidden="true"><use href="#ic-heart"/></svg>Build confidence</li>
+        <li><svg aria-hidden="true"><use href="#ic-hands"/></svg>Create friendships</li>
+        <li><svg aria-hidden="true"><use href="#ic-group"/></svg>Promote inclusion</li>
+        <li><svg aria-hidden="true"><use href="#ic-rise"/></svg>Strengthen our community</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="score-band on-navy" aria-labelledby="board-h">
+    <div class="wrap">
+      <h2 id="board-h" class="sr">Winter Indoor Soccer at a glance</h2>
+      <dl class="board">
+        <div><dt>Registration opens</dt><dd>NOV 20</dd></div>
+        <div><dt>Spots</dt><dd>48</dd></div>
+        <div><dt>Fee</dt><dd>$30<small>EACH</small></dd></div>
+        <div><dt>Sunday sessions</dt><dd>6</dd></div>
+      </dl>
+      <p class="board-note">Sundays, January 10 through February 14, 2027. Registration closes when all 48 spots are filled or on December 18, 2026, whichever comes first.</p>
+      <div class="btns score-cta"><a class="btn btn-sage" href="get-involved.html">Register for winter soccer <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-line" href="index.html#faq">Parent questions</a></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="sports-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">The lineup</p>
+        <h2 id="sports-h">Four sports. Every pace.</h2>
+        <p>Every athlete plays at their own pace, with coaches and buddies right beside them.</p>
+      </div>
+      <div class="sports reveal">
+        <a class="sport featured" href="programs.html" style="--pg-acc:#B7CFA9">
+          <div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#F7F4EC"><use href="#pg-soccer"/></svg></div>
+          <span class="pill open">Signing up Nov 20</span>
+          <h3>Soccer</h3>
+          <p>Winter Indoor Soccer. Six Sundays, 48 spots, $30.</p>
+          <span class="go">See the season <span aria-hidden="true">→</span></span>
+        </a>
+        <article class="sport" style="--pg-acc:#0287B0">
+          <div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#0A2342"><use href="#pg-wheel"/></svg></div>
+          <span class="pill">Coming later</span>
+          <h3>Basketball</h3>
+          <p>Dribble, pass and shoot.</p>
+        </article>
+        <article class="sport" style="--pg-flag:#0287B0">
+          <div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#3F7D2A"><use href="#pg-base"/></svg></div>
+          <span class="pill">Coming later</span>
+          <h3>Baseball</h3>
+          <p>Hit, run the bases, cheer.</p>
+        </article>
+        <article class="sport" style="--pg-acc:#3F7D2A;--pg-flag:#0287B0">
+          <div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#0A2342"><use href="#pg-flag"/></svg></div>
+          <span class="pill">Coming later</span>
+          <h3>Flag football</h3>
+          <p>Flag-style fun and teamwork.</p>
+        </article>
+      </div>
+      <p class="sports-note">Basketball, baseball and flag football aren't open for sign-ups yet. Dates and fees will be posted here first.</p>
+    </div>
+  </section>
+
+  <section class="glass-band sec on-navy" aria-labelledby="glass-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Game day, every day</p>
+        <h2 id="glass-h">Everything you need, behind the glass.</h2>
+      </div>
+      <div class="glass-grid reveal">
+        <article class="glass">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 120 120"><use href="#pg-soccer"/></svg></span>
+          <h3>Programs</h3>
+          <p>Soccer first. Basketball, baseball and flag football to follow, each adapted so every athlete can join in.</p>
+          <a class="more" href="programs.html">View programs <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="glass">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32"><rect x="4" y="6" width="24" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M4 12h24M11 3v6M21 3v6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="20" r="3" fill="#B7CFA9"/></svg></span>
+          <h3>Schedule</h3>
+          <dl class="sched">
+            <div><dt>Sport</dt><dd>Indoor soccer</dd></div>
+            <div><dt>Sign-ups</dt><dd>Nov 20 to Dec 18</dd></div>
+            <div><dt>Sessions</dt><dd>Sundays, Jan 10 to Feb 14</dd></div>
+            <div><dt>Fee</dt><dd>$30 per athlete</dd></div>
+          </dl>
+          <a class="more" href="programs.html">Season details <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="glass">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32"><path d="M16 27s-11-6.6-11-14a6 6 0 0 1 11-3.3A6 6 0 0 1 27 13c0 7.4-11 14-11 14z" fill="#B7CFA9"/></svg></span>
+          <h3>Donate</h3>
+          <p>Help pay for coaching, adaptive equipment and affordable spots, to help keep cost from being the reason a child sits out.</p>
+          <div class="balls" aria-hidden="true">
+            <svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#fff"/><path d="M17 9l7 5-2.6 8h-8.8L10 14z" fill="#0A2342"/></svg>
+            <svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#E07A2E"/><path d="M2 17h30M17 2v30M7 6c6 6 6 16 0 22M27 6c-6 6-6 16 0 22" stroke="#0A2342" stroke-width="1.6" fill="none" opacity=".6"/></svg>
+            <svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#fff"/><path d="M10 6q5 11 0 22M24 6q-5 11 0 22" stroke="#C0392B" stroke-width="1.8" fill="none" stroke-dasharray="2.5 2"/></svg>
+            <svg viewBox="0 0 34 34"><ellipse cx="17" cy="17" rx="15" ry="9.5" transform="rotate(-30 17 17)" fill="#7A4A2A"/><path d="M12 17h10M14 15v4M17 15v4M20 15v4" stroke="#fff" stroke-width="1.5" transform="rotate(-30 17 17)"/></svg>
+          </div>
+          <a class="more" href="donate.html">Support the club <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="faq-band sec" id="faq" aria-labelledby="faq-h">
+    <div class="wrap faq-grid">
+      <div class="sec-head reveal">
+        <p class="kicker">Parent questions</p>
+        <h2 id="faq-h">Good to know before you sign up.</h2>
+        <p>Quick answers about Winter Indoor Soccer. Can't find yours? Email the club and Amber will get back to you.</p>
+        <div class="btns"><a class="btn btn-navy" href="contact.html">Ask a question</a></div>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>What is Winter Indoor Soccer?</summary>
+          <div class="ans"><p>An indoor soccer season for children of all abilities. It runs six Sundays, from January 10 to February 14, 2027.</p></div>
+        </details>
+        <details>
+          <summary>When does registration open and close?</summary>
+          <div class="ans"><p>Registration opens November 20, 2026. It closes December 18, 2026, or sooner if all 48 spots are filled.</p></div>
+        </details>
+        <details>
+          <summary>How do I register my child?</summary>
+          <div class="ans"><p>A parent or guardian registers each athlete on the club's online registration form. The link goes live on the <a href="get-involved.html">sign-up page</a> when registration opens.</p></div>
+        </details>
+        <details>
+          <summary>How much does it cost?</summary>
+          <div class="ans"><p>The registration fee is $30 per athlete.</p></div>
+        </details>
+        <details>
+          <summary>How do I pay the $30 fee?<span class="soon">Coming soon</span></summary>
+          <div class="ans"><p>The club will post this before the season starts.</p></div>
+        </details>
+        <details>
+          <summary>Where are sessions held?<span class="soon">Coming soon</span></summary>
+          <div class="ans"><p>The club will post this before the season starts.</p></div>
+        </details>
+        <details>
+          <summary>What time are the Sunday sessions?<span class="soon">Coming soon</span></summary>
+          <div class="ans"><p>The club will post this before the season starts.</p></div>
+        </details>
+        <details>
+          <summary>What ages can play?<span class="soon">Coming soon</span></summary>
+          <div class="ans"><p>The club will post this before the season starts.</p></div>
+        </details>
+        <details>
+          <summary>Does my child need soccer experience?</summary>
+          <div class="ans"><p>No. No experience is needed.</p></div>
+        </details>
+        <details>
+          <summary>Can I help without signing up an athlete?</summary>
+          <div class="ans"><p>Yes. You can <a href="get-involved.html#volunteer">volunteer</a> as a coach, a buddy or an event-day helper, or <a href="donate.html">support the club</a> with a gift.</p></div>
+        </details>
+        <details>
+          <summary>Who do I contact with a question?</summary>
+          <div class="ans"><p>Email Amber Davidson, the club's founder, at <a href="mailto:amber.davidson@allabilitiessportsclub.com">amber.davidson@allabilitiessportsclub.com</a>.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="join sec" aria-labelledby="join-h">
+    <div class="wrap join-grid">
+      <div class="intro reveal">
+        <p class="kicker">Join the team</p>
+        <h2 id="join-h">There's a place on the field for you.</h2>
+        <p>Sign up an athlete, lend a hand on game day, or help another family say yes.</p>
+      </div>
+      <div class="paths reveal">
+        <a class="path" href="get-involved.html">
+          <svg class="pic" viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-acc:#3F7D2A"><use href="#pg-soccer"/></svg>
+          <h3>Play</h3>
+          <p>Sign up your athlete for Winter Indoor Soccer.</p>
+          <span class="go">Sign up <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="path" href="get-involved.html#volunteer">
+          <svg class="pic" viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-buddy:#0287B0"><use href="#pg-buddy"/></svg>
+          <h3>Volunteer</h3>
+          <p>Be a coach, a buddy or an event-day helper.</p>
+          <span class="go">Get involved <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="path" href="donate.html">
+          <svg class="pic" viewBox="0 0 32 32" aria-hidden="true"><use href="#ic-heart"/></svg>
+          <h3>Give</h3>
+          <p>Donate or sponsor so every child can play.</p>
+          <span class="go">Support <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot on-navy">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="810" height="610" loading="lazy"></div>
+        <p>A nonprofit organization offering inclusive youth sports in the Dayton, Ohio area.</p>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="about.html">Our story</a></li>
+          <li><a href="get-involved.html">Sign up</a></li>
+          <li><a href="get-involved.html#volunteer">Volunteer</a></li>
+          <li><a href="index.html#faq">Parent questions</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Connect</h2>
+        <ul>
+          <li><a href="donate.html">Donate and sponsor</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>Every Ability. Every Athlete. Every Opportunity.</span></div>
+  </div>
+</footer>
+</body>
+</html>
