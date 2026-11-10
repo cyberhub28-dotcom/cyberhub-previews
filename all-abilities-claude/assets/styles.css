@@ -517,7 +517,8 @@ fieldset{min-width:0}
 .form>*,.handoff>*,.ho-card>*,.panel>*,.copy-row>*{min-width:0}
 .btn{max-width:100%}
 @media (max-width:560px){.btn{white-space:normal;text-align:center;line-height:1.25;padding-block:12px}}
-.email,.copy-row code,.form-done span{overflow-wrap:anywhere;word-break:normal}
+.email,.copy-row code,.form-done span,a[href^="mailto:"]{overflow-wrap:anywhere;word-break:normal}
+.faq-list>*,.sec-head>*,.btns>*{min-width:0}
 /* Get Involved: calm two-option switch */
 .join-h{font-size:var(--fs-h3);margin:0}
 .tabs{display:grid;grid-template-columns:1fr 1fr;width:100%;padding:4px;gap:4px;margin:0;flex-wrap:nowrap}
