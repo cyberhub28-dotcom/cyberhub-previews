@@ -1,5 +1,15 @@
 headline: Game day, in pictures.
 intro: Practices, game days and the moments in between.
 photos:
-  - photo: /all-abilities-claude/images/IMG_0205.png
+  - photo: /all-abilities-claude/images/sample-photo-1.jpg
     category: Soccer
+    description: Sample photo 1
+    caption: Sample photo 1. Remove before launch.
+  - photo: /all-abilities-claude/images/sample-photo-2.jpg
+    category: Soccer
+    description: Sample photo 2
+    caption: Sample photo 2. Remove before launch.
+  - photo: /all-abilities-claude/images/sample-photo-3.jpg
+    category: Soccer
+    description: Sample photo 3
+    caption: Sample photo 3. Remove before launch.
