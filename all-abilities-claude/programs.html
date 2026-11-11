@@ -1,10 +1,12 @@
-<!doctype html>
+---
+---
+{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.programs -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Programs | All Abilities Sports Club</title>
-<meta name="description" content="Winter Indoor Soccer: six Sundays, January 10 to February 14, 2027. $30 per athlete, 48 spots. Basketball, baseball and flag football to follow.">
+<meta name="description" content="Winter Indoor Soccer: {{ sundays_word }} Sundays, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}. ${{ s.fee }} per athlete, {{ s.spots }} spots. Basketball, baseball and flag football to follow.">
 <!-- PREVIEW ONLY: remove the robots line below at launch -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0A2342">
@@ -12,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="All Abilities Sports Club">
 <meta property="og:title" content="Programs | All Abilities Sports Club">
-<meta property="og:description" content="Winter Indoor Soccer: six Sundays, January 10 to February 14, 2027. $30 per athlete, 48 spots. Basketball, baseball and flag football to follow.">
+<meta property="og:description" content="Winter Indoor Soccer: {{ sundays_word }} Sundays, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}. ${{ s.fee }} per athlete, {{ s.spots }} spots. Basketball, baseball and flag football to follow.">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,34 +154,34 @@
   <section class="page-hero on-navy">
     <div class="wrap">
       <p class="kicker">Programs</p>
-      <h1>Winter Indoor Soccer is first.</h1>
-      <p class="sub">Six Sundays. Forty-eight athletes. Every ability welcome on the field.</p>
+      <h1>{{ p.headline | escape }}</h1>
+      <p class="sub">{{ p.intro | escape }}</p>
     </div>
   </section>
   <section class="sec">
     <div class="wrap two">
       <div class="panel">
-        <span class="pill open">Registration opens Nov 20, 2026</span>
+        <span class="pill open">Registration opens {{ s.registration_opens | date: "%b %-d, %Y" }}</span>
         <h2 class="big">Winter Indoor Soccer</h2>
-        <p class="muted">Kids run, kick and score together at their own pace. No experience needed. Families in the Dayton, Ohio area are welcome.</p>
+        <p class="muted">{{ p.soccer_text | escape }}</p>
         <dl class="facts">
-          <div><dt>Registration opens</dt><dd>November 20, 2026</dd></div>
-          <div><dt>Registration closes</dt><dd>When 48 spots fill, or December 18, 2026</dd></div>
-          <div><dt>Sessions</dt><dd>Sundays, January 10 to February 14, 2027</dd></div>
-          <div><dt>Fee</dt><dd>$30 per participant</dd></div>
-          <div><dt>Spots</dt><dd>48 athletes</dd></div>
-          <div><dt>Where</dt><dd><span class="ph">To confirm: venue</span></dd></div>
-          <div><dt>Session times</dt><dd><span class="ph">To confirm: times</span></dd></div>
-          <div><dt>Ages</dt><dd>From age 3 <span class="ph">To confirm: top age</span></dd></div>
+          <div><dt>Registration opens</dt><dd>{{ s.registration_opens | date: "%B %-d, %Y" }}</dd></div>
+          <div><dt>Registration closes</dt><dd>When {{ s.spots }} spots fill, or {{ s.registration_closes | date: "%B %-d, %Y" }}</dd></div>
+          <div><dt>Sessions</dt><dd>Sundays, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}</dd></div>
+          <div><dt>Fee</dt><dd>${{ s.fee }} per participant</dd></div>
+          <div><dt>Spots</dt><dd>{{ s.spots }} athletes</dd></div>
+          <div><dt>Where</dt><dd>{% if s.where and s.where != "" %}{{ s.where | escape }}{% else %}<span class="ph">To confirm: venue</span>{% endif %}</dd></div>
+          <div><dt>Session times</dt><dd>{% if s.session_times and s.session_times != "" %}{{ s.session_times | escape }}{% else %}<span class="ph">To confirm: times</span>{% endif %}</dd></div>
+          <div><dt>Ages</dt><dd>{% if s.oldest_age and s.oldest_age != "" %}Ages {{ s.youngest_age }} to {{ s.oldest_age }}{% else %}From age {{ s.youngest_age }} <span class="ph">To confirm: top age</span>{% endif %}</dd></div>
         </dl>
       </div>
       <div class="panel soft">
         <h2>How to join</h2>
         <ol class="steps">
-          <li><div><strong>Registration opens November 20</strong><span>The link to the club's online registration form goes live on the sign-up page.</span></div></li>
+          <li><div><strong>Registration opens {{ s.registration_opens | date: "%B %-d" }}</strong><span>The link to the club's online registration form goes live on the sign-up page.</span></div></li>
           <li><div><strong>Fill in the form</strong><span>A parent or guardian registers each athlete.</span></div></li>
-          <li><div><strong>Pay the $30 fee</strong><span>The club will share how to pay when sign-ups open. <span class="ph">To confirm: how to pay</span></span></div></li>
-          <li><div><strong>See you January 10</strong><span>The first Sunday session.</span></div></li>
+          <li><div><strong>Pay the ${{ s.fee }} fee</strong><span>{% if s.how_to_pay and s.how_to_pay != "" %}{{ s.how_to_pay | escape }}{% else %}The club will share how to pay when sign-ups open. <span class="ph">To confirm: how to pay</span>{% endif %}</span></div></li>
+          <li><div><strong>See you {{ s.first_sunday | date: "%B %-d" }}</strong><span>The first Sunday session.</span></div></li>
         </ol>
         <div class="btns"><a class="btn btn-navy" href="get-involved.html">Go to sign-up</a></div>
       </div>
@@ -187,11 +189,11 @@
   </section>
   <section class="sec" style="padding-top:0">
     <div class="wrap">
-      <div class="sec-head"><p class="kicker">Coming later</p><h2>More sports are on the way.</h2><p>These aren't open for sign-ups yet. Dates and fees will be posted when the club is ready.</p></div>
+      <div class="sec-head"><p class="kicker">Coming later</p><h2>More sports are on the way.</h2><p>{{ p.later_intro | escape }}</p></div>
       <div class="later">
-        <article class="sport" style="--pg-acc:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#0A2342"><use href="#pg-wheel"/></svg></div><span class="pill">Coming later</span><h3>Basketball</h3><p>Dribble, pass and shoot.</p></article>
-        <article class="sport" style="--pg-flag:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#3F7D2A"><use href="#pg-base"/></svg></div><span class="pill">Coming later</span><h3>Baseball</h3><p>Hit, run the bases, cheer.</p></article>
-        <article class="sport" style="--pg-acc:#3F7D2A;--pg-flag:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#0A2342"><use href="#pg-flag"/></svg></div><span class="pill">Coming later</span><h3>Flag football</h3><p>Flag-style fun and teamwork.</p></article>
+        <article class="sport" style="--pg-acc:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#0A2342"><use href="#pg-wheel"/></svg></div><span class="pill">Coming later</span><h3>Basketball</h3><p>{{ pg.basketball_text | escape }}</p></article>
+        <article class="sport" style="--pg-flag:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#3F7D2A"><use href="#pg-base"/></svg></div><span class="pill">Coming later</span><h3>Baseball</h3><p>{{ pg.baseball_text | escape }}</p></article>
+        <article class="sport" style="--pg-acc:#3F7D2A;--pg-flag:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#0A2342"><use href="#pg-flag"/></svg></div><span class="pill">Coming later</span><h3>Flag football</h3><p>{{ pg.flag_football_text | escape }}</p></article>
       </div>
     </div>
   </section>
@@ -202,7 +204,7 @@
     <div class="foot-grid">
       <div>
         <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="810" height="610" loading="lazy"></div>
-        <p>A nonprofit organization offering inclusive youth sports in the Dayton, Ohio area.</p>
+        <p>{{ c.footer_about | escape }}</p>
       </div>
       <div>
         <h2>Explore</h2>
@@ -220,12 +222,12 @@
         <ul>
           <li><a href="donate.html">Donate and sponsor</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61595151791769" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="privacy.html">Privacy</a></li>
         </ul>
       </div>
     </div>
-    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>Every Ability. Every Athlete. Every Opportunity.</span></div>
+    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>{{ c.motto | escape }}</span></div>
   </div>
 </footer>
 </body>

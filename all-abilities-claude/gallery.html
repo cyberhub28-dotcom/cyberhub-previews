@@ -1,4 +1,6 @@
-<!doctype html>
+---
+---
+{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.gallery -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -152,13 +154,15 @@
   <section class="page-hero on-navy">
     <div class="wrap">
       <p class="kicker">Gallery</p>
-      <h1>Game day, in pictures.</h1>
-      <p class="sub">Practices, game days and the moments in between.</p>
+      <h1>{{ p.headline | escape }}</h1>
+      <p class="sub">{{ p.intro | escape }}</p>
     </div>
   </section>
   <section class="sec">
     <div class="wrap">
-      <div class="gallery" role="list" aria-label="Photo spaces, waiting for the club's photos">
+{% assign shots = "" | split: "" %}{% for x in p.photos %}{% if x.photo and x.photo != "" %}{% assign shots = shots | push: x %}{% endif %}{% endfor %}{% if shots.size > 0 %}      <div class="gallery" role="list" aria-label="Club photos">
+{% for x in shots %}        <figure class="g-tile reveal" role="listitem"><img src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ x.caption | escape }}" loading="lazy">{% if x.caption and x.caption != "" %}<figcaption>{{ x.caption | escape }}</figcaption>{% endif %}</figure>
+{% endfor %}      </div>{% else %}      <div class="gallery" role="list" aria-label="Photo spaces, waiting for the club's photos">
         <figure class="g-tile reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-soccer"/></svg><figcaption>Soccer</figcaption></figure>
         <figure class="g-tile reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-buddy"/></svg><figcaption>Buddies</figcaption></figure>
         <figure class="g-tile reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-wheel"/></svg><figcaption>Basketball</figcaption></figure>
@@ -166,7 +170,7 @@
         <figure class="g-tile reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-flag"/></svg><figcaption>Flag football</figcaption></figure>
         <figure class="g-tile reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-soccer"/></svg><figcaption>Game day</figcaption></figure>
       </div>
-      <p class="ph-note gallery-note"><span aria-hidden="true">✎</span><span>To confirm: the club's own photos go here. Photos of children go up only after a parent or guardian signs a photo release.</span></p>
+      <p class="ph-note gallery-note"><span aria-hidden="true">✎</span><span>To confirm: the club's own photos go here. Photos of children go up only after a parent or guardian signs a photo release.</span></p>{% endif %}
     </div>
   </section>
 </main>
@@ -176,7 +180,7 @@
     <div class="foot-grid">
       <div>
         <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="810" height="610" loading="lazy"></div>
-        <p>A nonprofit organization offering inclusive youth sports in the Dayton, Ohio area.</p>
+        <p>{{ c.footer_about | escape }}</p>
       </div>
       <div>
         <h2>Explore</h2>
@@ -194,12 +198,12 @@
         <ul>
           <li><a href="donate.html">Donate and sponsor</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61595151791769" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="privacy.html">Privacy</a></li>
         </ul>
       </div>
     </div>
-    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>Every Ability. Every Athlete. Every Opportunity.</span></div>
+    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>{{ c.motto | escape }}</span></div>
   </div>
 </footer>
 </body>

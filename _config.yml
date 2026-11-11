@@ -1,0 +1,4 @@
+# GitHub Pages builds this repo with Jekyll so the All Abilities preview
+# can read the text, dates and photos that are edited in Pages CMS
+# (the files in _data/aasc). Every other folder is copied as it is.
+title: CyberHub previews
