@@ -51,9 +51,14 @@ content:
     label: Sign-up form link
     type: string
     description: The online form families use to register. Leave empty until it's ready, and the Register button stays switched off.
-    pattern:
+    pattern: &id004
       regex: ^(https://\S+)?$
       message: Paste the full link, starting with https://, or leave it empty
+  - name: volunteer_form
+    label: Volunteer form link
+    type: string
+    description: The online form volunteers fill in. Leave empty until it's ready, and the Volunteer now button stays switched off.
+    pattern: *id004
 - name: aasc-season
   label: 'All Abilities: Winter soccer season'
   type: file
@@ -154,8 +159,9 @@ content:
     type: string
   - name: link
     label: Button link
-    description: Paste the full link, starting with https://
+    description: Paste the full link, starting with https://. Leave empty for no button.
     type: string
+    pattern: *id004
 - name: aasc-faq
   label: 'All Abilities: Parent questions'
   type: file
