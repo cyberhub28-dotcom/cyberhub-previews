@@ -91,22 +91,27 @@
     });
   }
 
-  /* registration countdown, in the visitor's local time */
-  var num = document.getElementById('rc-num'), txt = document.getElementById('rc-text');
-  if (num && txt){
+  /* registration countdown, in the visitor's local time. Dates come from the page (set in Pages CMS). */
+  var rc = document.getElementById('reg-count'), num = document.getElementById('rc-num'), txt = document.getElementById('rc-text');
+  function ymd(v){ var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
+  var open = rc && ymd(rc.getAttribute('data-open')), last = rc && ymd(rc.getAttribute('data-close'));
+  if (num && txt && open && last){
+    var MNAME = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     var now = new Date();
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var open = new Date(2026, 10, 20), close = new Date(2026, 11, 19);
+    var close = new Date(last.getFullYear(), last.getMonth(), last.getDate() + 1);
+    var spots = rc.getAttribute('data-spots');
+    var openTxt = MNAME[open.getMonth()] + ' ' + open.getDate(), lastTxt = MNAME[last.getMonth()] + ' ' + last.getDate();
     var days = Math.round((open - today) / 86400000);
     if (today < open){
       num.textContent = days;
       num.insertAdjacentHTML('beforeend', days === 1 ? '<small>day</small>' : '<small>days</small>');
-      txt.textContent = days === 1 ? 'until registration opens tomorrow, November 20' : 'until registration opens November 20';
+      txt.textContent = days === 1 ? 'until registration opens tomorrow, ' + openTxt : 'until registration opens ' + openTxt;
       num.hidden = false;
     } else if (now < close){
       num.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       num.hidden = false;
-      txt.textContent = 'Registration is open now, until December 18 or all 48 spots are filled';
+      txt.textContent = 'Registration is open now, until ' + lastTxt + (spots ? ' or all ' + spots + ' spots are filled' : '');
     } else {
       txt.textContent = 'Winter registration has closed. Contact us about the next season.';
     }

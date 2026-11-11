@@ -1,4 +1,6 @@
-<!doctype html>
+---
+---
+{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.contact -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -152,14 +154,14 @@
   <section class="page-hero on-navy">
     <div class="wrap">
       <p class="kicker">Contact</p>
-      <h1>Say hello.</h1>
-      <p class="sub">Questions about soccer, volunteering or sponsoring come straight to the club.</p>
+      <h1>{{ p.headline | escape }}</h1>
+      <p class="sub">{{ p.intro | escape }}</p>
     </div>
   </section>
   <section class="sec">
     <div class="wrap two">
       <div class="panel">
-        <form class="form" id="form-contact" novalidate data-mailto="amber.davidson@allabilitiessportsclub.com" data-subject="Website message">
+        <form class="form" id="form-contact" novalidate data-mailto="{{ c.email | escape }}" data-subject="Website message">
           <div class="field-row">
             <div class="fl"><label for="c-name">Your name <span class="req" aria-hidden="true">*</span></label><input id="c-name" name="name" autocomplete="name" required></div>
             <div class="fl"><label for="c-email">Email <span class="req" aria-hidden="true">*</span></label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
@@ -174,10 +176,10 @@
       </div>
       <aside class="panel soft">
         <h2>Email the club</h2>
-        <p class="muted">Amber Davidson, Founder</p>
-        <div class="copy-row"><code class="email" id="club-email">amber.davidson@allabilitiessportsclub.com</code><button class="btn btn-line-dark btn-sm" type="button" id="copy-email">Copy</button></div>
-        <p class="muted">Serving the Dayton, Ohio area.</p>
-        <p class="muted">Follow the club on <a href="https://www.facebook.com/profile.php?id=61595151791769" target="_blank" rel="noopener">Facebook</a> for news and events.</p>
+        <p class="muted">{{ c.contact_person | escape }}</p>
+        <div class="copy-row"><code class="email" id="club-email">{{ c.email | escape }}</code><button class="btn btn-line-dark btn-sm" type="button" id="copy-email">Copy</button></div>
+        <p class="muted">{{ c.area_line | escape }}</p>
+        <p class="muted">Follow the club on <a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a> for news and events.</p>
       </aside>
     </div>
   </section>
@@ -188,7 +190,7 @@
     <div class="foot-grid">
       <div>
         <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="810" height="610" loading="lazy"></div>
-        <p>A nonprofit organization offering inclusive youth sports in the Dayton, Ohio area.</p>
+        <p>{{ c.footer_about | escape }}</p>
       </div>
       <div>
         <h2>Explore</h2>
@@ -206,12 +208,12 @@
         <ul>
           <li><a href="donate.html">Donate and sponsor</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61595151791769" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="privacy.html">Privacy</a></li>
         </ul>
       </div>
     </div>
-    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>Every Ability. Every Athlete. Every Opportunity.</span></div>
+    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>{{ c.motto | escape }}</span></div>
   </div>
 </footer>
 </body>

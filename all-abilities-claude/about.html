@@ -1,4 +1,6 @@
-<!doctype html>
+---
+---
+{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.about -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -152,25 +154,25 @@
   <section class="page-hero on-navy">
     <div class="wrap">
       <p class="kicker">Our story</p>
-      <h1>Built by a family. Open to every athlete.</h1>
+      <h1>{{ p.headline | escape }}</h1>
     </div>
   </section>
   <section class="sec">
     <div class="wrap story">
-      <div class="photo-slot" role="img" aria-label="Space for a family photo">
+      {% if p.photo and p.photo != "" %}<div class="photo-slot has-photo"><img src="{{ p.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ p.photo_description | default: 'Club photo' | escape }}" loading="lazy"></div>{% else %}<div class="photo-slot" role="img" aria-label="Space for a family photo">
         <div class="ps-in">
           <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="14" width="52" height="40" rx="8" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="32" cy="34" r="10" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 14l4-6h12l4 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
           <strong>Family photo</strong>
           <span>Goes here once Amber sends one and every release is signed.</span>
         </div>
-      </div>
+      </div>{% endif %}
       <div class="prose">
         <h2>Why we started</h2>
-        <p>As parents to a child with autism, we understand firsthand how difficult it can be to find recreational opportunities where children with different abilities feel truly welcomed, supported, and included. What began as a desire to create a place where our son Bennett could create the same friendships our older daughter experiences within her club sports has grown into a mission to provide those same opportunities to other families in our community.</p>
+        {{ p.why_text }}
         <h2>Bennett's story</h2>
-        <p class="ph-block">Amber is sending Bennett's story. It goes here, in her words, first name only.</p>
+        {% if p.bennett_story and p.bennett_story != "" %}{{ p.bennett_story }}{% else %}<p class="ph-block">Amber is sending Bennett's story. It goes here, in her words, first name only.</p>{% endif %}
         <h2>What the club does</h2>
-        <p>All Abilities Sports Club is a nonprofit organization dedicated to providing inclusive sports opportunities for children of all abilities in the Dayton, Ohio area. Through adaptive programming, supportive coaching and a welcoming community, we help every child build confidence, friendships and a lifelong love of sports.</p>
+        {{ p.what_we_do }}
         <div class="btns" style="margin-top:var(--sp-6)"><a class="btn btn-navy" href="programs.html">See programs</a><a class="btn btn-line-dark" href="get-involved.html">Get involved</a></div>
       </div>
     </div>
@@ -190,7 +192,7 @@
     <div class="foot-grid">
       <div>
         <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="810" height="610" loading="lazy"></div>
-        <p>A nonprofit organization offering inclusive youth sports in the Dayton, Ohio area.</p>
+        <p>{{ c.footer_about | escape }}</p>
       </div>
       <div>
         <h2>Explore</h2>
@@ -208,12 +210,12 @@
         <ul>
           <li><a href="donate.html">Donate and sponsor</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61595151791769" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="privacy.html">Privacy</a></li>
         </ul>
       </div>
     </div>
-    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>Every Ability. Every Athlete. Every Opportunity.</span></div>
+    <div class="legal"><span>© 2026 All Abilities Sports Club</span><span>{{ c.motto | escape }}</span></div>
   </div>
 </footer>
 </body>

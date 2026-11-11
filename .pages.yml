@@ -1,44 +1,386 @@
 # Pages CMS setup (https://pagescms.org). Lets you edit site content with simple forms.
-# Each entry below shows up in the Pages CMS sidebar.
+# Each entry below shows up in the Pages CMS sidebar. The All Abilities entries edit the
+# files in _data/aasc (and the events file); GitHub Pages builds the pages from them.
+media:
+  input: all-abilities-claude/images
+  output: /all-abilities-claude/images
+  categories:
+  - image
 content:
-  - name: aasc-events
-    label: "All Abilities: Upcoming events"
-    type: file
-    path: all-abilities-claude/content/events.json
-    format: json
+- name: aasc-club
+  label: 'All Abilities: Club details'
+  type: file
+  path: _data/aasc/club.yml
+  format: yaml
+  fields:
+  - name: email
+    label: Club email
+    type: string
+    description: Shown on the Contact page. Messages from the site forms go here.
+    required: true
+  - name: contact_person
+    label: Contact name
+    type: string
+    description: Shown on the Contact page, under "Email the club".
+  - name: area_line
+    label: Area line
+    type: string
+    description: Shown on the Contact page.
+  - name: footer_about
+    label: Footer sentence
+    type: text
+    description: The short line under the logo at the bottom of every page.
+  - name: motto
+    label: Motto
+    type: string
+    description: Bottom of every page.
+  - name: facebook
+    label: Facebook page link
+    type: string
+    required: true
+    pattern: &id001
+      regex: ^https://\S+$
+      message: Paste the full link, starting with https://
+  - name: donate_link
+    label: Donate button link
+    type: string
+    description: Where the Donate on Zeffy button goes.
+    required: true
+    pattern: *id001
+  - name: registration_form
+    label: Sign-up form link
+    type: string
+    description: The online form families use to register. Leave empty until it's ready, and the Register button stays switched off.
+    pattern:
+      regex: ^(https://\S+)?$
+      message: Paste the full link, starting with https://, or leave it empty
+- name: aasc-season
+  label: 'All Abilities: Winter soccer season'
+  type: file
+  path: _data/aasc/season.yml
+  format: yaml
+  fields:
+  - name: registration_opens
+    label: Registration opens
+    type: date
+    description: These dates update the scoreboard, schedule, sign-up page and countdown on their own. Check Parent questions too, since those answers are written out by hand.
+    required: true
+    options: &id002
+      format: yyyy-MM-dd
+  - name: registration_closes
+    label: Registration closes
+    type: date
+    required: true
+    options: *id002
+  - name: first_sunday
+    label: First Sunday
+    type: date
+    required: true
+    options: *id002
+  - name: last_sunday
+    label: Last Sunday
+    type: date
+    required: true
+    options: *id002
+  - name: sundays
+    label: Number of Sundays
+    type: number
+    required: true
+  - name: spots
+    label: Number of spots
+    type: number
+    required: true
+  - name: fee
+    label: Fee per athlete, in dollars
+    type: number
+    description: Numbers only, like 30.
+    required: true
+  - name: youngest_age
+    label: Youngest age
+    type: number
+    required: true
+  - name: oldest_age
+    label: Oldest age
+    type: number
+    description: Leave empty if there is no top age yet.
+  - name: where
+    label: Where
+    type: string
+    description: The venue. Leave empty until it's set.
+  - name: session_times
+    label: Session times
+    type: string
+    description: 'For example: 1 to 2 PM'
+  - name: how_to_pay
+    label: How to pay
+    type: text
+    description: One or two sentences families see on the Programs page.
+- name: aasc-events
+  label: 'All Abilities: Upcoming events'
+  type: file
+  path: all-abilities-claude/content/events.json
+  format: json
+  list: true
+  fields:
+  - name: title
+    label: Event name
+    type: string
+    required: true
+  - name: date
+    label: Date
+    description: Past events hide from the site on their own the day after.
+    type: date
+    required: true
+    options:
+      format: yyyy-MM-dd
+  - name: time
+    label: Time
+    description: 'For example: 5 to 7 PM'
+    type: string
+  - name: place
+    label: Where
+    type: string
+  - name: details
+    label: What to expect
+    description: One short line each.
+    type: string
+    list: true
+  - name: note
+    label: Small print
+    type: text
+  - name: button
+    label: Button words
+    description: 'For example: Details and tickets'
+    type: string
+  - name: link
+    label: Button link
+    description: Paste the full link, starting with https://
+    type: string
+- name: aasc-faq
+  label: 'All Abilities: Parent questions'
+  type: file
+  path: _data/aasc/faq.yml
+  format: yaml
+  list: true
+  fields:
+  - name: question
+    label: Question
+    type: string
+    required: true
+  - name: answer
+    label: Answer
+    type: rich-text
+    required: true
+    options: &id003
+      format: html
+      media: false
+  - name: coming_soon
+    label: Show a "Coming soon" tag
+    type: boolean
+- name: aasc-home
+  label: 'All Abilities: Home page'
+  type: file
+  path: _data/aasc/home.yml
+  format: yaml
+  fields:
+  - name: hero_text
+    label: Intro paragraph
+    type: text
+    description: The paragraph under the big headline at the top.
+  - name: story_photo
+    label: Story photo
+    type: image
+    description: Only add photos of children after a parent or guardian signs the photo release.
+  - name: story_photo_description
+    label: Story photo description
+    type: string
+    description: A few words describing the photo, for people who use screen readers.
+  - name: story_heading
+    label: Story heading
+    type: string
+  - name: quote
+    label: Founder quote
+    type: text
+  - name: quote_highlight
+    label: Highlighted words
+    type: text
+    description: Copy a part of the quote here, word for word, and it gets a soft highlight. Leave empty for none.
+  - name: quote_by
+    label: Quote by
+    type: string
+  - name: events_heading
+    label: Events heading
+    type: string
+  - name: events_intro
+    label: Events intro
+    type: text
+  - name: faq_heading
+    label: Parent questions heading
+    type: string
+  - name: faq_intro
+    label: Parent questions intro
+    type: text
+  - name: join_heading
+    label: Join the team heading
+    type: string
+  - name: join_intro
+    label: Join the team intro
+    type: text
+- name: aasc-about
+  label: 'All Abilities: About page'
+  type: file
+  path: _data/aasc/about.yml
+  format: yaml
+  fields:
+  - name: headline
+    label: Headline
+    type: string
+  - name: photo
+    label: Family photo
+    type: image
+    description: Only add photos of children after a parent or guardian signs the photo release.
+  - name: photo_description
+    label: Photo description
+    type: string
+    description: A few words describing the photo, for people who use screen readers.
+  - name: why_text
+    label: Why we started
+    type: rich-text
+    options: *id003
+  - name: bennett_story
+    label: Bennett's story
+    type: rich-text
+    description: First names only for children.
+    options: *id003
+  - name: what_we_do
+    label: What the club does
+    type: rich-text
+    options: *id003
+- name: aasc-programs
+  label: 'All Abilities: Programs page'
+  type: file
+  path: _data/aasc/programs.yml
+  format: yaml
+  fields:
+  - name: headline
+    label: Headline
+    type: string
+  - name: intro
+    label: Intro line
+    type: text
+  - name: soccer_text
+    label: Soccer description
+    type: text
+  - name: later_intro
+    label: Coming later intro
+    type: text
+  - name: basketball_text
+    label: Basketball line
+    type: string
+    description: Also shown on the home page.
+  - name: baseball_text
+    label: Baseball line
+    type: string
+    description: Also shown on the home page.
+  - name: flag_football_text
+    label: Flag football line
+    type: string
+    description: Also shown on the home page.
+- name: aasc-signup
+  label: 'All Abilities: Sign-up page'
+  type: file
+  path: _data/aasc/get_involved.yml
+  format: yaml
+  fields:
+  - name: headline
+    label: Headline
+    type: string
+  - name: intro
+    label: Intro line
+    type: text
+- name: aasc-donate
+  label: 'All Abilities: Donate page'
+  type: file
+  path: _data/aasc/donate.yml
+  format: yaml
+  fields:
+  - name: headline
+    label: Headline
+    type: string
+  - name: intro
+    label: Intro line
+    type: text
+  - name: gift_text
+    label: Make a gift text
+    type: text
+  - name: sponsor_text
+    label: Partner with us text
+    type: text
+  - name: levels
+    label: Sponsorship levels
+    type: object
+    description: Drag to reorder.
     list: true
     fields:
-      - name: title
-        label: Event name
-        type: string
-        required: true
-      - name: date
-        label: Date
-        description: Past events hide from the site on their own the day after.
-        type: date
-        required: true
-        options:
-          format: yyyy-MM-dd
-      - name: time
-        label: Time
-        description: "For example: 5 to 7 PM"
-        type: string
-      - name: place
-        label: Where
-        type: string
-      - name: details
-        label: What to expect
-        description: One short line each.
-        type: string
-        list: true
-      - name: note
-        label: Small print
-        type: text
-      - name: button
-        label: Button words
-        description: "For example: Details and tickets"
-        type: string
-      - name: link
-        label: Button link
-        description: Paste the full link, starting with https://
-        type: string
+    - name: amount
+      label: Amount
+      type: string
+      description: 'For example: $500'
+      required: true
+    - name: name
+      label: Level name
+      type: string
+      required: true
+    - name: text
+      label: Description
+      type: text
+    - name: perks
+      label: What sponsors get
+      type: string
+      description: One line each.
+      list: true
+    - name: stand_out
+      label: Make this level stand out
+      type: boolean
+  - name: thanks_note
+    label: Note under the levels
+    type: text
+- name: aasc-contact
+  label: 'All Abilities: Contact page'
+  type: file
+  path: _data/aasc/contact.yml
+  format: yaml
+  fields:
+  - name: headline
+    label: Headline
+    type: string
+  - name: intro
+    label: Intro line
+    type: text
+    description: The club email and contact name are under Club details.
+- name: aasc-gallery
+  label: 'All Abilities: Gallery page'
+  type: file
+  path: _data/aasc/gallery.yml
+  format: yaml
+  fields:
+  - name: headline
+    label: Headline
+    type: string
+  - name: intro
+    label: Intro line
+    type: text
+  - name: photos
+    label: Photos
+    type: object
+    description: Only add photos of children after a parent or guardian signs the photo release. Until a photo is added, the page shows picture spaces.
+    list: true
+    fields:
+    - name: photo
+      label: Photo
+      type: image
+      required: true
+    - name: caption
+      label: Caption
+      type: string
+      description: A few words. Shown on the photo and read out by screen readers.

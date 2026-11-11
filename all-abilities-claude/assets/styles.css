@@ -542,4 +542,7 @@ fieldset{min-width:0}
 .ev-body .btns{margin-top:var(--sp-2)}
 .ev-more{margin:var(--sp-5) 0 0;max-width:46rem}
 .ev-empty{margin:0}
+.photo-slot.has-photo{padding:0;background:var(--sage-soft)}
+.photo-slot.has-photo::before{display:none}
+.photo-slot img,.g-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 @media (max-width:560px){.ev{grid-template-columns:1fr;gap:var(--sp-4)}.ev-date{display:inline-flex;align-items:baseline;justify-self:start;width:auto;height:auto;gap:8px;padding:10px 16px;border-radius:999px}.ev-date b{font-size:1.25rem;margin-top:0}}
