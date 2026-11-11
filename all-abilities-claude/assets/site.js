@@ -112,6 +112,45 @@
     }
   }
 
+  /* upcoming events: read from content/events.json (edited in Pages CMS). Past events hide themselves. */
+  var evList = document.querySelector('[data-events]');
+  if (evList && window.fetch){
+    var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+    function parseDay(v){ var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(v || '')); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
+    function showEmpty(){ evList.textContent = ''; evList.appendChild(el('p', 'ev-empty muted', 'No events on the calendar right now. New ones are posted on our Facebook page first.')); }
+    fetch(evList.getAttribute('data-events'), {cache: 'no-cache'}).then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(list){
+      var today = new Date(); today.setHours(0,0,0,0);
+      var items = (Array.isArray(list) ? list : []).map(function(e){ return {e: e, d: parseDay(e && e.date)}; })
+        .filter(function(x){ return x.e && x.e.title && x.d && x.d >= today; })
+        .sort(function(a, b){ return a.d - b.d; });
+      if (!items.length) return showEmpty();
+      evList.textContent = '';
+      items.forEach(function(x){
+        var e = x.e, d = x.d;
+        var card = el('article', 'ev');
+        var badge = el('div', 'ev-date'); badge.setAttribute('aria-hidden', 'true');
+        badge.appendChild(el('span', null, MON[d.getMonth()])); badge.appendChild(el('b', null, String(d.getDate())));
+        var body = el('div', 'ev-body');
+        body.appendChild(el('h3', null, e.title));
+        body.appendChild(el('p', 'ev-when', DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + (e.time ? ' · ' + e.time : '')));
+        if (e.place) body.appendChild(el('p', null, e.place));
+        var det = (Array.isArray(e.details) ? e.details : []).filter(Boolean);
+        if (det.length){ var ul = el('ul'); det.forEach(function(t){ ul.appendChild(el('li', null, t)); }); body.appendChild(ul); }
+        if (e.note) body.appendChild(el('p', 'muted', e.note));
+        if (/^https:\/\/[^\s"<>]+$/.test(e.link || '')){
+          var btns = el('div', 'btns'), a = el('a', 'btn btn-navy', e.button || 'Details');
+          a.href = e.link; a.target = '_blank'; a.rel = 'noopener';
+          var arr = el('span', 'arr', ' ↗'); arr.setAttribute('aria-hidden', 'true'); a.appendChild(arr);
+          btns.appendChild(a); body.appendChild(btns);
+        }
+        card.appendChild(badge); card.appendChild(body); evList.appendChild(card);
+      });
+    }).catch(showEmpty);
+  }
+
   /* gentle reveal as sections scroll into view */
   var rv = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window){

@@ -1,0 +1,44 @@
+# Pages CMS setup (https://pagescms.org). Lets you edit site content with simple forms.
+# Each entry below shows up in the Pages CMS sidebar.
+content:
+  - name: aasc-events
+    label: "All Abilities: Upcoming events"
+    type: file
+    path: all-abilities-claude/content/events.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Event name
+        type: string
+        required: true
+      - name: date
+        label: Date
+        description: Past events hide from the site on their own the day after.
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: time
+        label: Time
+        description: "For example: 5 to 7 PM"
+        type: string
+      - name: place
+        label: Where
+        type: string
+      - name: details
+        label: What to expect
+        description: One short line each.
+        type: string
+        list: true
+      - name: note
+        label: Small print
+        type: text
+      - name: button
+        label: Button words
+        description: "For example: Details and tickets"
+        type: string
+      - name: link
+        label: Button link
+        description: Paste the full link, starting with https://
+        type: string

@@ -529,7 +529,7 @@ fieldset{min-width:0}
 
 /* Round 2: upcoming events (from the club's Facebook page) */
 .events-sec{background:var(--sage-soft)}
-.ev-list{display:grid;gap:var(--sp-4);max-width:46rem}
+.ev-list{display:grid;gap:var(--sp-4);max-width:46rem;min-height:120px}
 .ev{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--sp-5);align-items:start;padding:var(--sp-5);border-radius:var(--r-md);background:#fff;border:1px solid rgba(10,35,66,.08);box-shadow:0 10px 30px -22px rgba(10,35,66,.45)}
 .ev-date{display:grid;place-items:center;align-content:center;width:76px;height:84px;border-radius:16px;background:var(--navy);color:var(--cream);text-align:center;line-height:1}
 .ev-date span{font-size:var(--fs-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sage)}
@@ -541,4 +541,5 @@ fieldset{min-width:0}
 .ev-body ul{margin:0;padding-left:1.1em;display:grid;gap:4px}
 .ev-body .btns{margin-top:var(--sp-2)}
 .ev-more{margin:var(--sp-5) 0 0;max-width:46rem}
+.ev-empty{margin:0}
 @media (max-width:560px){.ev{grid-template-columns:1fr;gap:var(--sp-4)}.ev-date{display:inline-flex;align-items:baseline;justify-self:start;width:auto;height:auto;gap:8px;padding:10px 16px;border-radius:999px}.ev-date b{font-size:1.25rem;margin-top:0}}
