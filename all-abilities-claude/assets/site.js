@@ -1,4 +1,4 @@
-/* All Abilities Sports Club: menu, tabs, forms, countdown and gentle reveals. No tracking, no cookies. */
+/* All Abilities Sports Club: menu, sign-up buttons, forms, countdown, gallery photos and gentle reveals. No tracking, no cookies. */
 (function(){
   var doc = document.documentElement;
   doc.classList.add('js');
@@ -16,28 +16,7 @@
     nav.addEventListener('click', function(e){ if (e.target.closest('a')) closeMenu(); });
   }
 
-  /* get involved tabs: register an athlete or volunteer */
-  var tabA = document.getElementById('tab-athlete'), tabV = document.getElementById('tab-volunteer');
-  var fA = document.getElementById('form-athlete'), fV = document.getElementById('form-volunteer');
-  function selectTab(which, focus){
-    if (!tabA || !tabV) return;
-    var isA = which === 'athlete';
-    tabA.setAttribute('aria-selected', isA ? 'true' : 'false'); tabV.setAttribute('aria-selected', isA ? 'false' : 'true');
-    tabA.tabIndex = isA ? 0 : -1; tabV.tabIndex = isA ? -1 : 0;
-    fA.hidden = !isA; fV.hidden = isA;
-    if (focus) (isA ? tabA : tabV).focus();
-  }
-  if (tabA && tabV){
-    tabA.addEventListener('click', function(){ selectTab('athlete', false); });
-    tabV.addEventListener('click', function(){ selectTab('volunteer', false); });
-    [tabA, tabV].forEach(function(t){ t.addEventListener('keydown', function(e){
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft'){ e.preventDefault(); selectTab(t === tabA ? 'volunteer' : 'athlete', true); }
-    }); });
-    function fromHash(){ if (location.hash === '#volunteer') selectTab('volunteer', false); }
-    fromHash(); window.addEventListener('hashchange', fromHash);
-  }
-
-  /* registration link: stays inactive until the club's Google Form link is added */
+  /* sign-up buttons: stay inactive until the club's form links are added in Pages CMS */
   Array.prototype.forEach.call(document.querySelectorAll('[data-form-link]'), function(a){
     a.addEventListener('click', function(e){
       if (a.getAttribute('href') === '#'){
@@ -154,6 +133,77 @@
         card.appendChild(badge); card.appendChild(body); evList.appendChild(card);
       });
     }).catch(showEmpty);
+  }
+
+  /* gallery: tap a photo to see it larger. Swipe or use the arrows when there are several. */
+  var shots = Array.prototype.slice.call(document.querySelectorAll('.g-open'));
+  if (shots.length){
+    var lb = null, idx = 0, opener = null, lbImg, lbCap, lbPrev, lbNext;
+    var ICON_X = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+    var ICON_L = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var ICON_R = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    function btn(cls, label, icon){ var b = document.createElement('button'); b.type = 'button'; b.className = 'lb-btn ' + cls; b.setAttribute('aria-label', label); b.innerHTML = icon; return b; }
+    function show(i){
+      idx = (i + shots.length) % shots.length;
+      var src = shots[idx].querySelector('img'), fig = shots[idx].closest('figure');
+      var cat = fig && fig.querySelector('figcaption') ? fig.querySelector('figcaption').textContent : '';
+      lbImg.src = src.currentSrc || src.src; lbImg.alt = src.alt;
+      lbCap.textContent = cat;
+      if (shots.length > 1){ var n = document.createElement('span'); n.textContent = (idx + 1) + ' of ' + shots.length; lbCap.appendChild(n); }
+    }
+    function closeLb(){
+      if (!lb) return;
+      lb.remove(); lb = null; doc.classList.remove('lb-open');
+      document.removeEventListener('keydown', onLbKey);
+      if (opener) opener.focus();
+    }
+    function onLbKey(e){
+      if (e.key === 'Escape'){ e.preventDefault(); closeLb(); }
+      else if (e.key === 'ArrowRight' && shots.length > 1) show(idx + 1);
+      else if (e.key === 'ArrowLeft' && shots.length > 1) show(idx - 1);
+      else if (e.key === 'Tab'){
+        var f = lb.querySelectorAll('button'), first = f[0], lastB = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); lastB.focus(); }
+        else if (!e.shiftKey && document.activeElement === lastB){ e.preventDefault(); first.focus(); }
+      }
+    }
+    function openLb(i){
+      opener = shots[i];
+      lb = document.createElement('div'); lb.className = 'lb';
+      lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Photo');
+      var top = document.createElement('div'); top.className = 'lb-top';
+      lbCap = document.createElement('p'); lbCap.className = 'lb-cap'; lbCap.setAttribute('aria-live', 'polite');
+      var x = btn('lb-close', 'Close photo', ICON_X);
+      top.appendChild(lbCap); top.appendChild(x);
+      var stage = document.createElement('div'); stage.className = 'lb-stage';
+      lbImg = document.createElement('img'); lbImg.decoding = 'async';
+      stage.appendChild(lbImg);
+      if (shots.length > 1){
+        lbPrev = btn('lb-prev', 'Previous photo', ICON_L); lbNext = btn('lb-next', 'Next photo', ICON_R);
+        lbPrev.addEventListener('click', function(){ show(idx - 1); });
+        lbNext.addEventListener('click', function(){ show(idx + 1); });
+        stage.appendChild(lbPrev); stage.appendChild(lbNext);
+      }
+      lb.appendChild(top); lb.appendChild(stage);
+      x.addEventListener('click', closeLb);
+      /* tap the dark area around the photo to close */
+      lb.addEventListener('click', function(e){ if (e.target === lb || e.target === stage || e.target === top) closeLb(); });
+      /* swipe left or right for the next photo, down to close */
+      var sx = null, sy = null;
+      stage.addEventListener('touchstart', function(e){ if (e.touches.length === 1){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; } }, {passive: true});
+      stage.addEventListener('touchend', function(e){
+        if (sx === null) return;
+        var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = sy = null;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) && shots.length > 1) show(idx + (dx < 0 ? 1 : -1));
+        else if (dy > 80 && Math.abs(dy) > Math.abs(dx)) closeLb();
+      }, {passive: true});
+      document.body.appendChild(lb);
+      doc.classList.add('lb-open');
+      show(i);
+      document.addEventListener('keydown', onLbKey);
+      x.focus();
+    }
+    shots.forEach(function(s, i){ s.addEventListener('click', function(){ openLb(i); }); });
   }
 
   /* gentle reveal as sections scroll into view */
