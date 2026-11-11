@@ -475,10 +475,12 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .form-hint{font-size:var(--fs-sm);color:var(--muted)}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
 .g-tile{position:relative;margin:0;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3;display:grid;place-items:center;background:var(--sage-soft)}
-.g-tile:nth-child(3n+1){background:var(--pitch)}
-.g-tile:nth-child(3n+2){background:#DCE7F0}
+/* tile colours by sport (not by position), so photo tiles never shift them */
+.g-tile.g-c1{background:var(--pitch)}
+.g-tile.g-c2{background:#DCE7F0}
+.g-tile.g-photo{background:var(--navy)}
 .g-tile svg{width:46%;height:auto}
-.g-tile:nth-child(3n+1) svg{color:var(--cream)}
+.g-tile.g-c1 svg{color:var(--cream)}
 .g-tile figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.92);color:var(--navy);font-weight:700;font-size:var(--fs-xs);letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
 .gallery-note{margin-top:var(--sp-5)}
 .err404{text-align:center;display:grid;justify-items:center;gap:var(--sp-4)}
