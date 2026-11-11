@@ -135,21 +135,35 @@
     }).catch(showEmpty);
   }
 
-  /* gallery: tap a photo to see it larger. Swipe or use the arrows when there are several. */
-  var shots = Array.prototype.slice.call(document.querySelectorAll('.g-open'));
-  if (shots.length){
-    var lb = null, idx = 0, opener = null, lbImg, lbCap, lbPrev, lbNext;
-    var ICON_X = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+  /* gallery: tap a sport to see all of its photos. Swipe, arrows or thumbnails move between them. */
+  var cards = Array.prototype.slice.call(document.querySelectorAll('button.sp-card'));
+  if (cards.length){
+    var lb = null, set = [], idx = 0, opener = null, lbImg, lbCount, lbCapt, lbThumbs;
+    var ICON_X = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
     var ICON_L = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     var ICON_R = '<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    function btn(cls, label, icon){ var b = document.createElement('button'); b.type = 'button'; b.className = 'lb-btn ' + cls; b.setAttribute('aria-label', label); b.innerHTML = icon; return b; }
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function mk(tag, cls){ var e = document.createElement(tag); if (cls) e.className = cls; return e; }
+    function btn(cls, label, icon){ var b = mk('button', 'lb-btn ' + cls); b.type = 'button'; b.setAttribute('aria-label', label); b.innerHTML = icon; return b; }
+    function paint(){
+      var s = set[idx];
+      lbImg.src = s.src;
+      lbImg.alt = s.cap || (lb.getAttribute('data-sport') + ' photo ' + (idx + 1));
+      lbCapt.textContent = s.cap; lbCapt.hidden = !s.cap;
+      lbCount.textContent = set.length > 1 ? (idx + 1) + ' of ' + set.length : '1 photo';
+      if (lbThumbs) Array.prototype.forEach.call(lbThumbs.children, function(t, i){
+        t.setAttribute('aria-current', i === idx ? 'true' : 'false');
+        if (i === idx && t.scrollIntoView) t.scrollIntoView({block: 'nearest', inline: 'center'});
+      });
+    }
     function show(i){
-      idx = (i + shots.length) % shots.length;
-      var src = shots[idx].querySelector('img'), fig = shots[idx].closest('figure');
-      var cat = fig && fig.querySelector('figcaption') ? fig.querySelector('figcaption').textContent : '';
-      lbImg.src = src.currentSrc || src.src; lbImg.alt = src.alt;
-      lbCap.textContent = cat;
-      if (shots.length > 1){ var n = document.createElement('span'); n.textContent = (idx + 1) + ' of ' + shots.length; lbCap.appendChild(n); }
+      if (!set.length) return;
+      var next = (i + set.length) % set.length;
+      if (next === idx && lbImg.getAttribute('src')) return;
+      idx = next;
+      if (reduce){ paint(); return; }
+      lbImg.classList.add('fading');
+      setTimeout(function(){ if (!lb) return; paint(); lbImg.classList.remove('fading'); }, 160);
     }
     function closeLb(){
       if (!lb) return;
@@ -158,33 +172,49 @@
       if (opener) opener.focus();
     }
     function onLbKey(e){
+      if (!lb) return;
       if (e.key === 'Escape'){ e.preventDefault(); closeLb(); }
-      else if (e.key === 'ArrowRight' && shots.length > 1) show(idx + 1);
-      else if (e.key === 'ArrowLeft' && shots.length > 1) show(idx - 1);
+      else if (e.key === 'ArrowRight' && set.length > 1) show(idx + 1);
+      else if (e.key === 'ArrowLeft' && set.length > 1) show(idx - 1);
       else if (e.key === 'Tab'){
-        var f = lb.querySelectorAll('button'), first = f[0], lastB = f[f.length - 1];
+        var f = Array.prototype.filter.call(lb.querySelectorAll('button'), function(b){ return b.offsetParent !== null; });
+        var first = f[0], lastB = f[f.length - 1];
         if (e.shiftKey && document.activeElement === first){ e.preventDefault(); lastB.focus(); }
         else if (!e.shiftKey && document.activeElement === lastB){ e.preventDefault(); first.focus(); }
       }
     }
-    function openLb(i){
-      opener = shots[i];
-      lb = document.createElement('div'); lb.className = 'lb';
-      lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Photo');
-      var top = document.createElement('div'); top.className = 'lb-top';
-      lbCap = document.createElement('p'); lbCap.className = 'lb-cap'; lbCap.setAttribute('aria-live', 'polite');
-      var x = btn('lb-close', 'Close photo', ICON_X);
-      top.appendChild(lbCap); top.appendChild(x);
-      var stage = document.createElement('div'); stage.className = 'lb-stage';
-      lbImg = document.createElement('img'); lbImg.decoding = 'async';
-      stage.appendChild(lbImg);
-      if (shots.length > 1){
-        lbPrev = btn('lb-prev', 'Previous photo', ICON_L); lbNext = btn('lb-next', 'Next photo', ICON_R);
-        lbPrev.addEventListener('click', function(){ show(idx - 1); });
-        lbNext.addEventListener('click', function(){ show(idx + 1); });
-        stage.appendChild(lbPrev); stage.appendChild(lbNext);
-      }
+    function openLb(card){
+      var holder = card.parentNode.querySelector('.sp-set');
+      set = holder ? Array.prototype.map.call(holder.children, function(s){ return {src: s.getAttribute('data-src'), cap: s.getAttribute('data-cap') || ''}; }).filter(function(s){ return s.src; }) : [];
+      if (!set.length) return;
+      opener = card; idx = 0;
+      var sport = card.getAttribute('data-sport') || '';
+      lb = mk('div', 'lb'); lb.setAttribute('data-sport', sport);
+      lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', sport + ' photos');
+      var top = mk('div', 'lb-top'), title = mk('p', 'lb-title');
+      title.textContent = sport; lbCount = mk('span'); lbCount.setAttribute('aria-live', 'polite'); title.appendChild(lbCount);
+      var x = btn('lb-close', 'Close photos', ICON_X);
+      top.appendChild(title); top.appendChild(x);
+      var stage = mk('div', 'lb-stage');
+      lbImg = mk('img'); lbImg.decoding = 'async';
+      lbCapt = mk('p', 'lb-caption'); lbCapt.hidden = true;
+      stage.appendChild(lbImg); stage.appendChild(lbCapt);
       lb.appendChild(top); lb.appendChild(stage);
+      lbThumbs = null;
+      if (set.length > 1){
+        var prev = btn('lb-prev', 'Previous photo', ICON_L), next = btn('lb-next', 'Next photo', ICON_R);
+        prev.addEventListener('click', function(){ show(idx - 1); });
+        next.addEventListener('click', function(){ show(idx + 1); });
+        stage.appendChild(prev); stage.appendChild(next);
+        lbThumbs = mk('div', 'lb-thumbs');
+        set.forEach(function(s, i){
+          var t = mk('button'); t.type = 'button'; t.setAttribute('aria-label', 'Photo ' + (i + 1) + ' of ' + set.length);
+          var ti = mk('img'); ti.src = s.src; ti.alt = ''; ti.loading = 'lazy'; t.appendChild(ti);
+          t.addEventListener('click', function(){ show(i); });
+          lbThumbs.appendChild(t);
+        });
+        lb.appendChild(lbThumbs);
+      }
       x.addEventListener('click', closeLb);
       /* tap the dark area around the photo to close */
       lb.addEventListener('click', function(e){ if (e.target === lb || e.target === stage || e.target === top) closeLb(); });
@@ -194,17 +224,45 @@
       stage.addEventListener('touchend', function(e){
         if (sx === null) return;
         var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = sy = null;
-        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) && shots.length > 1) show(idx + (dx < 0 ? 1 : -1));
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) && set.length > 1) show(idx + (dx < 0 ? 1 : -1));
         else if (dy > 80 && Math.abs(dy) > Math.abs(dx)) closeLb();
       }, {passive: true});
       document.body.appendChild(lb);
       doc.classList.add('lb-open');
-      show(i);
+      lbImg.removeAttribute('src');
+      paint();
       document.addEventListener('keydown', onLbKey);
       x.focus();
     }
-    shots.forEach(function(s, i){ s.addEventListener('click', function(){ openLb(i); }); });
+    cards.forEach(function(c){ c.addEventListener('click', function(){ openLb(c); }); });
   }
+
+  /* Some phones show a strip beside the page that Safari fills with the page's base colour.
+     Keep that colour matched to the part of the page in the middle of the screen. */
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var NAVY = '#0A2342', edgeNow = '', edgeTick = false;
+  function edgeColor(){
+    if (doc.classList.contains('lb-open')) return null;
+    if (window.innerHeight + window.pageYOffset >= doc.scrollHeight - 4) return NAVY;
+    var hit = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2));
+    var sec = hit && hit.closest ? hit.closest('section, footer, .head') : null;
+    if (!sec || sec.classList.contains('on-navy')) return NAVY;
+    var m = (getComputedStyle(sec).backgroundColor || '').match(/[\d.]+/g);
+    if (m && m.length >= 3 && (m.length < 4 || +m[3] > .5)) return 'rgb(' + m[0] + ', ' + m[1] + ', ' + m[2] + ')';
+    return getComputedStyle(document.body).backgroundColor;
+  }
+  function paintEdge(){
+    edgeTick = false;
+    var c = edgeColor();
+    if (!c || c === edgeNow) return;
+    edgeNow = c; doc.style.backgroundColor = c;
+    if (themeMeta) themeMeta.setAttribute('content', c);
+  }
+  function queueEdge(){ if (!edgeTick){ edgeTick = true; window.requestAnimationFrame(paintEdge); } }
+  window.addEventListener('scroll', queueEdge, {passive: true});
+  window.addEventListener('resize', queueEdge);
+  window.addEventListener('load', queueEdge);
+  queueEdge();
 
   /* gentle reveal as sections scroll into view */
   var rv = document.querySelectorAll('.reveal');
