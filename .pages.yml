@@ -379,7 +379,7 @@ content:
   - name: photos
     label: Photos
     type: object
-    description: Pick a sport for each photo. It takes that sport's spot, and sports without a photo keep their drawing. Only add photos of children after a parent or guardian signs the photo release.
+    description: Add as many photos as you like. Pick a sport for each one, and it joins that sport's set. Each sport always has one card on the page. Only add photos of children after a parent or guardian signs the photo release.
     list: true
     fields:
     - name: photo
@@ -390,7 +390,7 @@ content:
       label: Sport
       type: select
       required: true
-      description: Which tile this photo goes in.
+      description: Which sport this photo belongs to.
       options:
         values:
         - Soccer
@@ -400,6 +400,6 @@ content:
         - Flag football
         - Game day
     - name: caption
-      label: Photo description
+      label: Caption
       type: string
-      description: A few words about the photo, read out by screen readers. Not shown on the page.
+      description: Optional. A few words shown under the photo when it's open, also read out by screen readers.

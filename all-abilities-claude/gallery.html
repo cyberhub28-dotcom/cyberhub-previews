@@ -160,21 +160,41 @@
   </section>
   <section class="sec">
     <div class="wrap">
-{% assign shots = "" | split: "" %}{% for x in p.photos %}{% if x.photo and x.photo != "" %}{% assign shots = shots | push: x %}{% endif %}{% endfor %}      <div class="gallery" role="list" aria-label="{% if shots.size > 0 %}Club photos{% else %}Photo spaces, waiting for the club's photos{% endif %}">
-        {% capture t %}{% for x in shots %}{% assign xc = x.category | default: "Game day" %}{% if xc == "Soccer" %}<figure class="g-tile g-photo reveal" role="listitem"><button type="button" class="g-open" aria-haspopup="dialog"><img src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ x.caption | default: 'Soccer photo' | escape }}" loading="lazy"></button><figcaption>Soccer</figcaption></figure>
-        {% endif %}{% endfor %}{% endcapture %}{% if t != "" %}{{ t }}{% else %}<figure class="g-tile g-c1 reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-soccer"/></svg><figcaption>Soccer</figcaption></figure>{% endif %}
-        {% capture t %}{% for x in shots %}{% assign xc = x.category | default: "Game day" %}{% if xc == "Buddies" %}<figure class="g-tile g-photo reveal" role="listitem"><button type="button" class="g-open" aria-haspopup="dialog"><img src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ x.caption | default: 'Buddies photo' | escape }}" loading="lazy"></button><figcaption>Buddies</figcaption></figure>
-        {% endif %}{% endfor %}{% endcapture %}{% if t != "" %}{{ t }}{% else %}<figure class="g-tile g-c2 reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-buddy"/></svg><figcaption>Buddies</figcaption></figure>{% endif %}
-        {% capture t %}{% for x in shots %}{% assign xc = x.category | default: "Game day" %}{% if xc == "Basketball" %}<figure class="g-tile g-photo reveal" role="listitem"><button type="button" class="g-open" aria-haspopup="dialog"><img src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ x.caption | default: 'Basketball photo' | escape }}" loading="lazy"></button><figcaption>Basketball</figcaption></figure>
-        {% endif %}{% endfor %}{% endcapture %}{% if t != "" %}{{ t }}{% else %}<figure class="g-tile g-c3 reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-wheel"/></svg><figcaption>Basketball</figcaption></figure>{% endif %}
-        {% capture t %}{% for x in shots %}{% assign xc = x.category | default: "Game day" %}{% if xc == "Baseball" %}<figure class="g-tile g-photo reveal" role="listitem"><button type="button" class="g-open" aria-haspopup="dialog"><img src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ x.caption | default: 'Baseball photo' | escape }}" loading="lazy"></button><figcaption>Baseball</figcaption></figure>
-        {% endif %}{% endfor %}{% endcapture %}{% if t != "" %}{{ t }}{% else %}<figure class="g-tile g-c1 reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-base"/></svg><figcaption>Baseball</figcaption></figure>{% endif %}
-        {% capture t %}{% for x in shots %}{% assign xc = x.category | default: "Game day" %}{% if xc == "Flag football" %}<figure class="g-tile g-photo reveal" role="listitem"><button type="button" class="g-open" aria-haspopup="dialog"><img src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ x.caption | default: 'Flag football photo' | escape }}" loading="lazy"></button><figcaption>Flag football</figcaption></figure>
-        {% endif %}{% endfor %}{% endcapture %}{% if t != "" %}{{ t }}{% else %}<figure class="g-tile g-c2 reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-flag"/></svg><figcaption>Flag football</figcaption></figure>{% endif %}
-        {% capture t %}{% for x in shots %}{% assign xc = x.category | default: "Game day" %}{% if xc == "Game day" %}<figure class="g-tile g-photo reveal" role="listitem"><button type="button" class="g-open" aria-haspopup="dialog"><img src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ x.caption | default: 'Game day photo' | escape }}" loading="lazy"></button><figcaption>Game day</figcaption></figure>
-        {% endif %}{% endfor %}{% endcapture %}{% if t != "" %}{{ t }}{% else %}<figure class="g-tile g-c3 reveal" role="listitem"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#B7CFA9"><use href="#pg-soccer"/></svg><figcaption>Game day</figcaption></figure>{% endif %}
+{%- comment -%} One card per sport, always in this order. Cards show the sport's drawing. Photos are grouped by the Sport picked in Pages CMS and open in the viewer. {%- endcomment -%}
+{%- assign sp_names = "Soccer,Buddies,Basketball,Baseball,Flag football,Game day" | split: "," -%}
+{%- assign sp_lower = "soccer,buddies,basketball,baseball,flag football,game day" | split: "," -%}
+{%- assign sp_art = "pg-soccer,pg-buddy,pg-wheel,pg-base,pg-flag,pg-soccer" | split: "," -%}
+{%- comment -%} Game day shows the whole team together, so it never repeats the Soccer drawing. {%- endcomment -%}
+{%- assign team_art = "pg-wheel,pg-soccer,pg-flag" | split: "," -%}
+{%- assign sp_cls = "sp-navy sp-feature,sp-sky,sp-sage,sp-pitch,sp-sky,sp-sage sp-wide-sm" | split: "," -%}
+{%- assign total = 0 -%}
+{%- for x in p.photos -%}{%- if x.photo and x.photo != "" -%}{%- assign total = total | plus: 1 -%}{%- endif -%}{%- endfor %}
+      <div class="gal-head">
+        <h2>Pick a sport</h2>
+        <p>{% if total > 0 %}Tap a sport with photos to see them all.{% else %}Photos from each sport go up here as the season gets going.{% endif %}</p>
       </div>
-      {% if shots.size == 0 %}<p class="ph-note gallery-note"><span aria-hidden="true">✎</span><span>To confirm: the club's own photos go here. Photos of children go up only after a parent or guardian signs a photo release.</span></p>{% endif %}
+      <ul class="gallery" aria-label="Sports">
+{%- for name in sp_names -%}
+{%- assign k = forloop.index0 -%}{%- assign nd = sp_lower[k] -%}
+{%- assign set = "" | split: "" -%}
+{%- for x in p.photos -%}{%- if x.photo and x.photo != "" -%}
+{%- assign xc = x.category | default: "Game day" | downcase | strip -%}
+{%- unless sp_lower contains xc -%}{%- assign xc = "game day" -%}{%- endunless -%}
+{%- if xc == nd -%}{%- assign set = set | push: x -%}{%- endif -%}
+{%- endif -%}{%- endfor -%}
+{%- capture art -%}{% if k == 5 %}<span class="sp-art sp-team">{% for t in team_art %}<svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#0287B0;--pg-acc:#3F7D2A"><use href="#{{ t }}"/></svg>{% endfor %}</span>{% else %}<span class="sp-art"><svg viewBox="0 0 120 120" aria-hidden="true" style="--pg-buddy:#0287B0;--pg-acc:#3F7D2A"><use href="#{{ sp_art[k] }}"/></svg></span>{% endif %}{%- endcapture -%}
+{%- capture kick -%}{% if k == 0 %}<span class="sp-kick">Winter season</span>{% endif %}{%- endcapture %}
+        <li class="sp {{ sp_cls[k] }} reveal">
+{%- if set.size > 0 %}
+          <button type="button" class="sp-card" aria-haspopup="dialog" data-sport="{{ name }}">{{ art }}{{ kick }}<span class="sp-name">{{ name }}</span><span class="sp-chip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><rect x="3" y="6" width="14" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 3h11a3 3 0 0 1 3 3v11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>{{ set.size }} {% if set.size == 1 %}photo{% else %}photos{% endif %}<span class="sp-go" aria-hidden="true">›</span></span></button>
+          <span class="sp-set" hidden>{% for x in set %}<span data-src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" data-cap="{{ x.caption | escape }}"></span>{% endfor %}</span>
+{%- else %}
+          <div class="sp-card">{{ art }}{{ kick }}<span class="sp-name">{{ name }}</span><span class="sp-chip sp-soon">Photos coming soon</span></div>
+{%- endif %}
+        </li>
+{%- endfor %}
+      </ul>
+      {% if total == 0 %}<p class="ph-note gallery-note"><span aria-hidden="true">✎</span><span>To confirm: the club's own photos go here. Photos of children go up only after a parent or guardian signs a photo release.</span></p>{% endif %}
     </div>
   </section>
 </main>
