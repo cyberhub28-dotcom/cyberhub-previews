@@ -373,14 +373,27 @@ content:
   - name: photos
     label: Photos
     type: object
-    description: Only add photos of children after a parent or guardian signs the photo release. Until a photo is added, the page shows picture spaces.
+    description: Pick a sport for each photo. It takes that sport's spot, and sports without a photo keep their drawing. Only add photos of children after a parent or guardian signs the photo release.
     list: true
     fields:
     - name: photo
       label: Photo
       type: image
       required: true
+    - name: category
+      label: Sport
+      type: select
+      required: true
+      description: Which tile this photo goes in.
+      options:
+        values:
+        - Soccer
+        - Buddies
+        - Basketball
+        - Baseball
+        - Flag football
+        - Game day
     - name: caption
-      label: Caption
+      label: Photo description
       type: string
-      description: A few words. Shown on the photo and read out by screen readers.
+      description: A few words about the photo, read out by screen readers. Not shown on the page.
