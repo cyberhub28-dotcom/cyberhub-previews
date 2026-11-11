@@ -1,3 +1,5 @@
 headline: Game day, in pictures.
 intro: Practices, game days and the moments in between.
-photos: []
+photos:
+  - photo: /all-abilities-claude/images/IMG_0205.png
+    category: Soccer
