@@ -280,7 +280,7 @@ p{margin:0}
 .foot a{display:inline-flex;min-height:40px;align-items:center;text-decoration:none}
 .foot a:hover{color:var(--cream);text-decoration:underline;text-underline-offset:4px}
 .foot-logo{width:min(220px,100%);background:var(--cream);border-radius:var(--r-md);padding:var(--sp-4) var(--sp-5);margin-bottom:var(--sp-5)}
-.foot-logo img{width:100%;height:auto;aspect-ratio:810/610;object-fit:contain}
+.foot-logo img{width:100%;height:auto;aspect-ratio:480/361;object-fit:contain}
 .foot .legal{margin-top:var(--sp-7);padding-top:var(--sp-5);border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:.9rem;color:rgba(247,244,236,.7)}
 .email{word-break:break-word}
 
