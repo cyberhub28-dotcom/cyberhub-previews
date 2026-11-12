@@ -17,9 +17,8 @@
 <meta property="og:description" content="How the All Abilities Sports Club website handles your information.">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap">
+<link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/styles.css?v={{ site.time | date: '%s' }}">
 <script src="assets/site.js?v={{ site.time | date: '%s' }}" defer></script>
 <!-- PREVIEW ONLY: remove review.js at launch -->
@@ -63,18 +62,30 @@
   <section class="sec">
     <div class="wrap prose">
       <h2>What we collect</h2>
-      <p>Only what you type into a form on this site: your name, email and your message. We use it to reply to you and run club programs. Athlete registration happens on the club's Google Form, and gifts are made on Zeffy. Those services' own privacy policies also apply.</p>
+      <p>This site doesn't store what you type. The contact form opens your own email app, and nothing reaches the club until you press Send. We use your message to reply to you and run club programs. Athlete registration happens on the club's Google Form, and gifts are made on Zeffy. Those services' own privacy policies also apply.</p>
+      <h2>Sign-ups</h2>
+      <p>Volunteers sign up on the club's Google Form. Parents and guardians register athletes on the club's Google Form too.</p>
+      <ul>
+        <li>What the form asks: <span class="ph">To confirm: the questions on the club's form</span></li>
+        <li>Who sees it: <span class="ph">To confirm: who at the club can see answers</span></li>
+        <li>Where it's kept and for how long: <span class="ph">To confirm: where answers are kept and when they're deleted</span></li>
+      </ul>
       <h2>Children</h2>
       <p>A parent, guardian or adult volunteer fills in every form. Forms on this site don't ask for details about children. Please don't send medical records through the site.</p>
+      <p>This site is for parents and adults. We don't knowingly collect information from children under 13.</p>
+      <h2>Photos</h2>
+      <p>Photos of children appear only with a parent's signed permission. To have a photo taken down, email the club and it comes down within 48 hours.</p>
       <h2>Donations</h2>
       <p>Gifts are made on the club's Zeffy page. Zeffy's own privacy policy covers what you enter there.</p>
       <h2>What we don't do</h2>
       <p>We don't sell personal information, and this site doesn't run advertising cookies.</p>
-      <h2>Email</h2>
-      <p>The volunteer and contact forms open your own email app with your message filled in. Nothing is sent until you press Send there.</p>
       <h2>Facebook</h2>
       <p>Links to the club's Facebook page open Facebook, and Facebook's own privacy policy applies there. This site doesn't load Facebook on its own pages.</p>
-      <p class="muted">Last updated: <span class="ph">To confirm at launch</span></p>
+      <h2>Where this site lives</h2>
+      <p>This site is hosted on GitHub Pages, and GitHub's own privacy statement covers the basic visit logs it keeps. The site's fonts load from this site, not from Google.</p>
+      <h2>Your information</h2>
+      <p>To see or delete information you've sent the club, email <span class="ph">To confirm: club email for privacy requests</span>.</p>
+      <p class="muted">Last updated: November 12, 2026</p>
     </div>
   </section>
 </main>

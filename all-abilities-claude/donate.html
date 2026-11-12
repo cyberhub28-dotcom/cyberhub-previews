@@ -17,9 +17,8 @@
 <meta property="og:description" content="Support inclusive youth sports with a gift or a sponsorship.">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap">
+<link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/styles.css?v={{ site.time | date: '%s' }}">
 <script src="assets/site.js?v={{ site.time | date: '%s' }}" defer></script>
 <!-- PREVIEW ONLY: remove review.js at launch -->
@@ -73,7 +72,7 @@
           <a class="btn btn-navy" href="{{ c.donate_link | escape }}" target="_blank" rel="noopener" aria-describedby="zeffy-note">Donate on Zeffy <span class="arr" aria-hidden="true">↗</span></a>
         </div>
         <p id="zeffy-note" class="muted" style="font-size:var(--fs-sm)">Opens the club's Zeffy donation page in a new tab.</p>
-        <p class="muted" style="font-size:var(--fs-sm)">Questions about whether your gift is tax-deductible? Please check with your tax advisor.</p>
+        <p class="muted" style="font-size:var(--fs-sm)">Gifts to All Abilities Sports Club are not tax-deductible at this time.</p>
       </div>
       <div class="panel soft">
         <h2>Partner with us</h2>
