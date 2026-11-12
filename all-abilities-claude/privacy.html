@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.club -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.privacy -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -36,96 +36,20 @@
 <a class="skip" href="#main">Skip to main content</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
-<header class="head on-navy">
-  <div class="wrap head-in">
-    <a class="brand" href="index.html" aria-label="All Abilities Sports Club, home">
-      <span class="brand-mark"><img src="assets/mark.webp" alt="" width="126" height="91"></span>
-      <span class="brand-name">All Abilities <small>Sports Club</small></span>
-    </a>
-    <nav class="nav" id="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="programs.html">Programs</a></li>
-        <li><a href="about.html">Our Story</a></li>
-        <li><a href="get-involved.html">Get Involved</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="nav-cta"><a href="get-involved.html">Register for soccer</a></li>
-      </ul>
-    </nav>
-    <a class="btn btn-sage btn-sm" href="get-involved.html">Register</a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Menu
-    </button>
-  </div>
-</header>
+{% include aasc/header.html current="" %}
 
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
-    <div class="wrap"><p class="kicker">Privacy</p><h1>How this site handles your information.</h1></div>
+    <div class="wrap"><p class="kicker">{{ p.kicker | escape }}</p><h1>{{ p.headline | escape }}</h1></div>
   </section>
   <section class="sec">
     <div class="wrap prose">
-      <h2>What we collect</h2>
-      <p>This site doesn't store what you type. The contact form opens your own email app, and nothing reaches the club until you press Send. We use your message to reply to you and run club programs. Athlete registration happens on the club's Google Form, and gifts are made on Zeffy. Those services' own privacy policies also apply.</p>
-      <h2>Sign-ups</h2>
-      <p>Volunteers sign up on the club's Google Form. Parents and guardians register athletes on the club's Google Form too.</p>
-      <ul>
-        <li>What the form asks: <span class="ph">To confirm: the questions on the club's form</span></li>
-        <li>Who sees it: <span class="ph">To confirm: who at the club can see answers</span></li>
-        <li>Where it's kept and for how long: <span class="ph">To confirm: where answers are kept and when they're deleted</span></li>
-      </ul>
-      <h2>Children</h2>
-      <p>A parent, guardian or adult volunteer fills in every form. Forms on this site don't ask for details about children. Please don't send medical records through the site.</p>
-      <p>This site is for parents and adults. We don't knowingly collect information from children under 13.</p>
-      <h2>Photos</h2>
-      <p>Photos of children appear only with a parent's signed permission. To have a photo taken down, email the club and it comes down within 48 hours.</p>
-      <h2>Donations</h2>
-      <p>Gifts are made on the club's Zeffy page. Zeffy's own privacy policy covers what you enter there.</p>
-      <h2>What we don't do</h2>
-      <p>We don't sell personal information, and this site doesn't run advertising cookies.</p>
-      <h2>Facebook</h2>
-      <p>Links to the club's Facebook page open Facebook, and Facebook's own privacy policy applies there. This site doesn't load Facebook on its own pages.</p>
-      <h2>Where this site lives</h2>
-      <p>This site is hosted on GitHub Pages, and GitHub's own privacy statement covers the basic visit logs it keeps. The site's fonts load from this site, not from Google.</p>
-      <h2>Your information</h2>
-      <p>To see or delete information you've sent the club, email <span class="ph">To confirm: club email for privacy requests</span>.</p>
-      <p class="muted">Last updated: November 12, 2026</p>
+      {{ p.body }}
+      <p class="muted">Last updated: {{ p.last_updated | date: "%B %-d, %Y" }}</p>
     </div>
   </section>
 </main>
 
-<footer class="foot on-navy">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="480" height="361" loading="lazy"></div>
-        <p>{{ c.footer_about | escape }}</p>
-      </div>
-      <div>
-        <h2>Explore</h2>
-        <ul>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="about.html">Our story</a></li>
-          <li><a href="get-involved.html">Sign up</a></li>
-          <li><a href="get-involved.html#volunteer">Volunteer</a></li>
-          <li><a href="index.html#faq">Parent questions</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Connect</h2>
-        <ul>
-          <li><a href="donate.html">Donate and sponsor</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="legal"><span>© 2026 All Abilities Sports Club</span></div>
-  </div>
-</footer>
+{% include aasc/footer.html %}
 </body>
 </html>

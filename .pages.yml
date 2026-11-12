@@ -8,7 +8,7 @@ media:
   - image
 content:
 - name: aasc-club
-  label: 'All Abilities: Club details'
+  label: 'All Abilities: Club details and links'
   type: file
   path: _data/aasc/club.yml
   format: yaml
@@ -30,10 +30,6 @@ content:
     label: Footer sentence
     type: text
     description: The short line under the logo at the bottom of every page.
-  - name: motto
-    label: Motto
-    type: string
-    description: Bottom of every page.
   - name: facebook
     label: Facebook page link
     type: string
@@ -48,47 +44,94 @@ content:
     required: true
     pattern: *id001
   - name: registration_form
-    label: Sign-up form link
+    label: Registration link
     type: string
-    description: The online form families use to register. Leave empty until it's ready, and the Register button stays switched off.
-    pattern: &id004
+    description: Where families sign up. This can be a Google Form or a Zeffy registration page. Every Register now button uses it. Leave empty until it's ready, and the button stays switched off.
+    pattern: &id002
+      regex: ^(https://\S+)?$
+      message: Paste the full link, starting with https://, or leave it empty
+  - name: payment_link
+    label: Payment link (optional)
+    type: string
+    description: Only if families pay the fee on a separate page, like a Zeffy payment page. When it's filled in, a Pay the fee button shows next to Register now. Leave empty if payment is part of the registration
+      form.
+    pattern:
       regex: ^(https://\S+)?$
       message: Paste the full link, starting with https://, or leave it empty
   - name: volunteer_form
     label: Volunteer form link
     type: string
     description: The online form volunteers fill in. Leave empty until it's ready, and the Volunteer now button stays switched off.
-    pattern: *id004
+    pattern: *id002
 - name: aasc-season
-  label: 'All Abilities: Winter soccer season'
+  label: 'All Abilities: Current season'
   type: file
   path: _data/aasc/season.yml
   format: yaml
   fields:
+  - name: name
+    label: Season name
+    type: string
+    description: Shown all over the site, for example Winter Indoor Soccer or Spring Basketball.
+    required: true
+  - name: sport
+    label: Sport for this season
+    type: select
+    description: This sport gets the big card on the home page. The other sports show as Coming later.
+    required: true
+    options:
+      values:
+      - Soccer
+      - Basketball
+      - Baseball
+      - Flag football
+  - name: session_day
+    label: Day of the week
+    type: select
+    description: The day sessions happen. The site says "Sundays", "Saturdays" and so on from this.
+    required: true
+    options:
+      values:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+  - name: button
+    label: Big Register button words
+    type: string
+    description: 'For example: Register for winter soccer. All Register buttons go to the sign-up page.'
+  - name: menu_button
+    label: Menu Register words
+    type: string
+    description: 'The shorter Register words in the menu, for example: Register for soccer.'
   - name: registration_opens
     label: Registration opens
     type: date
-    description: These dates update the scoreboard, schedule, sign-up page and countdown on their own. Check Parent questions too, since those answers are written out by hand.
+    description: The home page countdown counts down to this day, then switches to "Registration is open now" on its own. These dates also update the scoreboard, schedule and sign-up page. Check Parent
+      questions too, since those answers are written out by hand.
     required: true
-    options: &id002
+    options: &id003
       format: yyyy-MM-dd
   - name: registration_closes
     label: Registration closes
     type: date
     required: true
-    options: *id002
+    options: *id003
   - name: first_sunday
-    label: First Sunday
+    label: First session day
     type: date
     required: true
-    options: *id002
+    options: *id003
   - name: last_sunday
-    label: Last Sunday
+    label: Last session day
     type: date
     required: true
-    options: *id002
+    options: *id003
   - name: sundays
-    label: Number of Sundays
+    label: Number of sessions
     type: number
     required: true
   - name: spots
@@ -120,6 +163,52 @@ content:
     label: How to pay
     type: text
     description: One or two sentences families see on the Programs page.
+  - name: countdown_before
+    label: Countdown words
+    type: string
+    description: Shown after the number of days, for example "8 days until registration opens November 20". The date fills in on its own.
+  - name: countdown_open
+    label: Countdown words once registration is open
+    type: string
+    description: The closing date fills in on its own after these words.
+  - name: countdown_closed
+    label: Countdown words after registration closes
+    type: text
+- name: aasc-sports
+  label: 'All Abilities: Sports'
+  type: file
+  path: _data/aasc/sports.yml
+  format: yaml
+  fields:
+  - name: soon_tag
+    label: '"Coming later" tag words'
+    type: string
+    description: The small tag on sports that aren't open yet.
+  - name: sports
+    label: Sports
+    type: object
+    list: true
+    description: Drag to reorder. The sport picked under Current season gets the big card, and the rest show as Coming later on the Home and Programs pages.
+    fields:
+    - name: name
+      label: Sport name
+      type: string
+      required: true
+    - name: picture
+      label: Drawing
+      type: select
+      required: true
+      description: Which drawing this card uses.
+      options:
+        values:
+        - Soccer
+        - Basketball
+        - Baseball
+        - Flag football
+    - name: line
+      label: Short line
+      type: string
+      description: 'One short line, for example: Dribble, pass and shoot.'
 - name: aasc-events
   label: 'All Abilities: Upcoming events'
   type: file
@@ -161,7 +250,7 @@ content:
     label: Button link
     description: Paste the full link, starting with https://. Leave empty for no button.
     type: string
-    pattern: *id004
+    pattern: *id002
 - name: aasc-faq
   label: 'All Abilities: Parent questions'
   type: file
@@ -177,7 +266,7 @@ content:
     label: Answer
     type: rich-text
     required: true
-    options: &id003
+    options: &id004
       format: html
       media: false
   - name: coming_soon
@@ -189,55 +278,211 @@ content:
   path: _data/aasc/home.yml
   format: yaml
   fields:
-  - name: hero_text
-    label: Intro paragraph
-    type: text
-    description: The paragraph under the big headline at the top.
-  - name: story_photo
-    label: Story photo
-    type: image
-    description: Only add photos of children after a parent or guardian signs the photo release.
-  - name: story_photo_description
-    label: Story photo description
-    type: string
-    description: A few words describing the photo, for people who use screen readers.
-  - name: story_heading
-    label: Story heading
-    type: string
-  - name: quote
-    label: Founder quote
-    type: text
-  - name: quote_highlight
-    label: Highlighted words
-    type: text
-    description: Copy a part of the quote here, word for word, and it gets a soft highlight. Leave empty for none.
-  - name: quote_by
-    label: Quote by
-    type: string
-  - name: events_heading
-    label: Events heading
-    type: string
-  - name: events_intro
-    label: Events intro
-    type: text
-  - name: faq_heading
-    label: Parent questions heading
-    type: string
-  - name: faq_intro
-    label: Parent questions intro
-    type: text
-  - name: join_heading
-    label: Join the team heading
-    type: string
-  - name: join_intro
-    label: Join the team intro
-    type: text
+  - name: hero
+    label: Top of the page
+    type: object
+    fields:
+    - name: headline_1
+      label: Headline, first line
+      type: string
+      description: The bouncing ball sits at the end of this line.
+    - name: headline_2
+      label: Headline, second line
+      type: string
+    - name: headline_mark
+      label: Underlined word
+      type: string
+      description: Shown at the end of the second line, with the green underline.
+    - name: text
+      label: Intro paragraph
+      type: text
+      description: The paragraph under the big headline.
+    - name: story_link
+      label: Small link words
+      type: string
+      description: The link next to the Register button. It jumps to the story below.
+    - name: team_name
+      label: Card title
+      type: string
+      description: On the drawing of the team, for example Team All Abilities.
+    - name: team_tag
+      label: Card tag
+      type: string
+    - name: ticker
+      label: Scrolling words
+      type: string
+      description: The words that slide across the bottom of the top section. One per line.
+      list: true
+  - name: story
+    label: Story section
+    type: object
+    fields:
+    - name: kicker
+      label: Small label above the heading
+      type: string
+    - name: heading
+      label: Heading
+      type: string
+    - name: photo
+      label: Photo
+      type: image
+      description: Only add photos of children after a parent or guardian signs the photo release.
+    - name: photo_description
+      label: Photo description
+      type: string
+      description: A few words describing the photo, for people who use screen readers.
+    - name: quote
+      label: Founder quote
+      type: text
+    - name: quote_highlight
+      label: Highlighted words
+      type: text
+      description: Copy a part of the quote here, word for word, and it gets a soft highlight. Leave empty for none.
+    - name: quote_by
+      label: Quote by
+      type: string
+    - name: button
+      label: Second button words
+      type: string
+      description: The button next to Register. It opens the Our story page.
+  - name: glance
+    label: Season scoreboard
+    type: object
+    description: The numbers and dates here come from Current season.
+    fields:
+    - name: faq_button
+      label: Parent questions button words
+      type: string
+  - name: lineup
+    label: Sports section
+    type: object
+    description: The sport cards come from Sports and Current season.
+    fields:
+    - name: kicker
+      label: Small label above the heading
+      type: string
+    - name: heading
+      label: Heading
+      type: string
+    - name: intro
+      label: Intro line
+      type: text
+    - name: open_tag
+      label: Tag words on the open sport
+      type: string
+      description: The opening date fills in after these words.
+    - name: season_link
+      label: Link words on the big card
+      type: string
+    - name: note
+      label: Note under the cards
+      type: text
+  - name: gameday
+    label: Game day section
+    type: object
+    fields:
+    - name: kicker
+      label: Small label above the heading
+      type: string
+    - name: heading
+      label: Heading
+      type: string
+    - name: programs_title
+      label: First card title
+      type: string
+    - name: programs_text
+      label: First card text
+      type: text
+    - name: programs_link
+      label: First card link words
+      type: string
+    - name: donate_title
+      label: Second card title
+      type: string
+    - name: donate_text
+      label: Second card text
+      type: text
+    - name: donate_link
+      label: Second card link words
+      type: string
+  - name: events
+    label: Events section
+    type: object
+    description: The events themselves are under Upcoming events.
+    fields:
+    - name: kicker
+      label: Small label above the heading
+      type: string
+    - name: heading
+      label: Heading
+      type: string
+    - name: intro
+      label: Intro line
+      type: text
+    - name: note
+      label: Note under the events
+      type: text
+      description: Put words in [square brackets] to turn them into a link to the club's Facebook page.
+    - name: empty
+      label: Words when no events are coming up
+      type: text
+  - name: faq
+    label: Parent questions section
+    type: object
+    description: The questions themselves are under Parent questions.
+    fields:
+    - name: kicker
+      label: Small label above the heading
+      type: string
+    - name: heading
+      label: Heading
+      type: string
+    - name: intro
+      label: Intro line
+      type: text
+    - name: button
+      label: Button words
+      type: string
+  - name: join
+    label: Join the team section
+    type: object
+    fields:
+    - name: kicker
+      label: Small label above the heading
+      type: string
+    - name: heading
+      label: Heading
+      type: string
+    - name: intro
+      label: Intro line
+      type: text
+    - name: play_title
+      label: First box title
+      type: string
+    - name: play_text
+      label: First box text
+      type: string
+    - name: volunteer_title
+      label: Second box title
+      type: string
+    - name: volunteer_text
+      label: Second box text
+      type: string
+    - name: give_title
+      label: Third box title
+      type: string
+    - name: give_text
+      label: Third box text
+      type: string
 - name: aasc-about
-  label: 'All Abilities: About page'
+  label: 'All Abilities: Our story page'
   type: file
   path: _data/aasc/about.yml
   format: yaml
   fields:
+  - name: kicker
+    label: Small label above the headline
+    type: string
   - name: headline
     label: Headline
     type: string
@@ -249,25 +494,43 @@ content:
     label: Photo description
     type: string
     description: A few words describing the photo, for people who use screen readers.
+  - name: why_heading
+    label: First heading
+    type: string
   - name: why_text
     label: Why we started
     type: rich-text
-    options: *id003
+    options: *id004
+  - name: bennett_heading
+    label: Second heading
+    type: string
   - name: bennett_story
     label: Bennett's story
     type: rich-text
     description: First names only for children.
-    options: *id003
+    options: *id004
+  - name: what_heading
+    label: Third heading
+    type: string
   - name: what_we_do
     label: What the club does
     type: rich-text
-    options: *id003
+    options: *id004
+  - name: programs_button
+    label: First button words
+    type: string
+  - name: involved_button
+    label: Second button words
+    type: string
 - name: aasc-programs
   label: 'All Abilities: Programs page'
   type: file
   path: _data/aasc/programs.yml
   format: yaml
   fields:
+  - name: kicker
+    label: Small label above the headline
+    type: string
   - name: headline
     label: Headline
     type: string
@@ -275,53 +538,191 @@ content:
     label: Intro line
     type: text
   - name: soccer_text
-    label: Soccer description
+    label: Season description
     type: text
+    description: Under the season name. The season facts come from Current season.
+  - name: steps_heading
+    label: Steps heading
+    type: string
+  - name: step1_text
+    label: Step 1 text
+    type: text
+    description: Step 1's title shows the opening date on its own.
+  - name: step2_title
+    label: Step 2 title
+    type: string
+  - name: step2_text
+    label: Step 2 text
+    type: text
+  - name: button
+    label: Button words
+    type: string
+  - name: later_kicker
+    label: 'Coming later: small label'
+    type: string
+  - name: later_heading
+    label: 'Coming later: heading'
+    type: string
   - name: later_intro
     label: Coming later intro
     type: text
-  - name: basketball_text
-    label: Basketball line
-    type: string
-    description: Also shown on the home page.
-  - name: baseball_text
-    label: Baseball line
-    type: string
-    description: Also shown on the home page.
-  - name: flag_football_text
-    label: Flag football line
-    type: string
-    description: Also shown on the home page.
+    description: The sports come from Sports.
 - name: aasc-signup
   label: 'All Abilities: Sign-up page'
   type: file
   path: _data/aasc/get_involved.yml
   format: yaml
   fields:
+  - name: kicker
+    label: Small label above the headline
+    type: string
   - name: headline
     label: Headline
     type: string
   - name: intro
     label: Intro line
     type: text
+  - name: choose_heading
+    label: Box heading
+    type: string
+  - name: athlete_heading
+    label: Athlete heading
+    type: string
+  - name: athlete_text
+    label: Athlete text
+    type: text
+  - name: register_button
+    label: Register button words
+    type: string
+    description: The link is Registration link, under Club details and links.
+  - name: pay_button
+    label: Pay button words
+    type: string
+    description: Only shows when Payment link is filled in, under Club details and links.
+  - name: volunteer_heading
+    label: Volunteer heading
+    type: string
+  - name: volunteer_text
+    label: Volunteer text
+    type: text
+  - name: volunteer_card
+    label: Volunteer box line
+    type: string
+  - name: volunteer_button
+    label: Volunteer button words
+    type: string
+    description: The link is Volunteer form link, under Club details and links.
+- name: aasc-gallery
+  label: 'All Abilities: Gallery page'
+  type: file
+  path: _data/aasc/gallery.yml
+  format: yaml
+  fields:
+  - name: kicker
+    label: Small label above the headline
+    type: string
+  - name: headline
+    label: Headline
+    type: string
+  - name: intro
+    label: Intro line
+    type: text
+  - name: pick_heading
+    label: Heading above the sports
+    type: string
+  - name: has_photos_line
+    label: Line when there are photos
+    type: string
+  - name: no_photos_line
+    label: Line when there are no photos yet
+    type: string
+  - name: coming_soon
+    label: Words on a sport with no photos
+    type: string
+  - name: season_tag
+    label: Tag on the big card
+    type: string
+    description: Shows when the big card is the current season's sport.
+  - name: photos
+    label: Photos
+    type: object
+    description: Add as many photos as you like. Pick a sport for each one, and it joins that sport's set. Each sport always has one card on the page, and the sport of the newest photo (the last one in
+      this list) gets the big card on top. Only add photos of children after a parent or guardian signs the photo release.
+    list: true
+    fields:
+    - name: photo
+      label: Photo
+      type: image
+      required: true
+    - name: category
+      label: Sport
+      type: select
+      required: true
+      description: Which sport this photo belongs to.
+      options:
+        values:
+        - Soccer
+        - Buddies
+        - Basketball
+        - Baseball
+        - Flag Football
+        - Game Day
+    - name: description
+      label: Photo description
+      type: string
+      required: true
+      description: A short description of what's in the photo, read out by screen readers. For example "Two players high-five after a goal." First names only.
+    - name: caption
+      label: Caption
+      type: string
+      description: Optional. A few words shown under the photo when it's open.
 - name: aasc-donate
   label: 'All Abilities: Donate page'
   type: file
   path: _data/aasc/donate.yml
   format: yaml
   fields:
+  - name: kicker
+    label: Small label above the headline
+    type: string
   - name: headline
     label: Headline
     type: string
   - name: intro
     label: Intro line
     type: text
+  - name: gift_heading
+    label: Gift heading
+    type: string
   - name: gift_text
     label: Make a gift text
     type: text
+  - name: donate_button
+    label: Donate button words
+    type: string
+    description: The link is Donate button link, under Club details and links.
+  - name: donate_button_note
+    label: Line under the Donate button
+    type: string
+  - name: tax_note
+    label: Tax line
+    type: text
+    description: Keep this line unless the club gets its IRS 501(c)(3) letter. Ask before changing it.
+  - name: sponsor_heading
+    label: Sponsor heading
+    type: string
   - name: sponsor_text
     label: Partner with us text
     type: text
+  - name: sponsor_button
+    label: Sponsor button words
+    type: string
+  - name: levels_kicker
+    label: 'Levels: small label'
+    type: string
+  - name: levels_heading
+    label: 'Levels: heading'
+    type: string
   - name: levels
     label: Sponsorship levels
     type: object
@@ -357,6 +758,9 @@ content:
   path: _data/aasc/contact.yml
   format: yaml
   fields:
+  - name: kicker
+    label: Small label above the headline
+    type: string
   - name: headline
     label: Headline
     type: string
@@ -364,47 +768,144 @@ content:
     label: Intro line
     type: text
     description: The club email and contact name are under Club details.
-- name: aasc-gallery
-  label: 'All Abilities: Gallery page'
+  - name: topics
+    label: Topic choices on the form
+    type: string
+    description: One per line. The first one is picked to start.
+    list: true
+  - name: form_hint
+    label: Line above the Send button
+    type: text
+  - name: form_done
+    label: Message after tapping Send
+    type: text
+  - name: email_heading
+    label: Email box heading
+    type: string
+  - name: facebook_line
+    label: Facebook line
+    type: text
+    description: Put words in [square brackets] to turn them into a link to the club's Facebook page.
+- name: aasc-privacy
+  label: 'All Abilities: Privacy page'
   type: file
-  path: _data/aasc/gallery.yml
+  path: _data/aasc/privacy.yml
   format: yaml
   fields:
+  - name: kicker
+    label: Small label above the headline
+    type: string
   - name: headline
     label: Headline
     type: string
-  - name: intro
-    label: Intro line
-    type: text
-  - name: photos
-    label: Photos
+  - name: body
+    label: Privacy policy
+    type: rich-text
+    description: This is the club's privacy policy. If something about how the club collects or keeps information changes, update it here and change the date below.
+    options:
+      format: html
+      media: false
+  - name: last_updated
+    label: Last updated
+    type: date
+    options:
+      format: yyyy-MM-dd
+- name: aasc-site
+  label: 'All Abilities: Menu, footer and values'
+  type: file
+  path: _data/aasc/site.yml
+  format: yaml
+  fields:
+  - name: menu
+    label: Menu at the top
     type: object
-    description: Add as many photos as you like. Pick a sport for each one, and it joins that sport's set. Each sport always has one card on the page, and the sport of the newest photo (the last one in this list) gets the big card on top. Only add photos of children after a parent or guardian signs the photo release.
-    list: true
+    description: Only the words change here. The Register words in the menu list are under Current season.
     fields:
-    - name: photo
-      label: Photo
-      type: image
-      required: true
-    - name: category
-      label: Sport
-      type: select
-      required: true
-      description: Which sport this photo belongs to.
-      options:
-        values:
-        - Soccer
-        - Buddies
-        - Basketball
-        - Baseball
-        - Flag Football
-        - Game Day
-    - name: description
-      label: Photo description
+    - name: programs
+      label: Programs link
       type: string
-      required: true
-      description: A short description of what's in the photo, read out by screen readers. For example "Two players high-five after a goal." First names only.
-    - name: caption
-      label: Caption
+    - name: story
+      label: Our story link
       type: string
-      description: Optional. A few words shown under the photo when it's open.
+    - name: involved
+      label: Get involved link
+      type: string
+    - name: gallery
+      label: Gallery link
+      type: string
+    - name: donate
+      label: Donate link
+      type: string
+    - name: contact
+      label: Contact link
+      type: string
+    - name: register
+      label: Small Register button
+      type: string
+  - name: footer
+    label: Footer at the bottom
+    type: object
+    description: The sentence under the logo is under Club details and links.
+    fields:
+    - name: explore_heading
+      label: First column heading
+      type: string
+    - name: programs
+      label: Programs link
+      type: string
+    - name: story
+      label: Our story link
+      type: string
+    - name: sign_up
+      label: Sign up link
+      type: string
+    - name: volunteer
+      label: Volunteer link
+      type: string
+    - name: faq
+      label: Parent questions link
+      type: string
+    - name: gallery
+      label: Gallery link
+      type: string
+    - name: connect_heading
+      label: Second column heading
+      type: string
+    - name: donate
+      label: Donate link
+      type: string
+    - name: contact
+      label: Contact link
+      type: string
+    - name: facebook
+      label: Facebook link
+      type: string
+    - name: privacy
+      label: Privacy link
+      type: string
+    - name: copyright_name
+      label: Name after the © sign
+      type: string
+      description: The year updates on its own.
+  - name: values
+    label: Club values
+    type: string
+    description: The four values with icons, on the Home and Our story pages. Keep it to four.
+    list: true
+  - name: not_found
+    label: Page not found
+    type: object
+    description: Shown when someone opens a link that doesn't exist.
+    fields:
+    - name: kicker
+      label: Small label
+      type: string
+    - name: heading
+      label: Heading
+      type: string
+    - name: text
+      label: Text
+      type: text
+    - name: home_button
+      label: Home button words
+      type: string

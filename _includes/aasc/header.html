@@ -1,0 +1,25 @@
+{%- assign m = site.data.aasc.site.menu -%}{%- assign hs = site.data.aasc.season -%}
+<header class="head on-navy">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html" aria-label="All Abilities Sports Club, home">
+      <span class="brand-mark"><img src="assets/mark.webp" alt="" width="126" height="91"></span>
+      <span class="brand-name">All Abilities <small>Sports Club</small></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="programs.html"{% if include.current == "programs" %} aria-current="page"{% endif %}>{{ m.programs | escape }}</a></li>
+        <li><a href="about.html"{% if include.current == "about" %} aria-current="page"{% endif %}>{{ m.story | escape }}</a></li>
+        <li><a href="get-involved.html"{% if include.current == "involved" %} aria-current="page"{% endif %}>{{ m.involved | escape }}</a></li>
+        <li><a href="gallery.html"{% if include.current == "gallery" %} aria-current="page"{% endif %}>{{ m.gallery | escape }}</a></li>
+        <li><a href="donate.html"{% if include.current == "donate" %} aria-current="page"{% endif %}>{{ m.donate | escape }}</a></li>
+        <li><a href="contact.html"{% if include.current == "contact" %} aria-current="page"{% endif %}>{{ m.contact | escape }}</a></li>
+        <li class="nav-cta"><a href="get-involved.html">{{ hs.menu_button | escape }}</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-sage btn-sm" href="get-involved.html">{{ m.register | escape }}</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Menu
+    </button>
+  </div>
+</header>

@@ -36,35 +36,12 @@
 <a class="skip" href="#main">Skip to main content</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
-<header class="head on-navy">
-  <div class="wrap head-in">
-    <a class="brand" href="index.html" aria-label="All Abilities Sports Club, home">
-      <span class="brand-mark"><img src="assets/mark.webp" alt="" width="126" height="91"></span>
-      <span class="brand-name">All Abilities <small>Sports Club</small></span>
-    </a>
-    <nav class="nav" id="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="programs.html">Programs</a></li>
-        <li><a href="about.html" aria-current="page">Our Story</a></li>
-        <li><a href="get-involved.html">Get Involved</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="nav-cta"><a href="get-involved.html">Register for soccer</a></li>
-      </ul>
-    </nav>
-    <a class="btn btn-sage btn-sm" href="get-involved.html">Register</a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Menu
-    </button>
-  </div>
-</header>
+{% include aasc/header.html current="about" %}
 
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
     <div class="wrap">
-      <p class="kicker">Our story</p>
+      <p class="kicker">{{ p.kicker | escape }}</p>
       <h1>{{ p.headline | escape }}</h1>
     </div>
   </section>
@@ -78,56 +55,21 @@
         </div>
       </div>{% endif %}
       <div class="prose">
-        <h2>Why we started</h2>
+        <h2>{{ p.why_heading | escape }}</h2>
         {{ p.why_text }}
-        <h2>Bennett's story</h2>
+        <h2>{{ p.bennett_heading | escape }}</h2>
         {% if p.bennett_story and p.bennett_story != "" %}{{ p.bennett_story }}{% else %}<p class="ph-block">Amber is sending Bennett's story. It goes here, in her words, first name only.</p>{% endif %}
-        <h2>What the club does</h2>
+        <h2>{{ p.what_heading | escape }}</h2>
         {{ p.what_we_do }}
-        <div class="btns" style="margin-top:var(--sp-6)"><a class="btn btn-navy" href="programs.html">See programs</a><a class="btn btn-line-dark" href="get-involved.html">Get involved</a></div>
+        <div class="btns" style="margin-top:var(--sp-6)"><a class="btn btn-navy" href="programs.html">{{ p.programs_button | escape }}</a><a class="btn btn-line-dark" href="get-involved.html">{{ p.involved_button | escape }}</a></div>
       </div>
     </div>
     <div class="wrap">
-      <ul class="values" aria-label="What the club is for">
-        <li><svg aria-hidden="true"><use href="#ic-heart"/></svg>Build confidence</li>
-        <li><svg aria-hidden="true"><use href="#ic-hands"/></svg>Create friendships</li>
-        <li><svg aria-hidden="true"><use href="#ic-group"/></svg>Promote inclusion</li>
-        <li><svg aria-hidden="true"><use href="#ic-rise"/></svg>Strengthen our community</li>
-      </ul>
+{% include aasc/values.html %}
     </div>
   </section>
 </main>
 
-<footer class="foot on-navy">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="480" height="361" loading="lazy"></div>
-        <p>{{ c.footer_about | escape }}</p>
-      </div>
-      <div>
-        <h2>Explore</h2>
-        <ul>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="about.html">Our story</a></li>
-          <li><a href="get-involved.html">Sign up</a></li>
-          <li><a href="get-involved.html#volunteer">Volunteer</a></li>
-          <li><a href="index.html#faq">Parent questions</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Connect</h2>
-        <ul>
-          <li><a href="donate.html">Donate and sponsor</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="legal"><span>© 2026 All Abilities Sports Club</span></div>
-  </div>
-</footer>
+{% include aasc/footer.html %}
 </body>
 </html>

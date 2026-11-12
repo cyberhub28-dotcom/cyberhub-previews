@@ -1,0 +1,32 @@
+{%- assign f = site.data.aasc.site.footer -%}{%- assign fc = site.data.aasc.club -%}
+<footer class="foot on-navy">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="480" height="361" loading="lazy"></div>
+        <p>{{ fc.footer_about | escape }}</p>
+      </div>
+      <div>
+        <h2>{{ f.explore_heading | escape }}</h2>
+        <ul>
+          <li><a href="programs.html">{{ f.programs | escape }}</a></li>
+          <li><a href="about.html">{{ f.story | escape }}</a></li>
+          <li><a href="get-involved.html">{{ f.sign_up | escape }}</a></li>
+          <li><a href="get-involved.html#volunteer">{{ f.volunteer | escape }}</a></li>
+          <li><a href="index.html#faq">{{ f.faq | escape }}</a></li>
+          <li><a href="gallery.html">{{ f.gallery | escape }}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>{{ f.connect_heading | escape }}</h2>
+        <ul>
+          <li><a href="donate.html">{{ f.donate | escape }}</a></li>
+          <li><a href="contact.html">{{ f.contact | escape }}</a></li>
+          <li><a href="{{ fc.facebook | escape }}" target="_blank" rel="noopener">{{ f.facebook | escape }}</a></li>
+          <li><a href="privacy.html">{{ f.privacy | escape }}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal"><span>© {{ site.time | date: "%Y" }} {{ f.copyright_name | escape }}</span></div>
+  </div>
+</footer>
