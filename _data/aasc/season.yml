@@ -1,5 +1,4 @@
-# All Abilities Sports Club preview: current season. Edited in Pages CMS.
-name: Winter Indoor Soccer
+name: Winter Indoor football
 sport: Soccer
 session_day: Sunday
 button: Register for winter soccer
@@ -12,10 +11,6 @@ sundays: 6
 spots: 48
 fee: 30
 youngest_age: 3
-oldest_age: ''
-where: ''
-session_times: ''
-how_to_pay: ''
 countdown_before: until registration opens
 countdown_open: Registration is open now
 countdown_closed: Winter registration has closed. Contact us about the next season.
