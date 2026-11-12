@@ -170,8 +170,9 @@ p{margin:0}
 .ticker li::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
 /* countdown */
 .count{display:inline-flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-6);padding:8px 18px 8px 8px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);font-weight:600;font-size:var(--fs-sm);line-height:1.35;color:var(--cream)}
-.count-num{display:grid;place-items:center;min-width:52px;height:52px;padding-inline:8px;border-radius:999px;background:var(--sage);color:var(--navy);font-family:var(--f-display);font-weight:800;font-size:1.35rem;line-height:1;font-variant-numeric:tabular-nums}
-.count-num small{display:block;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.count-num{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex:none;min-width:56px;height:56px;padding:0 10px;border-radius:999px;background:var(--sage);color:var(--navy);font-family:var(--f-display);font-weight:800;font-size:1.375rem;line-height:1;letter-spacing:-.015em;font-variant-numeric:tabular-nums}
+#rc-text{text-wrap:balance}
+.count-num small{display:block;font-family:var(--f-body);font-size:9px;font-weight:700;line-height:1;letter-spacing:.08em;text-transform:uppercase;padding-left:.08em}
 /* field props: goal and hoop line art */
 .prop{position:absolute;bottom:18px;width:110px;height:auto;color:rgba(247,244,236,.55);display:none}
 .prop.goal{left:1.5%}.prop.hoop{right:1.5%}

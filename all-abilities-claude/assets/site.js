@@ -80,7 +80,7 @@
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var close = new Date(last.getFullYear(), last.getMonth(), last.getDate() + 1);
     var spots = rc.getAttribute('data-spots');
-    var openTxt = MNAME[open.getMonth()] + ' ' + open.getDate(), lastTxt = MNAME[last.getMonth()] + ' ' + last.getDate();
+    var openTxt = MNAME[open.getMonth()] + '\u00a0' + open.getDate(), lastTxt = MNAME[last.getMonth()] + '\u00a0' + last.getDate();
     var days = Math.round((open - today) / 86400000);
     if (today < open){
       num.textContent = days;
@@ -514,7 +514,23 @@
     });
   }
 
-  /* the period after "Everybody plays" is a little ball: it drops in, then every 7 seconds hops and changes sport */
+  /* the kids on the team card take turns doing their little move, one every 1.6 seconds, while the card is on screen; tap one to replay it */
+  var kids = Array.prototype.slice.call(document.querySelectorAll('.team-card svg.kid'));
+  if (kids.length){
+    var ki = 0, kOn = true;
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ kOn = es[0].isIntersecting; }, {threshold: 0.3}).observe(document.querySelector('.team-card'));
+    }
+    kids.forEach(function(k){ k.parentNode.addEventListener('click', function(){ hello(k); }); });
+    setTimeout(function(){
+      setInterval(function(){
+        if (!kOn || document.hidden || reduced()) return;
+        hello(kids[ki]); ki = (ki + 1) % kids.length;
+      }, 1600);
+    }, 2200);
+  }
+
+  /* the period after "Everybody plays" is a little ball: it drops in, then every 3 seconds hops and changes sport */
   var bd = document.querySelector('.ball-dot');
   if (bd){
     var bds = bd.querySelectorAll('.bd'), bi = 0;
@@ -524,7 +540,7 @@
       setTimeout(function(){ bds[bi].classList.remove('on'); bi = (bi + 1) % bds.length; bds[bi].classList.add('on'); }, 300);
       setTimeout(function(){ bd.classList.remove('hop'); }, 650);
     };
-    setTimeout(function(){ setInterval(hop, 7000); }, 1750);
+    setTimeout(function(){ setInterval(hop, 3000); }, 1750);
   }
 
   /* the word strip under the hero holds still while touched */
