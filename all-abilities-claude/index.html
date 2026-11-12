@@ -76,11 +76,11 @@
       <figure class="team-card">
         <div class="team-pitch">
           <svg class="pitch-lines" viewBox="0 0 100 80" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="rgba(247,244,236,.42)" stroke-width="1.6" vector-effect="non-scaling-stroke"><rect x="4" y="4" width="92" height="72" rx="2"/><path d="M4 40h92"/><ellipse cx="50" cy="40" rx="13" ry="11"/><path d="M38 76v-10h24v10M38 4v10h24V4"/></g></svg>
-          <span class="tm t4"><svg viewBox="0 0 120 120" role="img" aria-label="An athlete in a wheelchair shoots a basketball"><use href="#pg-wheel"/></svg></span>
-          <span class="tm t5"><svg viewBox="0 0 120 120" role="img" aria-label="An athlete wearing sensory headphones swings a baseball bat"><use href="#pg-base"/></svg></span>
-          <span class="tm t1"><svg viewBox="0 0 120 120" role="img" aria-label="An athlete using a forearm crutch kicks a soccer ball"><use href="#pg-soccer"/></svg></span>
-          <span class="tm t2" style="--pg-buddy:#B7CFA9"><svg viewBox="0 0 120 120" role="img" aria-label="A volunteer buddy and a young athlete hold hands and cheer"><use href="#pg-buddy"/></svg></span>
-          <span class="tm t3"><svg viewBox="0 0 120 120" role="img" aria-label="An athlete with a running prosthetic carries a football"><use href="#pg-flag"/></svg></span>
+          <span class="tm t4">{% include aasc/pg.html n="wheel" cls="kid" label="An athlete in a wheelchair shoots a basketball" %}</span>
+          <span class="tm t5">{% include aasc/pg.html n="base" cls="kid" label="An athlete wearing sensory headphones swings a baseball bat" %}</span>
+          <span class="tm t1">{% include aasc/pg.html n="soccer" cls="kid" label="An athlete using a forearm crutch kicks a soccer ball" %}</span>
+          <span class="tm t2" style="--pg-buddy:#B7CFA9">{% include aasc/pg.html n="buddy" cls="kid" label="A volunteer buddy and a young athlete hold hands and cheer" %}</span>
+          <span class="tm t3">{% include aasc/pg.html n="flag" cls="kid" label="An athlete with a running prosthetic carries a football" %}</span>
         </div>
         <figcaption><span class="tc-name">Team All Abilities<small>Winter Indoor Soccer · {{ s.spots }} spots</small></span><span class="tc-tag">Every ability welcome</span></figcaption>
       </figure>
