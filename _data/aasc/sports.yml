@@ -1,0 +1,15 @@
+# All Abilities Sports Club preview: sports. Edited in Pages CMS.
+soon_tag: Coming later
+sports:
+- name: Soccer
+  picture: Soccer
+  line: Run, kick and score together.
+- name: Basketball
+  picture: Basketball
+  line: Dribble, pass and shoot.
+- name: Baseball
+  picture: Baseball
+  line: Hit, run the bases, cheer.
+- name: Flag football
+  picture: Flag football
+  line: Flag-style fun and teamwork.

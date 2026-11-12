@@ -1,12 +1,12 @@
 ---
 ---
-{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.programs -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.programs -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.sports -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Programs | All Abilities Sports Club</title>
-<meta name="description" content="Winter Indoor Soccer: {{ sundays_word }} Sundays, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}. ${{ s.fee }} per athlete, {{ s.spots }} spots. Basketball, baseball and flag football to follow.">
+<meta name="description" content="{{ s.name | escape }}: {{ sundays_word }} {{ day }}s, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}. ${{ s.fee }} per athlete, {{ s.spots }} spots. Basketball, baseball and flag football to follow.">
 <!-- PREVIEW ONLY: remove the robots line below at launch -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0A2342">
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="All Abilities Sports Club">
 <meta property="og:title" content="Programs | All Abilities Sports Club">
-<meta property="og:description" content="Winter Indoor Soccer: {{ sundays_word }} Sundays, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}. ${{ s.fee }} per athlete, {{ s.spots }} spots. Basketball, baseball and flag football to follow.">
+<meta property="og:description" content="{{ s.name | escape }}: {{ sundays_word }} {{ day }}s, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}. ${{ s.fee }} per athlete, {{ s.spots }} spots. Basketball, baseball and flag football to follow.">
 <meta property="og:image" content="{{ 'all-abilities-claude/assets/share.jpg' | absolute_url }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -36,35 +36,12 @@
 <a class="skip" href="#main">Skip to main content</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
-<header class="head on-navy">
-  <div class="wrap head-in">
-    <a class="brand" href="index.html" aria-label="All Abilities Sports Club, home">
-      <span class="brand-mark"><img src="assets/mark.webp" alt="" width="126" height="91"></span>
-      <span class="brand-name">All Abilities <small>Sports Club</small></span>
-    </a>
-    <nav class="nav" id="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="programs.html" aria-current="page">Programs</a></li>
-        <li><a href="about.html">Our Story</a></li>
-        <li><a href="get-involved.html">Get Involved</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="nav-cta"><a href="get-involved.html">Register for soccer</a></li>
-      </ul>
-    </nav>
-    <a class="btn btn-sage btn-sm" href="get-involved.html">Register</a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Menu
-    </button>
-  </div>
-</header>
+{% include aasc/header.html current="programs" %}
 
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
     <div class="wrap">
-      <p class="kicker">Programs</p>
+      <p class="kicker">{{ p.kicker | escape }}</p>
       <h1>{{ p.headline | escape }}</h1>
       <p class="sub">{{ p.intro | escape }}</p>
     </div>
@@ -73,12 +50,12 @@
     <div class="wrap two">
       <div class="panel">
         <span class="pill open">Registration opens {{ s.registration_opens | date: "%b %-d, %Y" }}</span>
-        <h2 class="big">Winter Indoor Soccer</h2>
+        <h2 class="big">{{ s.name | escape }}</h2>
         <p class="muted">{{ p.soccer_text | escape }}</p>
         <dl class="facts">
           <div><dt>Registration opens</dt><dd>{{ s.registration_opens | date: "%B %-d, %Y" }}</dd></div>
           <div><dt>Registration closes</dt><dd>When {{ s.spots }} spots fill, or {{ s.registration_closes | date: "%B %-d, %Y" }}</dd></div>
-          <div><dt>Sessions</dt><dd>Sundays, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}</dd></div>
+          <div><dt>Sessions</dt><dd>{{ day }}s, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}</dd></div>
           <div><dt>Fee</dt><dd>${{ s.fee }} per participant</dd></div>
           <div><dt>Spots</dt><dd>{{ s.spots }} athletes</dd></div>
           <div><dt>Where</dt><dd>{% if s.where and s.where != "" %}{{ s.where | escape }}{% else %}<span class="ph">To confirm: venue</span>{% endif %}</dd></div>
@@ -87,59 +64,31 @@
         </dl>
       </div>
       <div class="panel soft">
-        <h2>How to join</h2>
+        <h2>{{ p.steps_heading | escape }}</h2>
         <ol class="steps">
-          <li><div><strong>Registration opens {{ s.registration_opens | date: "%B %-d" }}</strong><span>The link to the club's online registration form goes live on the sign-up page.</span></div></li>
-          <li><div><strong>Fill in the form</strong><span>A parent or guardian registers each athlete.</span></div></li>
+          <li><div><strong>Registration opens {{ s.registration_opens | date: "%B %-d" }}</strong><span>{{ p.step1_text | escape }}</span></div></li>
+          <li><div><strong>{{ p.step2_title | escape }}</strong><span>{{ p.step2_text | escape }}</span></div></li>
           <li><div><strong>Pay the ${{ s.fee }} fee</strong><span>{% if s.how_to_pay and s.how_to_pay != "" %}{{ s.how_to_pay | escape }}{% else %}The club will share how to pay when sign-ups open. <span class="ph">To confirm: how to pay</span>{% endif %}</span></div></li>
-          <li><div><strong>See you {{ s.first_sunday | date: "%B %-d" }}</strong><span>The first Sunday session.</span></div></li>
+          <li><div><strong>See you {{ s.first_sunday | date: "%B %-d" }}</strong><span>The first {{ day }} session.</span></div></li>
         </ol>
-        <div class="btns"><a class="btn btn-navy" href="get-involved.html">Go to sign-up</a></div>
+        <div class="btns"><a class="btn btn-navy" href="get-involved.html">{{ p.button | escape }}</a></div>
       </div>
     </div>
   </section>
   <section class="sec" style="padding-top:0">
     <div class="wrap">
-      <div class="sec-head"><p class="kicker">Coming later</p><h2>More sports are on the way.</h2><p>{{ p.later_intro | escape }}</p></div>
+      <div class="sec-head"><p class="kicker">{{ p.later_kicker | escape }}</p><h2>{{ p.later_heading | escape }}</h2><p>{{ p.later_intro | escape }}</p></div>
       <div class="later">
-        <article class="sport" style="--pg-acc:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#0A2342"><use href="#pg-wheel"/></svg></div><span class="pill">Coming later</span><h3>Basketball</h3><p>{{ pg.basketball_text | escape }}</p></article>
-        <article class="sport" style="--pg-flag:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#3F7D2A"><use href="#pg-base"/></svg></div><span class="pill">Coming later</span><h3>Baseball</h3><p>{{ pg.baseball_text | escape }}</p></article>
-        <article class="sport" style="--pg-acc:#3F7D2A;--pg-flag:#0287B0"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="color:#0A2342"><use href="#pg-flag"/></svg></div><span class="pill">Coming later</span><h3>Flag football</h3><p>{{ pg.flag_football_text | escape }}</p></article>
+{%- assign want = s.sport | default: "Soccer" | downcase | strip -%}
+{%- for x in sp.sports -%}{%- assign xp = x.picture | default: "" | downcase | strip -%}{%- if xp != want %}
+{%- include aasc/sport-style.html pic=xp %}
+        <article class="sport" style="{{ sport_style }}"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="{{ sport_color }}"><use href="#pg-{{ sport_art }}"/></svg></div><span class="pill">{{ sp.soon_tag | escape }}</span><h3>{{ x.name | escape }}</h3><p>{{ x.line | escape }}</p></article>
+{%- endif -%}{%- endfor %}
       </div>
     </div>
   </section>
 </main>
 
-<footer class="foot on-navy">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="480" height="361" loading="lazy"></div>
-        <p>{{ c.footer_about | escape }}</p>
-      </div>
-      <div>
-        <h2>Explore</h2>
-        <ul>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="about.html">Our story</a></li>
-          <li><a href="get-involved.html">Sign up</a></li>
-          <li><a href="get-involved.html#volunteer">Volunteer</a></li>
-          <li><a href="index.html#faq">Parent questions</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Connect</h2>
-        <ul>
-          <li><a href="donate.html">Donate and sponsor</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="legal"><span>© 2026 All Abilities Sports Club</span></div>
-  </div>
-</footer>
+{% include aasc/footer.html %}
 </body>
 </html>

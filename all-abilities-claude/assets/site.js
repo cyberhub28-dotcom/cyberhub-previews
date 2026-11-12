@@ -80,19 +80,20 @@
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var close = new Date(last.getFullYear(), last.getMonth(), last.getDate() + 1);
     var spots = rc.getAttribute('data-spots');
+    var before = rc.getAttribute('data-before') || 'until registration opens', openNow = rc.getAttribute('data-open-text') || 'Registration is open now', closedTxt = rc.getAttribute('data-closed') || 'Registration has closed. Contact us about the next season.';
     var openTxt = MNAME[open.getMonth()] + '\u00a0' + open.getDate(), lastTxt = MNAME[last.getMonth()] + '\u00a0' + last.getDate();
     var days = Math.round((open - today) / 86400000);
     if (today < open){
       num.textContent = days;
       num.insertAdjacentHTML('beforeend', days === 1 ? '<small>day</small>' : '<small>days</small>');
-      txt.textContent = days === 1 ? 'until registration opens tomorrow, ' + openTxt : 'until registration opens ' + openTxt;
+      txt.textContent = days === 1 ? before + ' tomorrow, ' + openTxt : before + ' ' + openTxt;
       num.hidden = false;
     } else if (now < close){
       num.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       num.hidden = false;
-      txt.textContent = 'Registration is open now, until ' + lastTxt + (spots ? ' or all ' + spots + ' spots are filled' : '');
+      txt.textContent = openNow + ', until ' + lastTxt + (spots ? ' or all ' + spots + ' spots are filled' : '');
     } else {
-      txt.textContent = 'Winter registration has closed. Contact us about the next season.';
+      txt.textContent = closedTxt;
     }
   }
 
@@ -104,7 +105,7 @@
     var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
     function parseDay(v){ var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(v || '')); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
-    function showEmpty(){ evList.textContent = ''; evList.appendChild(el('p', 'ev-empty muted', 'No events on the calendar right now. New ones are posted on our Facebook page first.')); }
+    function showEmpty(){ evList.textContent = ''; evList.appendChild(el('p', 'ev-empty muted', evList.getAttribute('data-empty') || 'No events on the calendar right now.')); }
     fetch(evList.getAttribute('data-events'), {cache: 'no-cache'}).then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(list){
       var today = new Date(); today.setHours(0,0,0,0);
       var items = (Array.isArray(list) ? list : []).map(function(e){ return {e: e, d: parseDay(e && e.date)}; })

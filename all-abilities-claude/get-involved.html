@@ -1,12 +1,12 @@
 ---
 ---
-{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.get_involved -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.get_involved -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.sports -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Get Involved | All Abilities Sports Club</title>
-<meta name="description" content="Register an athlete for Winter Indoor Soccer or volunteer as a coach, buddy or event-day helper.">
+<meta name="description" content="Register an athlete for {{ s.name | escape }} or volunteer as a coach, buddy or event-day helper.">
 <!-- PREVIEW ONLY: remove the robots line below at launch -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0A2342">
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="All Abilities Sports Club">
 <meta property="og:title" content="Get Involved | All Abilities Sports Club">
-<meta property="og:description" content="Register an athlete for Winter Indoor Soccer or volunteer as a coach, buddy or event-day helper.">
+<meta property="og:description" content="Register an athlete for {{ s.name | escape }} or volunteer as a coach, buddy or event-day helper.">
 <meta property="og:image" content="{{ 'all-abilities-claude/assets/share.jpg' | absolute_url }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -36,35 +36,12 @@
 <a class="skip" href="#main">Skip to main content</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
-<header class="head on-navy">
-  <div class="wrap head-in">
-    <a class="brand" href="index.html" aria-label="All Abilities Sports Club, home">
-      <span class="brand-mark"><img src="assets/mark.webp" alt="" width="126" height="91"></span>
-      <span class="brand-name">All Abilities <small>Sports Club</small></span>
-    </a>
-    <nav class="nav" id="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="programs.html">Programs</a></li>
-        <li><a href="about.html">Our Story</a></li>
-        <li><a href="get-involved.html" aria-current="page">Get Involved</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="donate.html">Donate</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="nav-cta"><a href="get-involved.html">Register for soccer</a></li>
-      </ul>
-    </nav>
-    <a class="btn btn-sage btn-sm" href="get-involved.html">Register</a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Menu
-    </button>
-  </div>
-</header>
+{% include aasc/header.html current="involved" %}
 
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
     <div class="wrap">
-      <p class="kicker">Get involved</p>
+      <p class="kicker">{{ p.kicker | escape }}</p>
       <h1>{{ p.headline | escape }}</h1>
       <p class="sub">{{ p.intro | escape }}</p>
     </div>
@@ -72,33 +49,33 @@
   <section class="sec">
     <div class="wrap two">
       <div class="panel">
-        <h2 class="join-h">How would you like to join?</h2>
+        <h2 class="join-h">{{ p.choose_heading | escape }}</h2>
         <div class="signups">
           <div class="signup handoff" id="athlete">
-            <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-acc:#3F7D2A"><use href="#pg-soccer"/></svg>Sign up an athlete</h3>
-            <p class="muted">A parent or guardian registers each athlete on the club's online form.</p>
+            <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-acc:#3F7D2A"><use href="#pg-soccer"/></svg>{{ p.athlete_heading | escape }}</h3>
+            <p class="muted">{{ p.athlete_text | escape }}</p>
             <div class="ho-card">
               <strong>Registration opens {{ s.registration_opens | date: "%B %-d, %Y" }}</strong>
-              {% if c.registration_form and c.registration_form != "" %}<div><a class="btn btn-navy" href="{{ c.registration_form | escape }}" target="_blank" rel="noopener" data-form-link>Register now <span class="arr" aria-hidden="true">↗</span></a></div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">Register now <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
+              {% if c.registration_form and c.registration_form != "" %}<div><a class="btn btn-navy" href="{{ c.registration_form | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% if c.payment_link and c.payment_link != "" %} <a class="btn btn-line-dark" href="{{ c.payment_link | escape }}" target="_blank" rel="noopener">{{ p.pay_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% endif %}</div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
             </div>
             {% unless c.registration_form and c.registration_form != "" %}<p class="ph-note"><span aria-hidden="true">✎</span><span>To confirm: the link to the club's Google registration form. This button opens it in a new tab once it's added.</span></p>{% endunless %}
           </div>
           <div class="signup handoff" id="volunteer">
-            <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-buddy:#0287B0"><use href="#pg-buddy"/></svg>Volunteer</h3>
-            <p class="muted">Volunteers sign up on the club's volunteer form.</p>
+            <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-buddy:#0287B0"><use href="#pg-buddy"/></svg>{{ p.volunteer_heading | escape }}</h3>
+            <p class="muted">{{ p.volunteer_text | escape }}</p>
             <div class="ho-card">
-              <strong>Coach, buddy or event-day helper</strong>
-              {% if c.volunteer_form and c.volunteer_form != "" %}<div><a class="btn btn-navy" href="{{ c.volunteer_form | escape }}" target="_blank" rel="noopener" data-form-link>Volunteer now <span class="arr" aria-hidden="true">↗</span></a></div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">Volunteer now <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
+              <strong>{{ p.volunteer_card | escape }}</strong>
+              {% if c.volunteer_form and c.volunteer_form != "" %}<div><a class="btn btn-navy" href="{{ c.volunteer_form | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.volunteer_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.volunteer_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
             </div>
             {% unless c.volunteer_form and c.volunteer_form != "" %}<p class="ph-note"><span aria-hidden="true">✎</span><span>To confirm: the link to the club's volunteer sign-up form. This button opens it in a new tab once it's added.</span></p>{% endunless %}
           </div>
         </div>
       </div>
       <aside class="panel dark">
-        <h2>Winter Indoor Soccer</h2>
+        <h2>{{ s.name | escape }}</h2>
         <dl class="sched">
           <div><dt>Sign-ups</dt><dd>{{ s.registration_opens | date: "%b %-d" }} to {{ s.registration_closes | date: "%b %-d" }}</dd></div>
-          <div><dt>Sessions</dt><dd>Sundays, {{ s.first_sunday | date: "%b %-d" }} to {{ s.last_sunday | date: "%b %-d" }}</dd></div>
+          <div><dt>Sessions</dt><dd>{{ day }}s, {{ s.first_sunday | date: "%b %-d" }} to {{ s.last_sunday | date: "%b %-d" }}</dd></div>
           <div><dt>Fee</dt><dd>${{ s.fee }} per athlete</dd></div>
           <div><dt>Spots</dt><dd>{{ s.spots }}</dd></div>
         </dl>
@@ -108,36 +85,6 @@
   </section>
 </main>
 
-<footer class="foot on-navy">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-logo"><img src="assets/logo.webp" alt="All Abilities Sports Club" width="480" height="361" loading="lazy"></div>
-        <p>{{ c.footer_about | escape }}</p>
-      </div>
-      <div>
-        <h2>Explore</h2>
-        <ul>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="about.html">Our story</a></li>
-          <li><a href="get-involved.html">Sign up</a></li>
-          <li><a href="get-involved.html#volunteer">Volunteer</a></li>
-          <li><a href="index.html#faq">Parent questions</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Connect</h2>
-        <ul>
-          <li><a href="donate.html">Donate and sponsor</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="privacy.html">Privacy</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="legal"><span>© 2026 All Abilities Sports Club</span></div>
-  </div>
-</footer>
+{% include aasc/footer.html %}
 </body>
 </html>

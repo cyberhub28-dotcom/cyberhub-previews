@@ -1,0 +1,6 @@
+{%- assign vi = "heart,hands,group,rise" | split: "," -%}
+      <ul class="values{% if include.reveal %} reveal{% endif %}" aria-label="What the club is for">
+{%- for v in site.data.aasc.site.values %}{% assign i = forloop.index0 | modulo: 4 %}
+        <li><svg aria-hidden="true"><use href="#ic-{{ vi[i] }}"/></svg>{{ v | escape }}</li>
+{%- endfor %}
+      </ul>

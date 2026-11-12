@@ -1,15 +1,22 @@
+# All Abilities Sports Club preview: gallery. Edited in Pages CMS.
+kicker: Gallery
 headline: Game day, in pictures.
 intro: Practices, game days and the moments in between.
+pick_heading: Pick a sport
+has_photos_line: Tap a sport with photos to see them all.
+no_photos_line: Photos from each sport go up here as the season gets going.
+coming_soon: Photos coming soon
+season_tag: Winter season
 photos:
-  - photo: /all-abilities-claude/images/sample-photo-1.jpg
-    category: Soccer
-    description: Sample photo 1
-    caption: Sample photo 1. Remove before launch.
-  - photo: /all-abilities-claude/images/sample-photo-2.jpg
-    category: Soccer
-    description: Sample photo 2
-    caption: Sample photo 2. Remove before launch.
-  - photo: /all-abilities-claude/images/sample-photo-3.jpg
-    category: Soccer
-    description: Sample photo 3
-    caption: Sample photo 3. Remove before launch.
+- photo: /all-abilities-claude/images/sample-photo-1.jpg
+  category: Soccer
+  description: Sample photo 1
+  caption: Sample photo 1. Remove before launch.
+- photo: /all-abilities-claude/images/sample-photo-2.jpg
+  category: Soccer
+  description: Sample photo 2
+  caption: Sample photo 2. Remove before launch.
+- photo: /all-abilities-claude/images/sample-photo-3.jpg
+  category: Soccer
+  description: Sample photo 3
+  caption: Sample photo 3. Remove before launch.

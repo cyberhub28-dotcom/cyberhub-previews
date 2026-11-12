@@ -1,0 +1,33 @@
+# All Abilities Sports Club preview: menu, footer and club values. Edited in Pages CMS.
+menu:
+  programs: Programs
+  story: Our Story
+  involved: Get Involved
+  gallery: Gallery
+  donate: Donate
+  contact: Contact
+  register: Register
+footer:
+  explore_heading: Explore
+  programs: Programs
+  story: Our story
+  sign_up: Sign up
+  volunteer: Volunteer
+  faq: Parent questions
+  gallery: Gallery
+  connect_heading: Connect
+  donate: Donate and sponsor
+  contact: Contact
+  facebook: Facebook
+  privacy: Privacy
+  copyright_name: All Abilities Sports Club
+values:
+- Build confidence
+- Create friendships
+- Promote inclusion
+- Strengthen our community
+not_found:
+  kicker: Page not found
+  heading: That ball went out of bounds.
+  text: The page you were looking for isn't here. Let's get you back in the game.
+  home_button: Go to the home page
