@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.contact -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign p = site.data.aasc.contact -%}{%- assign sp = site.data.aasc.programs -%}{%- include aasc/lineup.html -%}{%- assign page_title = p.page.tab_title | escape -%}{%- assign page_desc = p.page.description | escape -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -33,7 +33,7 @@
 <body data-page="contact">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | default: "Skip to main content" | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="contact" %}
@@ -49,7 +49,7 @@
   <section class="sec">
     <div class="wrap two">
       <div class="panel">
-        <form class="form" id="form-contact" novalidate data-mailto="{{ c.email | escape }}" data-subject="{{ p.form.email_subject | escape }}" data-missing-one="{{ p.form.missing_one | escape }}" data-missing-many="{{ p.form.missing_many | escape }}">
+        <form class="form" id="form-contact" novalidate data-mailto="{{ c.email | escape }}" data-subject="{{ p.form.email_subject | escape }}" data-missing-one="{{ p.form.missing_one | default: "One thing is missing. Please check the highlighted field." | escape }}" data-missing-many="{{ p.form.missing_many | escape }}">
           <div class="field-row">
             <div class="fl"><label for="c-name">{{ p.form.name_label | escape }} <span class="req" aria-hidden="true">*</span></label><input id="c-name" name="name" autocomplete="name" required></div>
             <div class="fl"><label for="c-email">{{ p.form.email_label | escape }} <span class="req" aria-hidden="true">*</span></label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
@@ -65,7 +65,7 @@
       <aside class="panel soft">
         <h2>{{ p.email_heading | escape }}</h2>
         <p class="muted">{{ c.contact_person | escape }}</p>
-        <div class="copy-row"><code class="email" id="club-email">{{ c.email | escape | replace: "@", "@<wbr>" }}</code><button class="btn btn-line-dark btn-sm" type="button" id="copy-email" data-copied="{{ p.copied | escape }}" data-selected="{{ p.selected | escape }}">{{ p.copy_button | escape }}</button>
+        <div class="copy-row"><code class="email" id="club-email">{{ c.email | escape | replace: "@", "@<wbr>" }}</code><button class="btn btn-line-dark btn-sm" type="button" id="copy-email" data-copied="{{ p.copied | escape }}" data-selected="{{ p.selected | default: "Selected" | escape }}">{{ p.copy_button | escape }}</button>
 </div>
         <p class="muted">{{ c.area_line | escape }}</p>
         {%- capture fb_open -%}<a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">{%- endcapture %}

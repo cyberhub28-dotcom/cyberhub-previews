@@ -1,0 +1,26 @@
+{%- comment -%}
+Builds the ready-to-show lines for one sport (include.x), so the editor never needs codes in curly brackets.
+Sets: si_st, si_title, si_days, si_signups, si_season, si_pill, si_link, si_ext, si_fee, si_line (the short summary on the Home card), si_slug.
+{%- endcomment -%}
+{%- assign _x = include.x -%}{%- assign _w = site.data.aasc.programs.words -%}
+{%- assign si_st = _x.status | default: "later" | downcase | strip | split: " " | first -%}{%- if si_st == "opening" -%}{%- assign si_st = "soon" -%}{%- elsif si_st == "coming" -%}{%- assign si_st = "later" -%}{%- elsif si_st == "season" -%}{%- assign si_st = "over" -%}{%- endif -%}
+{%- assign si_title = _x.season_name | default: _x.name | strip -%}{%- if si_title == "" -%}{%- assign si_title = _x.name -%}{%- endif -%}
+{%- assign si_slug = _x.name | slugify -%}
+{%- assign si_days = "" -%}{%- if _x.day and _x.day != "" -%}{%- capture si_days -%}{{ _x.day }}s{%- endcapture -%}{%- endif -%}
+{%- assign _o = "" -%}{%- assign _c = "" -%}{%- if _x.signups_open and _x.signups_open != "" -%}{%- assign _o = _x.signups_open | date: "%Y-%m-%d" -%}{%- endif -%}{%- if _x.signups_close and _x.signups_close != "" -%}{%- assign _c = _x.signups_close | date: "%Y-%m-%d" -%}{%- endif -%}
+{%- assign _f = "" -%}{%- assign _l = "" -%}{%- if _x.first_day and _x.first_day != "" -%}{%- assign _f = _x.first_day | date: "%Y-%m-%d" -%}{%- endif -%}{%- if _x.last_day and _x.last_day != "" -%}{%- assign _l = _x.last_day | date: "%Y-%m-%d" -%}{%- endif -%}
+{%- assign si_open_date = _o -%}{%- assign si_close_date = _c -%}{%- assign si_first_date = _f -%}{%- assign si_last_date = _l -%}
+{%- capture si_signups -%}{%- if _o != "" and _c != "" -%}{{ _o | date: "%B %-d" }} to {{ _c | date: "%B %-d, %Y" }}{%- elsif _o != "" -%}Opens {{ _o | date: "%B %-d, %Y" }}{%- elsif _c != "" -%}Until {{ _c | date: "%B %-d, %Y" }}{%- endif -%}{%- endcapture -%}
+{%- capture si_season -%}{%- if _f != "" and _l != "" -%}{{ _f | date: "%B %-d" }} to {{ _l | date: "%B %-d, %Y" }}{%- elsif _f != "" -%}Starts {{ _f | date: "%B %-d, %Y" }}{%- endif -%}{%- endcapture -%}
+{%- capture si_pill -%}{%- if si_st == "open" -%}{{ _w.open | default: "Sign-ups open now" }}{%- elsif si_st == "soon" -%}{{ _w.soon | default: "Sign-ups open" }}{% if _o != "" %} {{ _o | date: "%b %-d" }}{% endif %}{%- elsif si_st == "over" -%}{{ _w.over | default: "Season over" }}{%- else -%}{{ _w.later | default: "Coming later" }}{%- endif -%}{%- endcapture -%}
+{%- assign si_link = "get-involved.html" -%}{%- assign si_ext = false -%}{%- if _x.signup_link and _x.signup_link != "" -%}{%- assign si_link = _x.signup_link -%}{%- assign si_ext = true -%}{%- endif -%}
+{%- assign si_fee = _x.fee | default: "" | strip -%}
+{%- assign _nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}
+{%- assign _n = _x.sessions | plus: 0 -%}{%- assign si_sessions = _n -%}{%- assign si_spots = _x.spots | plus: 0 -%}{%- capture _nword -%}{%- if _n > 0 and _n <= 20 -%}{{ _nw[_n] | capitalize }}{%- elsif _n > 0 -%}{{ _n }}{%- endif -%}{%- endcapture -%}
+{%- assign _parts = "" | split: "" -%}
+{%- if _nword != "" -%}{%- capture _p -%}{{ _nword }}{% if si_days != "" %} {{ si_days }}{% else %} sessions{% endif %}{%- endcapture -%}{%- assign _parts = _parts | push: _p -%}{%- elsif si_days != "" -%}{%- assign _parts = _parts | push: si_days -%}{%- endif -%}
+{%- if si_spots > 0 -%}{%- capture _p -%}{{ si_spots }} spots{%- endcapture -%}{%- assign _parts = _parts | push: _p -%}{%- endif -%}
+{%- if si_fee != "" -%}{%- assign _parts = _parts | push: si_fee -%}{%- endif -%}
+{%- capture si_line -%}{{ si_title }}.{% if _parts.size > 0 %} {{ _parts | join: ", " }}.{% endif %}{%- endcapture -%}
+{%- capture si_signups_short -%}{%- if _o != "" and _c != "" -%}{{ _o | date: "%b %-d" }} to {{ _c | date: "%b %-d" }}{%- else -%}{{ si_signups }}{%- endif -%}{%- endcapture -%}
+{%- capture si_season_short -%}{%- if _f != "" and _l != "" -%}{{ _f | date: "%b %-d" }} to {{ _l | date: "%b %-d" }}{%- else -%}{{ si_season }}{%- endif -%}{%- endcapture -%}

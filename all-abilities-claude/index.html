@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.home -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.programs -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign p = site.data.aasc.home -%}{%- assign sp = site.data.aasc.programs -%}{%- include aasc/lineup.html -%}{%- assign page_title = p.page.tab_title | escape -%}{%- assign page_desc = p.page.description | escape -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -33,27 +33,28 @@
 <body data-page="home">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | default: "Skip to main content" | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="" %}
 
+{%- if main -%}{%- include aasc/sport-info.html x=main -%}{%- assign m_title = si_title -%}{%- assign m_days = si_days -%}{%- assign m_st = si_st -%}{%- assign m_pill = si_pill -%}{%- assign m_link = si_link -%}{%- assign m_ext = si_ext -%}{%- assign m_fee = si_fee -%}{%- assign m_open = si_open_date -%}{%- assign m_close = si_close_date -%}{%- assign m_first = si_first_date -%}{%- assign m_last = si_last_date -%}{%- assign m_spots = si_spots -%}{%- assign m_sessions = si_sessions -%}{%- capture m_btn -%}{% if main.button and main.button != "" %}{{ main.button }}{% else %}{{ sp.words.register | default: "Register" }} for {{ si_title }}{% endif %}{%- endcapture -%}{%- endif -%}{%- assign cd = p.hero.countdown -%}
 <main id="main" tabindex="-1">
   <section class="hero on-navy" aria-labelledby="home-h1">
    <div class="hero-top">
     <div class="wrap hero-grid">
       <div>
-        <p class="kicker hero-kicker"><span class="live-dot" aria-hidden="true"></span><span class="hk-text"><span class="hk-a">{{ s.name | escape }}</span><span class="hk-sep"> · </span><span class="hk-b">{% include aasc/fill.html t=p.hero.season_dates %}</span></span></p>
+        {%- if main %}<p class="kicker hero-kicker"><span class="live-dot" aria-hidden="true"></span><span class="hk-text"><span class="hk-a">{{ m_title | escape }}</span>{% if m_days != "" and m_first != "" %}<span class="hk-sep"> · </span><span class="hk-b">{{ m_days | escape }} from {{ m_first | date: "%b %-d" }}</span>{% endif %}</span></p>{% endif %}
         <h1 id="home-h1">
           <span class="line">{{ p.hero.headline_1 | escape | replace: " ", "&nbsp;" }}<span class="dot-wrap"><span class="sr">.</span><span class="ball-dot" aria-hidden="true"><span class="bd-shadow"></span><span class="bd-hop"><span class="bd-drop"><span class="bd-squash"><svg class="bd on" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#E07A2E"/><g fill="none" stroke="#0A2342" stroke-width="1.8" opacity=".7"><path d="M2 20h36M20 2v36"/><path d="M7.5 7.5c5 5 5 20 0 25M32.5 7.5c-5 5-5 20 0 25"/></g></svg><svg class="bd" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#FFFFFF" stroke="#0A2342" stroke-width="2"/><path d="M20 11l8 6-3 9.5h-10L12 17z" fill="#0A2342"/><path d="M20 11V3M28 17l7-3M25 26.5l5 6M15 26.5l-5 6M12 17l-7-3" stroke="#0A2342" stroke-width="1.8"/></svg><svg class="bd" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#FFFFFF" stroke="#0A2342" stroke-width="2"/><path d="M11 6q6 14 0 28M29 6q-6 14 0 28" stroke="#C0392B" stroke-width="2" fill="none" stroke-dasharray="3 2.4"/></svg><svg class="bd" viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="18" ry="11.5" transform="rotate(-30 20 20)" fill="#8A4B2A"/><path d="M14 20h12M16.5 17v6M20 17v6M23.5 17v6" stroke="#F7F4EC" stroke-width="1.8" stroke-linecap="round" transform="rotate(-30 20 20)"/></svg></span></span></span></span></span></span>
           <span class="line">{{ p.hero.headline_2 | escape | replace: " ", "&nbsp;" }}&nbsp;<span class="mark-word">{{ p.hero.headline_mark | escape }}<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 50 4, 120 4, 197 10" pathLength="1" fill="none" stroke="#B7CFA9" stroke-width="6" stroke-linecap="round"/></svg></span></span>
         </h1>
         <p class="lead">{{ p.hero.text | escape }}</p>
         <div class="btns">
-          <a class="btn btn-sage" href="get-involved.html">{{ s.button | escape }} <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn-sage" href="{% if main %}{{ m_link | escape }}{% else %}programs.html{% endif %}"{% if main and m_ext %} target="_blank" rel="noopener"{% endif %}>{% if main %}{{ m_btn | escape }}{% else %}{{ site.data.aasc.site.menu.programs | escape }}{% endif %} <span class="arr" aria-hidden="true">→</span></a>
           <a class="hero-link" href="index.html#story">{{ p.hero.story_link | escape }}</a>
         </div>
-        <p class="count" id="reg-count" data-open="{{ s.registration_opens | date: "%Y-%m-%d" }}" data-close="{{ s.registration_closes | date: "%Y-%m-%d" }}" data-spots="{{ s.spots }}" data-before="{{ s.countdown_before | escape }}" data-open-text="{% include aasc/fill.html t=s.countdown_open %}" data-closed="{{ s.countdown_closed | escape }}" data-day="{{ s.countdown_day | escape }}" data-days="{{ s.countdown_days | escape }}" data-tomorrow="{{ s.countdown_tomorrow | escape }}"><span class="count-num" id="rc-num" hidden></span><span id="rc-text">{% include aasc/fill.html t=p.hero.countdown_start %}</span></p>
+        {%- if main and m_open != "" %}<p class="count" id="reg-count" data-open="{{ m_open }}" data-close="{{ m_close }}" data-spots="{% if m_spots > 0 %}{{ m_spots }}{% endif %}" data-before="{{ cd.before | default: "until registration opens" | escape }}" data-open-text="{{ cd.open | default: "Registration is open now" | escape }}{% if m_close != "" %}, until {{ m_close | date: "%B %-d" }}{% if m_spots > 0 %} or all {% if m_spots > 0 %}{{ m_spots }}{% endif %} spots are filled{% endif %}{% endif %}" data-closed="{{ cd.closed | escape }}" data-day="day" data-days="days" data-tomorrow="tomorrow,"><span class="count-num" id="rc-num" hidden></span><span id="rc-text">{{ m_pill | escape }}</span></p>{% endif %}
       </div>
       <figure class="team-card">
         <div class="team-pitch">
@@ -64,7 +65,7 @@
           <span class="tm t2" style="--pg-buddy:#B7CFA9">{% include aasc/pg.html n="buddy" cls="kid" label="A volunteer buddy and a young athlete hold hands and cheer" %}</span>
           <span class="tm t3">{% include aasc/pg.html n="flag" cls="kid" label="An athlete with a running prosthetic carries a football" %}</span>
         </div>
-        <figcaption><span class="tc-name">{{ p.hero.team_name | escape }}<small>{{ s.name | escape }} · {{ s.spots }} spots</small></span><span class="tc-tag">{{ p.hero.team_tag | escape }}</span></figcaption>
+        <figcaption><span class="tc-name">{{ p.hero.team_name | escape }}{% if main %}<small>{{ m_title | escape }}{% if m_spots > 0 %} · {% if m_spots > 0 %}{{ m_spots }}{% endif %} spots{% endif %}</small>{% endif %}</span><span class="tc-tag">{{ p.hero.team_tag | escape }}</span></figcaption>
       </figure>
     </div>
    </div>
@@ -88,26 +89,30 @@
             <p>{% if p.story.quote_highlight and p.story.quote_highlight != "" %}{% capture hl %}<mark>{{ p.story.quote_highlight | escape }}</mark>{% endcapture %}{% assign hl_plain = p.story.quote_highlight | escape %}{{ p.story.quote | escape | replace: hl_plain, hl }}{% else %}{{ p.story.quote | escape }}{% endif %}</p>
             <footer>{{ p.story.quote_by | escape }}</footer>
           </blockquote>
-          <div class="btns" style="margin-top:var(--sp-6)"><a class="btn btn-navy" href="get-involved.html">{{ s.button | escape }} <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-line-dark" href="about.html">{{ p.story.button | escape }}</a></div>
+          <div class="btns" style="margin-top:var(--sp-6)"><a class="btn btn-navy" href="{% if main %}{{ m_link | escape }}{% else %}programs.html{% endif %}"{% if main and m_ext %} target="_blank" rel="noopener"{% endif %}>{% if main %}{{ m_btn | escape }}{% else %}{{ site.data.aasc.site.menu.programs | escape }}{% endif %} <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-line-dark" href="about.html">{{ p.story.button | escape }}</a></div>
         </div>
       </div>
 {% include aasc/values.html reveal=true %}
     </div>
   </section>
 
+{%- if main %}
   <section class="score-band on-navy" aria-labelledby="board-h">
     <div class="wrap">
-      <h2 id="board-h" class="sr">{{ s.name | escape }} at a glance</h2>
+      <h2 id="board-h" class="sr">{{ m_title | escape }} at a glance</h2>
+      {%- assign g = p.glance %}
       <dl class="board">
-        <div><dt>{% include aasc/fill.html t=p.glance.opens_label %}</dt><dd>{{ s.registration_opens | date: "%b %-d" | upcase }}</dd></div>
-        <div><dt>{% include aasc/fill.html t=p.glance.spots_label %}</dt><dd>{{ s.spots }}</dd></div>
-        <div><dt>{% include aasc/fill.html t=p.glance.fee_label %}</dt><dd>${{ s.fee }}<small>{{ p.glance.fee_each | escape }}</small></dd></div>
-        <div><dt>{% include aasc/fill.html t=p.glance.sessions_label %}</dt><dd>{{ s.sundays }}</dd></div>
+        {%- if m_st == "open" and m_close != "" %}<div><dt>{{ g.closes_label | default: "Closes" | escape }}</dt><dd>{{ m_close | date: "%b %-d" | upcase }}</dd></div>{% elsif m_open != "" %}<div><dt>{{ g.opens_label | default: "Opens" | escape }}</dt><dd>{{ m_open | date: "%b %-d" | upcase }}</dd></div>{% endif %}
+        {%- if m_spots > 0 %}<div><dt>{{ g.spots_label | default: "Spots" | escape }}</dt><dd>{% if m_spots > 0 %}{{ m_spots }}{% endif %}</dd></div>{% endif %}
+        {%- if m_fee != "" %}{%- assign fee_first = m_fee | slice: 0 -%}<div><dt>{{ g.fee_label | default: "Fee" | escape }}</dt><dd>{{ m_fee | escape }}{% if fee_first == "$" %}<small>{{ g.fee_each | default: "EACH" | escape }}</small>{% endif %}</dd></div>{% endif %}
+        {%- if m_sessions > 0 %}<div><dt>{% if main.day and main.day != "" %}{{ main.day | escape }} {{ g.sessions_label | default: "Sessions" | downcase | escape }}{% else %}{{ g.sessions_label | default: "Sessions" | escape }}{% endif %}</dt><dd>{{ m_sessions }}</dd></div>{% endif %}
       </dl>
-      <p class="board-note">{% include aasc/fill.html t=p.glance.note %}</p>
-      <div class="btns score-cta"><a class="btn btn-sage" href="get-involved.html">{{ s.button | escape }} <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-line" href="index.html#faq">{{ p.glance.faq_button | escape }}</a></div>
+      {%- capture bnote -%}{%- if m_first != "" and m_last != "" -%}{% if m_days != "" %}{{ m_days }}, {% endif %}{{ m_first | date: "%B %-d" }} through {{ m_last | date: "%B %-d, %Y" }}.{%- endif -%}{%- if m_close != "" %} Registration closes {% if m_spots > 0 %}when all {% if m_spots > 0 %}{{ m_spots }}{% endif %} spots are filled or {% endif %}on {{ m_close | date: "%B %-d, %Y" }}{% if m_spots > 0 %}, whichever comes first{% endif %}.{%- endif -%}{%- endcapture -%}{%- assign bnote = bnote | strip -%}
+      {%- if bnote != "" %}<p class="board-note">{{ bnote | escape }}</p>{% endif %}
+      <div class="btns score-cta"><a class="btn btn-sage" href="{% if main %}{{ m_link | escape }}{% else %}programs.html{% endif %}"{% if main and m_ext %} target="_blank" rel="noopener"{% endif %}>{% if main %}{{ m_btn | escape }}{% else %}{{ site.data.aasc.site.menu.programs | escape }}{% endif %} <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-line" href="index.html#faq">{{ g.faq_button | escape }}</a></div>
     </div>
   </section>
+{%- endif %}
 
   <section class="sec" aria-labelledby="sports-h">
     <div class="wrap">
@@ -117,20 +122,21 @@
         <p>{{ p.lineup.intro | escape }}</p>
       </div>
       <div class="sports reveal">
-{%- include aasc/featured-sport.html -%}
-{%- include aasc/sport-style.html pic=feat.picture -%}{%- assign fart = sport_art %}
-        <a class="sport featured" href="programs.html" style="--pg-acc:#B7CFA9">
-          <div class="art" aria-hidden="true">{% include aasc/pg.html n=fart style="color:#F7F4EC" cls="hello" %}</div>
-          <span class="pill open">{{ p.lineup.open_tag | escape }} {{ s.registration_opens | date: "%b %-d" }}</span>
-          <h3>{{ feat.name | escape }}</h3>
-          <p>{% include aasc/fill.html t=p.lineup.season_line %}</p>
+{%- for x in active_sports %}
+{%- include aasc/sport-info.html x=x -%}{%- include aasc/sport-style.html pic=x.picture -%}
+        <a class="sport featured" href="programs.html#{{ si_slug }}" style="--pg-acc:#B7CFA9">
+          <div class="art" aria-hidden="true">{% include aasc/pg.html n=sport_art style="color:#F7F4EC" cls="hello" %}</div>
+          <span class="pill open">{{ si_pill | escape }}</span>
+          <h3>{{ x.name | escape }}</h3>
+          <p>{{ si_line | escape }}</p>
           <span class="go">{{ p.lineup.season_link | escape }} <span class="arr" aria-hidden="true">→</span></span>
         </a>
+{%- endfor %}
 {%- for x in later_sports %}
 {%- include aasc/sport-style.html pic=x.picture %}
         <article class="sport" style="{{ sport_style }}">
           <div class="art" aria-hidden="true">{% include aasc/pg.html n=sport_art style=sport_color cls="hello" %}</div>
-          <span class="pill">{{ sp.soon_tag | escape }}</span>
+          <span class="pill">{{ sp.words.later | default: "Coming later" | escape }}</span>
           <h3>{{ x.name | escape }}</h3>
           <p>{{ x.line | escape }}</p>
         </article>

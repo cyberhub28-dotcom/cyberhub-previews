@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.privacy -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign p = site.data.aasc.privacy -%}{%- assign sp = site.data.aasc.programs -%}{%- include aasc/lineup.html -%}{%- assign page_title = p.page.tab_title | escape -%}{%- assign page_desc = p.page.description | escape -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -33,7 +33,7 @@
 <body data-page="privacy">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | default: "Skip to main content" | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="" %}
