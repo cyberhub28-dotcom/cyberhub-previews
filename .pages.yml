@@ -292,6 +292,9 @@ content:
       - name: answer
         label: Answer
         type: rich-text
+        options:
+          format: html
+          switcher: false
       - name: coming_soon
         label: Show a "Coming soon" tag
         type: boolean
@@ -679,6 +682,9 @@ content:
     - name: text
       label: Text
       type: rich-text
+      options:
+        format: html
+        switcher: false
   - name: bennett
     label: 4. Bennett's story
     type: object
@@ -690,6 +696,9 @@ content:
       label: Story
       type: rich-text
       description: Amber's words.
+      options:
+        format: html
+        switcher: false
   - name: what
     label: 5. What the club does
     type: object
@@ -700,6 +709,9 @@ content:
     - name: text
       label: Text
       type: rich-text
+      options:
+        format: html
+        switcher: false
   - name: buttons
     label: 6. Buttons at the bottom
     type: object
@@ -1164,6 +1176,9 @@ content:
     label: 2. Privacy policy
     type: rich-text
     description: The whole policy. Tell Zack before changing it.
+    options:
+      format: html
+      switcher: false
   - name: updated
     label: 3. Last updated line
     type: object

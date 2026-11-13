@@ -44,7 +44,7 @@
   </section>
   <section class="sec">
     <div class="wrap prose">
-      {{ p.body }}
+      {{ p.body | markdownify }}
       <p class="muted">{{ p.updated.label | escape }} {{
  p.updated.date | date: "%B %-d, %Y" }}</p>
     </div>

@@ -2,32 +2,25 @@ hero:
   headline_1: Everybody plays
   headline_2: Everybody
   headline_mark: belongs.
-  text: Inclusive youth sports for children of all abilities in the Dayton, Ohio
-    area. No experience needed.
+  text: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. No experience needed.
   story_link: Why we started
+  team_name: Team All Abilities
+  team_tag: Every ability welcome
+  ticker:
+  - Every ability
+  - Every athlete
+  - Every opportunity
   countdown:
     before: until registration opens
     open: Registration is open now
     closed: Registration has closed. Contact us about the next season.
-  team_name: Team All Abilities
-  team_tag: Every ability welcome
-  ticker:
-    - Every ability
-    - Every athlete
-    - Every opportunity
 story:
   kicker: Why we started
   heading: It started with a team for Bennett.
-  quote: As parents to a child with autism, we understand firsthand how difficult
-    it can be to find recreational opportunities where children with different
-    abilities feel truly welcomed, supported, and included. What began as a
-    desire to create a place where our son Bennett could create the same
-    friendships our older daughter experiences within her club sports has grown
-    into a mission to provide those same opportunities to other families in our
-    community.
-  quote_highlight: What began as a desire to create a place where our son Bennett
-    could create the same friendships our older daughter experiences within her
-    club sports
+  photo: ''
+  photo_description: ''
+  quote: As parents to a child with autism, we understand firsthand how difficult it can be to find recreational opportunities where children with different abilities feel truly welcomed, supported, and included. What began as a desire to create a place where our son Bennett could create the same friendships our older daughter experiences within her club sports has grown into a mission to provide those same opportunities to other families in our community.
+  quote_highlight: What began as a desire to create a place where our son Bennett could create the same friendships our older daughter experiences within her club sports
   quote_by: Amber Davidson, Founder
   button: Read our story
 glance:
@@ -41,76 +34,59 @@ glance:
 lineup:
   kicker: The lineup
   heading: Every sport. Every pace.
-  intro: Every athlete plays at their own pace, with coaches and buddies right
-    beside them.
+  intro: Every athlete plays at their own pace, with coaches and buddies right beside them.
   season_link: See the season
-  note: Sports marked Coming later aren't open for sign-ups yet. Dates and fees
-    will be posted here first.
+  note: Sports marked Coming later aren't open for sign-ups yet. Dates and fees will be posted here first.
 gameday:
   kicker: Game day, every day
   heading: Everything you need for game day.
   programs_title: Programs
-  programs_text: Every sport is adapted so every athlete can join in, with coaches
-    and buddies close by.
+  programs_text: Every sport is adapted so every athlete can join in, with coaches and buddies close by.
   programs_link: View programs
   donate_title: Donate
-  donate_text: Help pay for coaching, adaptive equipment and affordable spots, to
-    help keep cost from being the reason a child sits out.
+  donate_text: Help pay for coaching, adaptive equipment and affordable spots, to help keep cost from being the reason a child sits out.
   donate_link: Support the club
 events:
   kicker: Upcoming events
   heading: Come say hello.
   intro: Meet the club, bring the kids to play, and hear what's coming next.
-  list:
-    - title: Launch Party
-      date: 2026-11-20
-      time: 5 to 7 PM
-      place: Hosted with our friends at Capabilities, Play for ALL Abilities, in
-        Dayton.
-      details:
-        - One hour of free play for kids, 5 to 6 PM or 6 to 7 PM
-        - Light refreshments
-        - Club shirts, cups and more for sale
-      note: Each child who will play needs a free ticket. Adults and infants don't.
-      button: Details and tickets
-      link: https://www.facebook.com/events/1828441874838201/
-    - title: Practice Picnic
-      date: 2026-12-05
-      time: 1 to 3 PM
-      place: Practice Park
   note: New events go up on our [Facebook page] first.
-  empty: No events on the calendar right now. New ones are posted on our Facebook
-    page first.
+  empty: No events on the calendar right now. New ones are posted on our Facebook page first.
   details_button: Details
+  list:
+  - title: Launch Party
+    date: '2026-11-20'
+    time: 5 to 7 PM
+    place: Hosted with our friends at Capabilities, Play for ALL Abilities, in Dayton.
+    details:
+    - One hour of free play for kids, 5 to 6 PM or 6 to 7 PM
+    - Light refreshments
+    - Club shirts, cups and more for sale
+    note: Each child who will play needs a free ticket. Adults and infants don't.
+    button: Details and tickets
+    link: https://www.facebook.com/events/1828441874838201/
 faq:
   kicker: Parent questions
   heading: Good to know before you sign up.
-  intro: Quick answers for families. Can't find yours? Email the club and Amber
-    will get back to you.
+  intro: Quick answers for families. Can't find yours? Email the club and Amber will get back to you.
   button: Ask a question
-  questions:
-    - question: How do I register my child?
-      answer: A parent or guardian registers each athlete on the club's online
-        registration form. The link goes live on the [sign-up
-        page](get-involved.html) when registration opens.
-      coming_soon: false
-    - question: What ages can play?
-      answer: "Children from age 3 can play. If your child is a little younger and
-        ready to join in, they're welcome too. To confirm: top age"
-      coming_soon: false
-    - question: Does my child need any experience?
-      answer: No. No experience is needed.
-      coming_soon: false
-    - question: Can I help without signing up an athlete?
-      answer: Yes. You can [volunteer](get-involved.html#volunteer) as a coach, a
-        buddy or an event-day helper, or [support the club](donate.html) with a
-        gift.
-      coming_soon: false
-    - question: Who do I contact with a question?
-      answer: Email Amber Davidson, the club's founder, at
-        [amber.davidson@allabilitiessportsclub.com](mailto:amber.davidson@allabilitiessportsclub.com).
-      coming_soon: false
   soon_tag: Coming soon
+  questions:
+  - question: How do I register my child?
+    answer: <p>A parent or guardian registers each athlete on the club's online registration form. The link goes live on the <a href="get-involved.html">sign-up page</a> when registration opens.</p>
+    coming_soon: false
+  - question: What ages can play?
+    answer: '<p>Children from age 3 can play. If your child is a little younger and ready to join in, they''re welcome too. <span class="ph">To confirm: top age</span></p>'
+    coming_soon: false
+  - question: Does my child need any experience?
+    answer: <p>No. No experience is needed.</p>
+    coming_soon: false
+  - question: Can I help without signing up an athlete?
+    answer: <p>Yes. You can <a href="get-involved.html#volunteer">volunteer</a> as a coach, a buddy or an event-day helper, or <a href="donate.html">support the club</a> with a gift.</p>
+    coming_soon: false
+  - question: Who do I contact with a question?
+    answer: <p>Email Amber Davidson, the club's founder, at <a href="mailto:amber.davidson@allabilitiessportsclub.com">amber.davidson@allabilitiessportsclub.com</a>.</p>
+    coming_soon: false
 join:
   kicker: Join the team
   heading: There's a place on the field for you.
@@ -123,5 +99,4 @@ join:
   give_text: Donate or sponsor so every child can play.
 page:
   tab_title: All Abilities Sports Club | Inclusive youth sports
-  description: Inclusive youth sports for children of all abilities in the Dayton,
-    Ohio area. No experience needed.
+  description: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. No experience needed.

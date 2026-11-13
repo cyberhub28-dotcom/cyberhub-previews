@@ -237,7 +237,7 @@
 {%- endif %}{% for q in site.data.aasc.home.faq.questions %}
         <details>
           <summary>{{ q.question | escape }}{% if q.coming_soon %}<span class="soon">{{ p.faq.soon_tag | escape }}</span>{% endif %}</summary>
-          <div class="ans">{{ q.answer }}</div>
+          <div class="ans">{{ q.answer | markdownify }}</div>
         </details>{% endfor %}
       </div>
     </div>

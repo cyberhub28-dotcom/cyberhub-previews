@@ -56,11 +56,11 @@
       </div>{% endif %}
       <div class="prose">
         <h2>{{ p.why.heading | escape }}</h2>
-        {{ p.why.text }}
+        {{ p.why.text | markdownify }}
         <h2>{{ p.bennett.heading | escape }}</h2>
-        {% if p.bennett.story and p.bennett.story != "" %}{{ p.bennett.story }}{% else %}<p class="ph-block">Amber is sending Bennett's story. It goes here, in her words, first name only.</p>{% endif %}
+        {% if p.bennett.story and p.bennett.story != "" %}{{ p.bennett.story | markdownify }}{% else %}<p class="ph-block">Amber is sending Bennett's story. It goes here, in her words, first name only.</p>{% endif %}
         <h2>{{ p.what.heading | escape }}</h2>
-        {{ p.what.text }}
+        {{ p.what.text | markdownify }}
         <div class="btns" style="margin-top:var(--sp-6)"><a class="btn btn-navy" href="programs.html">{{ p.buttons.programs | escape }}</a><a class="btn btn-line-dark" href="get-involved.html">{{ p.buttons.involved | escape }}</a></div>
       </div>
     </div>
