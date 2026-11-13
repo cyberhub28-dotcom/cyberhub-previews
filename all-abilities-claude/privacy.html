@@ -44,7 +44,7 @@
   </section>
   <section class="sec">
     <div class="wrap prose">
-      {{ p.body | markdownify }}
+      {% include aasc/rich.html text=p.body %}
       <p class="muted">{{ p.updated.label | escape }} {{
  p.updated.date | date: "%B %-d, %Y" }}</p>
     </div>

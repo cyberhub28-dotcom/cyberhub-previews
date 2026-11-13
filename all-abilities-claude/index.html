@@ -237,7 +237,7 @@
 {%- endif %}{% for q in site.data.aasc.home.faq.questions %}
         <details>
           <summary>{{ q.question | escape }}{% if q.coming_soon %}<span class="soon">{{ p.faq.soon_tag | escape }}</span>{% endif %}</summary>
-          <div class="ans">{{ q.answer | markdownify }}</div>
+          <div class="ans">{% include aasc/rich.html text=q.answer %}</div>
         </details>{% endfor %}
       </div>
     </div>

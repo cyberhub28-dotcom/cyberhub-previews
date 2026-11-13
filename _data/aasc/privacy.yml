@@ -11,11 +11,11 @@ body: '<h2>What we collect</h2>
 
   <ul>
 
-  <li>What the form asks: <span class="ph">To confirm: the questions on the club''s form</span></li>
+  <li>What the form asks: To confirm: the questions on the club''s form</li>
 
-  <li>Who sees it: <span class="ph">To confirm: who at the club can see answers</span></li>
+  <li>Who sees it: To confirm: who at the club can see answers</li>
 
-  <li>Where it''s kept and for how long: <span class="ph">To confirm: where answers are kept and when they''re deleted</span></li>
+  <li>Where it''s kept and for how long: To confirm: where answers are kept and when they''re deleted</li>
 
   </ul>
 
@@ -47,7 +47,7 @@ body: '<h2>What we collect</h2>
 
   <h2>Your information</h2>
 
-  <p>To see or delete information you''ve sent the club, email <span class="ph">To confirm: club email for privacy requests</span>.</p>'
+  <p>To see or delete information you''ve sent the club, email To confirm: club email for privacy requests.</p>'
 updated:
   label: 'Last updated:'
   date: '2026-11-12'
