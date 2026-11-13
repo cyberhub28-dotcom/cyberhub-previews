@@ -398,11 +398,10 @@ content:
   - name: intro
     label: Intro line
     type: text
-    description: The sentence under the headline.
+    description: 'The sentence under the headline. Sports (just below): one box per sport. Tap Add an item for a new sport, drag to change the order, and set each one''s Status. Open now sports show first, then Opening soon, then Coming later.'
   - name: sports
     label: Sports
     type: object
-    description: One box per sport. Tap Add an entry for a new sport, drag to change the order, and set each one's Status. Open now sports show first, then Opening soon, then Coming later.
     list:
       collapsible:
         collapsed: true
