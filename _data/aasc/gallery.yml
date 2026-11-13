@@ -7,16 +7,36 @@ has_photos_line: Tap a sport with photos to see them all.
 no_photos_line: Photos from each sport go up here as the season gets going.
 coming_soon: Photos coming soon
 season_tag: Winter season
-photos:
-- photo: /all-abilities-claude/images/sample-photo-1.jpg
-  category: Soccer
-  description: Sample photo 1
-  caption: Sample photo 1. Remove before launch.
-- photo: /all-abilities-claude/images/sample-photo-2.jpg
-  category: Soccer
-  description: Sample photo 2
-  caption: Sample photo 2. Remove before launch.
-- photo: /all-abilities-claude/images/sample-photo-3.jpg
-  category: Soccer
-  description: Sample photo 3
-  caption: Sample photo 3. Remove before launch.
+photo_word: photo
+photos_word: photos
+groups:
+- name: Soccer
+  picture: Soccer
+  photos:
+  - photo: /all-abilities-claude/images/sample-photo-1.jpg
+    description: Sample photo 1
+    caption: Sample photo 1. Remove before launch.
+  - photo: /all-abilities-claude/images/sample-photo-2.jpg
+    description: Sample photo 2
+    caption: Sample photo 2. Remove before launch.
+  - photo: /all-abilities-claude/images/sample-photo-3.jpg
+    description: Sample photo 3
+    caption: Sample photo 3. Remove before launch.
+- name: Buddies
+  picture: Buddies
+  photos: []
+- name: Basketball
+  picture: Basketball
+  photos: []
+- name: Baseball
+  picture: Baseball
+  photos: []
+- name: Flag Football
+  picture: Flag football
+  photos: []
+- name: Game Day
+  picture: Cheering kids
+  photos: []
+page:
+  tab_title: Gallery | All Abilities Sports Club
+  description: Photos from All Abilities Sports Club practices and game days.

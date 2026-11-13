@@ -1,12 +1,12 @@
 ---
 ---
-{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.get_involved -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.sports -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.get_involved -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.sports -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Get Involved | All Abilities Sports Club</title>
-<meta name="description" content="Register an athlete for {{ s.name | escape }} or volunteer as a coach, buddy or event-day helper.">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_desc }}">
 <!-- PREVIEW ONLY: remove the robots line below at launch -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0A2342">
@@ -14,8 +14,8 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="All Abilities Sports Club">
-<meta property="og:title" content="Get Involved | All Abilities Sports Club">
-<meta property="og:description" content="Register an athlete for {{ s.name | escape }} or volunteer as a coach, buddy or event-day helper.">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page_desc }}">
 <meta property="og:image" content="{{ 'all-abilities-claude/assets/share.jpg' | absolute_url }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
 <body data-page="signup">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">Skip to main content</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="involved" %}
@@ -55,7 +55,7 @@
             <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-acc:#3F7D2A"><use href="#pg-soccer"/></svg>{{ p.athlete_heading | escape }}</h3>
             <p class="muted">{{ p.athlete_text | escape }}</p>
             <div class="ho-card">
-              <strong>Registration opens {{ s.registration_opens | date: "%B %-d, %Y" }}</strong>
+              <strong>{% include aasc/fill.html t=p.opens_line %}</strong>
               {% if c.registration_form and c.registration_form != "" %}<div><a class="btn btn-navy" href="{{ c.registration_form | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% if c.payment_link and c.payment_link != "" %} <a class="btn btn-line-dark" href="{{ c.payment_link | escape }}" target="_blank" rel="noopener">{{ p.pay_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% endif %}</div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
             </div>
             {% unless c.registration_form and c.registration_form != "" %}<p class="ph-note"><span aria-hidden="true">✎</span><span>To confirm: the link to the club's Google registration form. This button opens it in a new tab once it's added.</span></p>{% endunless %}
@@ -74,12 +74,13 @@
       <aside class="panel dark">
         <h2>{{ s.name | escape }}</h2>
         <dl class="sched">
-          <div><dt>Sign-ups</dt><dd>{{ s.registration_opens | date: "%b %-d" }} to {{ s.registration_closes | date: "%b %-d" }}</dd></div>
-          <div><dt>Sessions</dt><dd>{{ day }}s, {{ s.first_sunday | date: "%b %-d" }} to {{ s.last_sunday | date: "%b %-d" }}</dd></div>
-          <div><dt>Fee</dt><dd>${{ s.fee }} per athlete</dd></div>
-          <div><dt>Spots</dt><dd>{{ s.spots }}</dd></div>
+          <div><dt>{{ p.side.signups_label | escape }}</dt><dd>{% include aasc/fill.html t=p.side.signups %}</dd></div>
+          <div><dt>{{ p.side.sessions_label | escape }}</dt><dd>{% include aasc/fill.html t=p.side.sessions %}</dd></div>
+          <div><dt>{{ p.side.fee_label | escape }}</dt><dd>{% include aasc/fill.html t=p.side.fee %}</dd></div>
+          <div><dt>{{ p.side.spots_label | escape }}</dt><dd>{% include aasc/fill.html t=p.side.spots %}</dd></div>
         </dl>
-        <p>Sign-ups close when all {{ s.spots }} spots are filled, so early is best.</p>
+        <p>{% include aasc/fill.html t=p.side.note %}</p>
+
       </aside>
     </div>
   </section>

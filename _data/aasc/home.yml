@@ -15,6 +15,8 @@ hero:
   - Every ability
   - Every athlete
   - Every opportunity
+  season_dates: '{days} from {first day short}'
+  countdown_start: Registration opens {opens}
 story:
   kicker: Why we started
   heading: It started with a team for Bennett.
@@ -25,6 +27,12 @@ story:
   quote_by: Amber Davidson, Founder
   button: Read our story
 glance:
+  opens_label: Opens
+  spots_label: Spots
+  fee_label: Fee
+  fee_each: EACH
+  sessions_label: '{day} sessions'
+  note: '{days}, {first day} through {last day year}. Registration closes when all {spots} spots are filled or on {closes year}, whichever comes first.'
   faq_button: Parent questions
 lineup:
   kicker: The lineup
@@ -33,6 +41,7 @@ lineup:
   open_tag: Signing up
   season_link: See the season
   note: Basketball, baseball and flag football aren't open for sign-ups yet. Dates and fees will be posted here first.
+  season_line: '{season}. {Sessions in words} {days}, {spots} spots, {fee}.'
 gameday:
   kicker: Game day, every day
   heading: Everything you need for game day.
@@ -48,11 +57,13 @@ events:
   intro: Meet the club, bring the kids to play, and hear what's coming next.
   note: New events go up on our [Facebook page] first.
   empty: No events on the calendar right now. New ones are posted on our Facebook page first.
+  details_button: Details
 faq:
   kicker: Parent questions
   heading: Good to know before you sign up.
   intro: Quick answers about Winter Indoor Soccer. Can't find yours? Email the club and Amber will get back to you.
   button: Ask a question
+  soon_tag: Coming soon
 join:
   kicker: Join the team
   heading: There's a place on the field for you.
@@ -63,3 +74,6 @@ join:
   volunteer_text: Be a coach, a buddy or an event-day helper.
   give_title: Give
   give_text: Donate or sponsor so every child can play.
+page:
+  tab_title: All Abilities Sports Club | Inclusive youth sports
+  description: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. {season} registration opens {opens year}.

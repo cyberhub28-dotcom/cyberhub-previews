@@ -1,0 +1,22 @@
+{%- comment -%}
+Fills in the {words in curly brackets} that can be used in editable sentences, from Current season.
+Use: {% include aasc/fill.html t=some.text %}  The text is escaped first, so it is always safe.
+{%- endcomment -%}
+{%- assign _s = site.data.aasc.season -%}{%- assign _d = _s.session_day | default: "Sunday" -%}{%- capture _ds -%}{{ _d }}s{%- endcapture -%}
+{%- assign _nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign _n = _s.sundays | plus: 0 -%}{%- capture _w -%}{%- if _n <= 20 -%}{{ _nw[_n] }}{%- else -%}{{ _n }}{%- endif -%}{%- endcapture -%}{%- assign _W = _w | capitalize -%}
+{%- capture _fee -%}${{ _s.fee }}{%- endcapture -%}{%- capture _sp -%}{{ _s.spots }}{%- endcapture -%}{%- capture _ses -%}{{ _s.sundays }}{%- endcapture -%}{%- capture _ya -%}{{ _s.youngest_age }}{%- endcapture -%}{%- capture _oa -%}{{ _s.oldest_age }}{%- endcapture -%}
+{%- assign _o1 = _s.registration_opens | date: "%B %-d" -%}{%- assign _o2 = _s.registration_opens | date: "%B %-d, %Y" -%}{%- assign _o3 = _s.registration_opens | date: "%b %-d" -%}{%- assign _o4 = _s.registration_opens | date: "%b %-d, %Y" -%}
+{%- assign _c1 = _s.registration_closes | date: "%B %-d" -%}{%- assign _c2 = _s.registration_closes | date: "%B %-d, %Y" -%}{%- assign _c3 = _s.registration_closes | date: "%b %-d" -%}{%- assign _c4 = _s.registration_closes | date: "%b %-d, %Y" -%}
+{%- assign _f1 = _s.first_sunday | date: "%B %-d" -%}{%- assign _f2 = _s.first_sunday | date: "%B %-d, %Y" -%}{%- assign _f3 = _s.first_sunday | date: "%b %-d" -%}{%- assign _f4 = _s.first_sunday | date: "%b %-d, %Y" -%}
+{%- assign _l1 = _s.last_sunday | date: "%B %-d" -%}{%- assign _l2 = _s.last_sunday | date: "%B %-d, %Y" -%}{%- assign _l3 = _s.last_sunday | date: "%b %-d" -%}{%- assign _l4 = _s.last_sunday | date: "%b %-d, %Y" -%}
+{%- assign _nm = _s.name | escape -%}{%- assign _wh = _s.where | escape -%}
+{%- assign _out = include.t | escape
+  | replace: "{season}", _nm | replace: "{where}", _wh
+  | replace: "{days}", _ds | replace: "{day}", _d
+  | replace: "{spots}", _sp | replace: "{fee}", _fee | replace: "{sessions}", _ses
+  | replace: "{sessions in words}", _w | replace: "{Sessions in words}", _W
+  | replace: "{youngest age}", _ya | replace: "{oldest age}", _oa
+  | replace: "{opens}", _o1 | replace: "{opens year}", _o2 | replace: "{opens short}", _o3 | replace: "{opens short year}", _o4
+  | replace: "{closes}", _c1 | replace: "{closes year}", _c2 | replace: "{closes short}", _c3 | replace: "{closes short year}", _c4
+  | replace: "{first day}", _f1 | replace: "{first day year}", _f2 | replace: "{first day short}", _f3 | replace: "{first day short year}", _f4
+  | replace: "{last day}", _l1 | replace: "{last day year}", _l2 | replace: "{last day short}", _l3 | replace: "{last day short year}", _l4 -%}{{- _out -}}

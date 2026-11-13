@@ -49,3 +49,7 @@ body: '<h2>What we collect</h2>
 
   <p>To see or delete information you''ve sent the club, email <span class="ph">To confirm: club email for privacy requests</span>.</p>'
 last_updated: '2026-11-12'
+updated_label: 'Last updated:'
+page:
+  tab_title: Privacy | All Abilities Sports Club
+  description: How the All Abilities Sports Club website handles your information.

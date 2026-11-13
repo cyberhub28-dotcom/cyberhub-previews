@@ -7,6 +7,8 @@ menu:
   donate: Donate
   contact: Contact
   register: Register
+  menu_button: Menu
+  skip_link: Skip to main content
 footer:
   explore_heading: Explore
   programs: Programs
@@ -31,3 +33,5 @@ not_found:
   heading: That ball went out of bounds.
   text: The page you were looking for isn't here. Let's get you back in the game.
   home_button: Go to the home page
+  tab_title: Page not found | All Abilities Sports Club
+  description: This page could not be found.
