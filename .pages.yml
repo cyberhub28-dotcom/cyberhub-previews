@@ -218,6 +218,7 @@ content:
         required: true
         options:
           format: yyyy-MM-dd
+        default: ''
       - name: time
         label: Time
         type: string
@@ -538,24 +539,28 @@ content:
     description: First day families can sign up. The Home page counts down to it.
     options:
       format: yyyy-MM-dd
+    default: ''
   - name: signups_close
     label: Sign-ups close
     type: date
     description: Last day families can sign up.
     options:
       format: yyyy-MM-dd
+    default: ''
   - name: first_day
     label: First session
     type: date
     description: First day of play.
     options:
       format: yyyy-MM-dd
+    default: ''
   - name: last_day
     label: Last session
     type: date
     description: Last day of play.
     options:
       format: yyyy-MM-dd
+    default: ''
   - name: day
     label: Day of the week
     type: select
@@ -1173,6 +1178,7 @@ content:
       description: Change it whenever the policy changes.
       options:
         format: yyyy-MM-dd
+      default: ''
   - name: page
     label: Browser tab and Google (rarely needed)
     type: object
