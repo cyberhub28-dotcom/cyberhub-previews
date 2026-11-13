@@ -1,13 +1,56 @@
-# All Abilities Sports Club preview: programs. Edited in Pages CMS.
+# All Abilities Sports Club preview: Programs page. Edited in Pages CMS.
 kicker: Programs
 headline: Winter Indoor Soccer is first.
 intro: Six Sundays. Forty-eight athletes. Every ability welcome on the field.
 soccer_text: Kids run, kick and score together at their own pace. No experience needed. Families in the Dayton, Ohio area are welcome.
+open_tag: Registration opens {opens short year}
+facts:
+  opens_label: Registration opens
+  opens: '{opens year}'
+  closes_label: Registration closes
+  closes: When {spots} spots fill, or {closes year}
+  sessions_label: Sessions
+  sessions: '{days}, {first day} to {last day year}'
+  fee_label: Fee
+  fee: '{fee} per participant'
+  spots_label: Spots
+  spots: '{spots} athletes'
+  where_label: Where
+  times_label: Session times
+  ages_label: Ages
+  ages: Ages {youngest age} to {oldest age}
+  ages_no_top: From age {youngest age}
 steps_heading: How to join
+step1_title: Registration opens {opens}
 step1_text: The link to the club's online registration form goes live on the sign-up page.
 step2_title: Fill in the form
 step2_text: A parent or guardian registers each athlete.
+step3_title: Pay the {fee} fee
+step3_text: The club will share how to pay when sign-ups open.
+step4_title: See you {first day}
+step4_text: The first {day} session.
 button: Go to sign-up
 later_kicker: Coming later
 later_heading: More sports are on the way.
 later_intro: These aren't open for sign-ups yet. Dates and fees will be posted when the club is ready.
+soon_tag: Coming later
+sports:
+- name: Soccer
+  status: This season
+  picture: Soccer
+  line: Run, kick and score together.
+- name: Basketball
+  status: Coming later
+  picture: Basketball
+  line: Dribble, pass and shoot.
+- name: Baseball
+  status: Coming later
+  picture: Baseball
+  line: Hit, run the bases, cheer.
+- name: Flag football
+  status: Coming later
+  picture: Flag football
+  line: Flag-style fun and teamwork.
+page:
+  tab_title: Programs | All Abilities Sports Club
+  description: '{season}: {sessions in words} {days}, {first day} to {last day year}. {fee} per athlete, {spots} spots. Basketball, baseball and flag football to follow.'

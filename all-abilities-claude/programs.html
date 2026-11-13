@@ -1,12 +1,12 @@
 ---
 ---
-{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.programs -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.sports -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.programs -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.programs -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Programs | All Abilities Sports Club</title>
-<meta name="description" content="{{ s.name | escape }}: {{ sundays_word }} {{ day }}s, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}. ${{ s.fee }} per athlete, {{ s.spots }} spots. Basketball, baseball and flag football to follow.">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_desc }}">
 <!-- PREVIEW ONLY: remove the robots line below at launch -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0A2342">
@@ -14,8 +14,8 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="All Abilities Sports Club">
-<meta property="og:title" content="Programs | All Abilities Sports Club">
-<meta property="og:description" content="{{ s.name | escape }}: {{ sundays_word }} {{ day }}s, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}. ${{ s.fee }} per athlete, {{ s.spots }} spots. Basketball, baseball and flag football to follow.">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page_desc }}">
 <meta property="og:image" content="{{ 'all-abilities-claude/assets/share.jpg' | absolute_url }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
 <body data-page="programs">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">Skip to main content</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="programs" %}
@@ -49,27 +49,28 @@
   <section class="sec">
     <div class="wrap two">
       <div class="panel">
-        <span class="pill open">Registration opens {{ s.registration_opens | date: "%b %-d, %Y" }}</span>
+        <span class="pill open">{% include aasc/fill.html t=p.open_tag %}</span>
         <h2 class="big">{{ s.name | escape }}</h2>
         <p class="muted">{{ p.soccer_text | escape }}</p>
         <dl class="facts">
-          <div><dt>Registration opens</dt><dd>{{ s.registration_opens | date: "%B %-d, %Y" }}</dd></div>
-          <div><dt>Registration closes</dt><dd>When {{ s.spots }} spots fill, or {{ s.registration_closes | date: "%B %-d, %Y" }}</dd></div>
-          <div><dt>Sessions</dt><dd>{{ day }}s, {{ s.first_sunday | date: "%B %-d" }} to {{ s.last_sunday | date: "%B %-d, %Y" }}</dd></div>
-          <div><dt>Fee</dt><dd>${{ s.fee }} per participant</dd></div>
-          <div><dt>Spots</dt><dd>{{ s.spots }} athletes</dd></div>
-          <div><dt>Where</dt><dd>{% if s.where and s.where != "" %}{{ s.where | escape }}{% else %}<span class="ph">To confirm: venue</span>{% endif %}</dd></div>
-          <div><dt>Session times</dt><dd>{% if s.session_times and s.session_times != "" %}{{ s.session_times | escape }}{% else %}<span class="ph">To confirm: times</span>{% endif %}</dd></div>
-          <div><dt>Ages</dt><dd>{% if s.oldest_age and s.oldest_age != "" %}Ages {{ s.youngest_age }} to {{ s.oldest_age }}{% else %}From age {{ s.youngest_age }} <span class="ph">To confirm: top age</span>{% endif %}</dd></div>
+          {%- assign fx = p.facts %}
+          <div><dt>{{ fx.opens_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.opens %}</dd></div>
+          <div><dt>{{ fx.closes_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.closes %}</dd></div>
+          <div><dt>{{ fx.sessions_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.sessions %}</dd></div>
+          <div><dt>{{ fx.fee_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.fee %}</dd></div>
+          <div><dt>{{ fx.spots_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.spots %}</dd></div>
+          <div><dt>{{ fx.where_label | escape }}</dt><dd>{% if s.where and s.where != "" %}{{ s.where | escape }}{% else %}<span class="ph">To confirm: venue</span>{% endif %}</dd></div>
+          <div><dt>{{ fx.times_label | escape }}</dt><dd>{% if s.session_times and s.session_times != "" %}{{ s.session_times | escape }}{% else %}<span class="ph">To confirm: times</span>{% endif %}</dd></div>
+          <div><dt>{{ fx.ages_label | escape }}</dt><dd>{% if s.oldest_age and s.oldest_age != "" %}{% include aasc/fill.html t=fx.ages %}{% else %}{% include aasc/fill.html t=fx.ages_no_top %} <span class="ph">To confirm: top age</span>{% endif %}</dd></div>
         </dl>
       </div>
       <div class="panel soft">
         <h2>{{ p.steps_heading | escape }}</h2>
         <ol class="steps">
-          <li><div><strong>Registration opens {{ s.registration_opens | date: "%B %-d" }}</strong><span>{{ p.step1_text | escape }}</span></div></li>
+          <li><div><strong>{% include aasc/fill.html t=p.step1_title %}</strong><span>{{ p.step1_text | escape }}</span></div></li>
           <li><div><strong>{{ p.step2_title | escape }}</strong><span>{{ p.step2_text | escape }}</span></div></li>
-          <li><div><strong>Pay the ${{ s.fee }} fee</strong><span>{% if s.how_to_pay and s.how_to_pay != "" %}{{ s.how_to_pay | escape }}{% else %}The club will share how to pay when sign-ups open. <span class="ph">To confirm: how to pay</span>{% endif %}</span></div></li>
-          <li><div><strong>See you {{ s.first_sunday | date: "%B %-d" }}</strong><span>The first {{ day }} session.</span></div></li>
+          <li><div><strong>{% include aasc/fill.html t=p.step3_title %}</strong><span>{% if s.how_to_pay and s.how_to_pay != "" %}{{ s.how_to_pay | escape }}{% else %}{% include aasc/fill.html t=p.step3_text %} <span class="ph">To confirm: how to pay</span>{% endif %}</span></div></li>
+          <li><div><strong>{% include aasc/fill.html t=p.step4_title %}</strong><span>{% include aasc/fill.html t=p.step4_text %}</span></div></li>
         </ol>
         <div class="btns"><a class="btn btn-navy" href="get-involved.html">{{ p.button | escape }}</a></div>
       </div>
@@ -79,11 +80,12 @@
     <div class="wrap">
       <div class="sec-head"><p class="kicker">{{ p.later_kicker | escape }}</p><h2>{{ p.later_heading | escape }}</h2><p>{{ p.later_intro | escape }}</p></div>
       <div class="later">
-{%- assign want = s.sport | default: "Soccer" | downcase | strip -%}
-{%- for x in sp.sports -%}{%- assign xp = x.picture | default: "" | downcase | strip -%}{%- if xp != want %}
-{%- include aasc/sport-style.html pic=xp %}
+{%- include aasc/featured-sport.html -%}
+{%- for x in later_sports %}
+{%- include aasc/sport-style.html pic=x.picture %}
         <article class="sport" style="{{ sport_style }}"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="{{ sport_color }}"><use href="#pg-{{ sport_art }}"/></svg></div><span class="pill">{{ sp.soon_tag | escape }}</span><h3>{{ x.name | escape }}</h3><p>{{ x.line | escape }}</p></article>
-{%- endif -%}{%- endfor %}
+{%- endfor %}
+
       </div>
     </div>
   </section>

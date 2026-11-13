@@ -1,4 +1,4 @@
-# All Abilities Sports Club preview: home. Edited in Pages CMS.
+# All Abilities Sports Club preview: Home page. Edited in Pages CMS.
 hero:
   headline_1: Everybody plays
   headline_2: Everybody
@@ -15,6 +15,8 @@ hero:
   - Every ability
   - Every athlete
   - Every opportunity
+  season_dates: '{days} from {first day short}'
+  countdown_start: Registration opens {opens}
 story:
   kicker: Why we started
   heading: It started with a team for Bennett.
@@ -25,6 +27,12 @@ story:
   quote_by: Amber Davidson, Founder
   button: Read our story
 glance:
+  opens_label: Opens
+  spots_label: Spots
+  fee_label: Fee
+  fee_each: EACH
+  sessions_label: '{day} sessions'
+  note: '{days}, {first day} through {last day year}. Registration closes when all {spots} spots are filled or on {closes year}, whichever comes first.'
   faq_button: Parent questions
 lineup:
   kicker: The lineup
@@ -33,6 +41,7 @@ lineup:
   open_tag: Signing up
   season_link: See the season
   note: Basketball, baseball and flag football aren't open for sign-ups yet. Dates and fees will be posted here first.
+  season_line: '{season}. {Sessions in words} {days}, {spots} spots, {fee}.'
 gameday:
   kicker: Game day, every day
   heading: Everything you need for game day.
@@ -48,11 +57,59 @@ events:
   intro: Meet the club, bring the kids to play, and hear what's coming next.
   note: New events go up on our [Facebook page] first.
   empty: No events on the calendar right now. New ones are posted on our Facebook page first.
+  details_button: Details
+  list:
+  - title: Launch Party
+    date: '2026-11-20'
+    time: 5 to 7 PM
+    place: Hosted with our friends at Capabilities, Play for ALL Abilities, in Dayton.
+    details:
+    - One hour of free play for kids, 5 to 6 PM or 6 to 7 PM
+    - Light refreshments
+    - Club shirts, cups and more for sale
+    note: Each child who will play needs a free ticket. Adults and infants don't.
+    button: Details and tickets
+    link: https://www.facebook.com/events/1828441874838201/
 faq:
   kicker: Parent questions
   heading: Good to know before you sign up.
   intro: Quick answers about Winter Indoor Soccer. Can't find yours? Email the club and Amber will get back to you.
   button: Ask a question
+  soon_tag: Coming soon
+  questions:
+  - question: What is Winter Indoor Soccer?
+    answer: <p>An indoor soccer season for children of all abilities. It runs six Sundays, from January 10 to February 14, 2027.</p>
+    coming_soon: false
+  - question: When does registration open and close?
+    answer: <p>Registration opens November 20, 2026. It closes December 18, 2026, or sooner if all 48 spots are filled.</p>
+    coming_soon: false
+  - question: How do I register my child?
+    answer: <p>A parent or guardian registers each athlete on the club's online registration form. The link goes live on the <a href="get-involved.html">sign-up page</a> when registration opens.</p>
+    coming_soon: false
+  - question: How much does it cost?
+    answer: <p>The registration fee is $30 per athlete.</p>
+    coming_soon: false
+  - question: How do I pay the $30 fee?
+    answer: <p>The club will post this before the season starts.</p>
+    coming_soon: true
+  - question: Where are sessions held?
+    answer: <p>At Dayton Functional Fitness in Beavercreek, Ohio.</p>
+    coming_soon: false
+  - question: What time are the Sunday sessions?
+    answer: <p>The club will post this before the season starts.</p>
+    coming_soon: true
+  - question: What ages can play?
+    answer: '<p>Winter Indoor Soccer starts at age 3. If your child is a little younger and ready to join in, they''re welcome too. <span class="ph">To confirm: top age</span></p>'
+    coming_soon: false
+  - question: Does my child need soccer experience?
+    answer: <p>No. No experience is needed.</p>
+    coming_soon: false
+  - question: Can I help without signing up an athlete?
+    answer: <p>Yes. You can <a href="get-involved.html#volunteer">volunteer</a> as a coach, a buddy or an event-day helper, or <a href="donate.html">support the club</a> with a gift.</p>
+    coming_soon: false
+  - question: Who do I contact with a question?
+    answer: <p>Email Amber Davidson, the club's founder, at <a href="mailto:amber.davidson@allabilitiessportsclub.com">amber.davidson@allabilitiessportsclub.com</a>.</p>
+    coming_soon: false
 join:
   kicker: Join the team
   heading: There's a place on the field for you.
@@ -63,3 +120,6 @@ join:
   volunteer_text: Be a coach, a buddy or an event-day helper.
   give_title: Give
   give_text: Donate or sponsor so every child can play.
+page:
+  tab_title: All Abilities Sports Club | Inclusive youth sports
+  description: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. {season} registration opens {opens year}.

@@ -1,0 +1,8 @@
+{%- comment -%}
+Picks the sport that gets the big card: the first one in the Sports list set to "This season".
+If none is set, the first sport that isn't hidden. later_sports holds the rest, minus hidden ones.
+{%- endcomment -%}
+{%- assign feat = nil -%}{%- assign later_sports = "" | split: "" -%}
+{%- for x in site.data.aasc.programs.sports -%}{%- assign _st = x.status | default: "Coming later" | downcase | strip -%}{%- if feat == nil and _st == "this season" -%}{%- assign feat = x -%}{%- endif -%}{%- endfor -%}
+{%- if feat == nil -%}{%- for x in site.data.aasc.programs.sports -%}{%- assign _st = x.status | default: "Coming later" | downcase | strip -%}{%- if feat == nil and _st != "hidden" -%}{%- assign feat = x -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+{%- for x in site.data.aasc.programs.sports -%}{%- assign _st = x.status | default: "Coming later" | downcase | strip -%}{%- if x != feat and _st != "hidden" -%}{%- assign later_sports = later_sports | push: x -%}{%- endif -%}{%- endfor -%}

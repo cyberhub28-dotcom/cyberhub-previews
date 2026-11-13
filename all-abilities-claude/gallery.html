@@ -1,12 +1,12 @@
 ---
 ---
-{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.gallery -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.sports -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.gallery -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.programs -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Gallery | All Abilities Sports Club</title>
-<meta name="description" content="Photos from All Abilities Sports Club practices and game days.">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ page_desc }}">
 <!-- PREVIEW ONLY: remove the robots line below at launch -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0A2342">
@@ -14,8 +14,8 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="All Abilities Sports Club">
-<meta property="og:title" content="Gallery | All Abilities Sports Club">
-<meta property="og:description" content="Photos from All Abilities Sports Club practices and game days.">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ page_desc }}">
 <meta property="og:image" content="{{ 'all-abilities-claude/assets/share.jpg' | absolute_url }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
 <body data-page="gallery">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">Skip to main content</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="gallery" %}
@@ -49,45 +49,34 @@
   <section class="sec gal-sec">
     <div class="wrap">
 {%- comment -%}
-  Six sports, always all shown, in this order. Each card shows that sport's drawing.
-  Photos are grouped by the Sport picked for each photo in Pages CMS.
-  The sport of the newest photo (the last one in the CMS list) gets the big navy card on top.
+  One card per photo group, in the order of the Photo groups list in Pages CMS.
+  The first group that has photos gets the big navy card on top. Each group's Drawing sets its picture and colors.
 {%- endcomment -%}
-{%- assign sp_names = "Soccer,Buddies,Basketball,Baseball,Flag Football,Game Day" | split: "," -%}
-{%- assign sp_lower = "soccer,buddies,basketball,baseball,flag football,game day" | split: "," -%}
-{%- assign sp_slug = "soccer,buddies,basketball,baseball,flag,gameday" | split: "," -%}
-{%- assign sp_art = "soccer,buddy,wheel,base,flag,cheer" | split: "," -%}
-{%- assign total = 0 -%}{%- assign newest = "" -%}
-{%- for x in p.photos -%}{%- if x.photo and x.photo != "" -%}
-{%- assign total = total | plus: 1 -%}
-{%- assign xc = x.category | default: "Game Day" | downcase | strip -%}
-{%- unless sp_lower contains xc -%}{%- assign xc = "game day" -%}{%- endunless -%}
-{%- assign newest = xc -%}
-{%- endif -%}{%- endfor -%}
-{%- assign order = "" | split: "" -%}
-{%- if newest != "" -%}{%- assign order = order | push: newest -%}{%- endif -%}
-{%- for nd in sp_lower -%}{%- if nd != newest -%}{%- assign order = order | push: nd -%}{%- endif -%}{%- endfor -%}
-{%- assign small_n = 6 -%}{%- if newest != "" -%}{%- assign small_n = 5 -%}{%- endif %}
+{%- include aasc/featured-sport.html -%}{%- assign season_name = feat.name | default: "" | downcase | strip -%}
+{%- assign total = 0 -%}{%- assign big_i = -1 -%}{%- assign gn = 0 -%}
+{%- for g in p.groups -%}{%- assign gn = gn | plus: 1 -%}{%- assign cnt = 0 -%}{%- for x in g.photos -%}{%- if x.photo and x.photo != "" -%}{%- assign cnt = cnt | plus: 1 -%}{%- endif -%}{%- endfor -%}{%- assign total = total | plus: cnt -%}{%- if big_i == -1 and cnt > 0 -%}{%- assign big_i = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+{%- assign small_n = gn -%}{%- if big_i != -1 -%}{%- assign small_n = gn | minus: 1 -%}{%- endif -%}
+{%- assign m3 = small_n | modulo: 3 -%}{%- if small_n <= 5 -%}{%- assign cols = small_n -%}{%- if cols < 2 -%}{%- assign cols = 2 -%}{%- endif -%}{%- elsif m3 == 0 -%}{%- assign cols = 3 -%}{%- else -%}{%- assign cols = 4 -%}{%- endif -%}
+{%- assign odd = small_n | modulo: 2 -%}
+{%- assign order = "" | split: "" -%}{%- if big_i != -1 -%}{%- assign order = order | push: big_i -%}{%- endif -%}
+{%- for g in p.groups -%}{%- if forloop.index0 != big_i -%}{%- assign order = order | push: forloop.index0 -%}{%- endif -%}{%- endfor %}
       <div class="gal-head">
         <h2>{{ p.pick_heading | escape }}</h2>
         <p>{% if total > 0 %}{{ p.has_photos_line | escape }}{% else %}{{ p.no_photos_line | escape }}{% endif %}</p>
       </div>
-      <ul class="gallery gal-{{ small_n }}" aria-label="Sports">
-{%- for nd in order -%}
-{%- for cand in sp_lower -%}{%- if cand == nd -%}{%- assign k = forloop.index0 -%}{%- endif -%}{%- endfor -%}
-{%- assign name = sp_names[k] -%}
+      <ul class="gallery{% if odd == 1 %} gal-odd{% endif %}" style="--gal-cols:{{ cols }}" aria-label="{{ p.pick_heading | escape }}">
+{%- for k in order -%}
+{%- assign g = p.groups[k] -%}
+{%- assign name = g.name | escape -%}
 {%- assign set = "" | split: "" -%}
-{%- for x in p.photos -%}{%- if x.photo and x.photo != "" -%}
-{%- assign xc = x.category | default: "Game Day" | downcase | strip -%}
-{%- unless sp_lower contains xc -%}{%- assign xc = "game day" -%}{%- endunless -%}
-{%- if xc == nd -%}{%- assign set = set | push: x -%}{%- endif -%}
-{%- endif -%}{%- endfor -%}
-{%- assign feat = false -%}{%- if nd == newest -%}{%- assign feat = true -%}{%- endif -%}
-{%- assign art_n = sp_art[k] -%}
-{%- capture art -%}<span class="sp-art">{% include aasc/pg.html n=art_n cls="hello" %}</span>{%- endcapture %}
-        <li class="sp sp-{{ sp_slug[k] }}{% if feat %} sp-feature{% endif %}">
+{%- for x in g.photos -%}{%- if x.photo and x.photo != "" -%}{%- assign set = set | push: x -%}{%- endif -%}{%- endfor -%}
+{%- assign big = false -%}{%- if k == big_i -%}{%- assign big = true -%}{%- endif -%}
+{%- include aasc/sport-style.html pic=g.picture -%}
+{%- capture art -%}<span class="sp-art">{% include aasc/pg.html n=sport_art cls="hello" %}</span>{%- endcapture -%}
+{%- assign gname = g.name | default: "" | downcase | strip %}
+        <li class="sp sp-{{ sport_slug }}{% if big %} sp-feature{% endif %}">
 {%- if set.size > 0 %}
-          <button type="button" class="sp-card has-photos" aria-haspopup="dialog" data-sport="{{ name }}">{{ art }}<span class="sp-text">{% assign season_sport = s.sport | default: "Soccer" | downcase | strip %}{% if feat and nd == season_sport %}<span class="sp-kick">{{ p.season_tag | escape }}</span>{% endif %}<span class="sp-name">{{ name }}</span><span class="sp-pill">{{ set.size }} {% if set.size == 1 %}photo{% else %}photos{% endif %}<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></button>
+          <button type="button" class="sp-card has-photos" aria-haspopup="dialog" data-sport="{{ name }}">{{ art }}<span class="sp-text">{% if big and gname == season_name %}<span class="sp-kick">{{ p.season_tag | escape }}</span>{% endif %}<span class="sp-name">{{ name }}</span><span class="sp-pill">{{ set.size }} {% if set.size == 1 %}{{ p.photo_word | escape }}{% else %}{{ p.photos_word | escape }}{% endif %}<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></button>
           <span class="sp-set" hidden>{% for x in set %}<span data-src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" data-alt="{{ x.description | escape }}" data-cap="{{ x.caption | escape }}"></span>{% endfor %}</span>
 {%- else %}
           <div class="sp-card no-photos">{{ art }}<span class="sp-text"><span class="sp-name">{{ name }}</span><span class="sp-status">{{ p.coming_soon | escape }}</span></span></div>

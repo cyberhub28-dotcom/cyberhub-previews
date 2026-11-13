@@ -1,4 +1,4 @@
-# All Abilities Sports Club preview: sign-up page. Edited in Pages CMS.
+# All Abilities Sports Club preview: Get Involved page. Edited in Pages CMS.
 kicker: Get involved
 headline: Grab a spot, or grab a whistle.
 intro: Athletes and helpers are both part of the team. No experience needed.
@@ -11,3 +11,17 @@ volunteer_heading: Volunteer
 volunteer_text: Volunteers sign up on the club's volunteer form.
 volunteer_card: Coach, buddy or event-day helper
 volunteer_button: Volunteer now
+opens_line: Registration opens {opens year}
+side:
+  signups_label: Sign-ups
+  signups: '{opens short} to {closes short}'
+  sessions_label: Sessions
+  sessions: '{days}, {first day short} to {last day short}'
+  fee_label: Fee
+  fee: '{fee} per athlete'
+  spots_label: Spots
+  spots: '{spots}'
+  note: Sign-ups close when all {spots} spots are filled, so early is best.
+page:
+  tab_title: Get Involved | All Abilities Sports Club
+  description: Register an athlete for {season} or volunteer as a coach, buddy or event-day helper.

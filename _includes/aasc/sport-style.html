@@ -1,5 +1,8 @@
-{%- comment -%}Sets the drawing and colors for a "Coming later" sport card, from the picture picked in Pages CMS.{%- endcomment -%}
-{%- if include.pic == "basketball" -%}{%- assign sport_art = "wheel" -%}{%- assign sport_style = "--pg-acc:#0287B0" -%}{%- assign sport_color = "color:#0A2342" -%}
-{%- elsif include.pic == "baseball" -%}{%- assign sport_art = "base" -%}{%- assign sport_style = "--pg-flag:#0287B0" -%}{%- assign sport_color = "color:#3F7D2A" -%}
-{%- elsif include.pic == "flag football" -%}{%- assign sport_art = "flag" -%}{%- assign sport_style = "--pg-acc:#3F7D2A;--pg-flag:#0287B0" -%}{%- assign sport_color = "color:#0A2342" -%}
-{%- else -%}{%- assign sport_art = "soccer" -%}{%- assign sport_style = "--pg-acc:#3F7D2A" -%}{%- assign sport_color = "color:#0A2342" -%}{%- endif -%}
+{%- comment -%}Sets the drawing, colors and gallery color class for a sport card, from the Drawing picked in Pages CMS.{%- endcomment -%}
+{%- assign _p = include.pic | default: "" | downcase | strip -%}
+{%- if _p == "basketball" -%}{%- assign sport_art = "wheel" -%}{%- assign sport_style = "--pg-acc:#0287B0" -%}{%- assign sport_color = "color:#0A2342" -%}{%- assign sport_slug = "basketball" -%}
+{%- elsif _p == "baseball" -%}{%- assign sport_art = "base" -%}{%- assign sport_style = "--pg-flag:#0287B0" -%}{%- assign sport_color = "color:#3F7D2A" -%}{%- assign sport_slug = "baseball" -%}
+{%- elsif _p == "flag football" -%}{%- assign sport_art = "flag" -%}{%- assign sport_style = "--pg-acc:#3F7D2A;--pg-flag:#0287B0" -%}{%- assign sport_color = "color:#0A2342" -%}{%- assign sport_slug = "flag" -%}
+{%- elsif _p == "buddies" -%}{%- assign sport_art = "buddy" -%}{%- assign sport_style = "--pg-buddy:#0287B0" -%}{%- assign sport_color = "color:#0A2342" -%}{%- assign sport_slug = "buddies" -%}
+{%- elsif _p == "cheering kids" -%}{%- assign sport_art = "cheer" -%}{%- assign sport_style = "--pg-acc:#3F7D2A" -%}{%- assign sport_color = "color:#0A2342" -%}{%- assign sport_slug = "gameday" -%}
+{%- else -%}{%- assign sport_art = "soccer" -%}{%- assign sport_style = "--pg-acc:#3F7D2A" -%}{%- assign sport_color = "color:#0A2342" -%}{%- assign sport_slug = "soccer" -%}{%- endif -%}

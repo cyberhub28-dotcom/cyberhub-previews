@@ -39,7 +39,7 @@
         if (!ok) missing.push(el);
       });
       if (missing.length){
-        err.textContent = missing.length === 1 ? 'One thing is missing. Please check the highlighted field.' : missing.length + ' things are missing. Please check the highlighted fields.';
+        err.textContent = missing.length === 1 ? (f.getAttribute('data-missing-one') || 'One thing is missing. Please check the highlighted field.') : (f.getAttribute('data-missing-many') || '{count} things are missing. Please check the highlighted fields.').replace('{count}', missing.length);
         err.hidden = false; done.hidden = true; missing[0].focus(); return;
       }
       err.hidden = true;
@@ -64,9 +64,10 @@
   if (copyBtn){
     copyBtn.addEventListener('click', function(){
       var el = document.getElementById('club-email');
-      function fallback(){ var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'Selected'; }
-      try { navigator.clipboard.writeText(el.textContent).then(function(){ copyBtn.textContent = 'Copied'; }, fallback); } catch(e){ fallback(); }
-      setTimeout(function(){ copyBtn.textContent = 'Copy'; }, 2200);
+      var copyTxt = copyBtn.textContent, copiedTxt = copyBtn.getAttribute('data-copied') || 'Copied', selectedTxt = copyBtn.getAttribute('data-selected') || 'Selected';
+      function fallback(){ var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = selectedTxt; }
+      try { navigator.clipboard.writeText(el.textContent).then(function(){ copyBtn.textContent = copiedTxt; }, fallback); } catch(e){ fallback(); }
+      setTimeout(function(){ copyBtn.textContent = copyTxt; }, 2200);
     });
   }
 
@@ -85,13 +86,13 @@
     var days = Math.round((open - today) / 86400000);
     if (today < open){
       num.textContent = days;
-      num.insertAdjacentHTML('beforeend', days === 1 ? '<small>day</small>' : '<small>days</small>');
-      txt.textContent = days === 1 ? before + ' tomorrow, ' + openTxt : before + ' ' + openTxt;
+      var small = document.createElement('small'); small.textContent = days === 1 ? (rc.getAttribute('data-day') || 'day') : (rc.getAttribute('data-days') || 'days'); num.appendChild(small);
+      txt.textContent = days === 1 ? before + ' ' + (rc.getAttribute('data-tomorrow') || 'tomorrow,') + ' ' + openTxt : before + ' ' + openTxt;
       num.hidden = false;
     } else if (now < close){
       num.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       num.hidden = false;
-      txt.textContent = openNow + ', until ' + lastTxt + (spots ? ' or all ' + spots + ' spots are filled' : '');
+      txt.textContent = openNow;
     } else {
       txt.textContent = closedTxt;
     }
@@ -126,7 +127,8 @@
         if (det.length){ var ul = el('ul'); det.forEach(function(t){ ul.appendChild(el('li', null, t)); }); body.appendChild(ul); }
         if (e.note) body.appendChild(el('p', 'muted', e.note));
         if (/^https:\/\/[^\s"<>]+$/.test(e.link || '')){
-          var btns = el('div', 'btns'), a = el('a', 'btn btn-navy', e.button || 'Details');
+          var btns = el('div', 'btns'), a = el('a', 'btn btn-navy', e.button || evList.getAttribute('data-details') || 'Details');
+
           a.href = e.link; a.target = '_blank'; a.rel = 'noopener';
           var arr = el('span', 'arr', ' ↗'); arr.setAttribute('aria-hidden', 'true'); a.appendChild(arr);
           btns.appendChild(a); body.appendChild(btns);
