@@ -1,7 +1,7 @@
 ---
 name: Practice Hockey
 status: Opening soon
-signups_open: 2026-11-15
+signups_open: 2026-12-01
 signups_close: 2026-12-10
 first_day: 2027-01-09
 last_day: 2027-02-13
