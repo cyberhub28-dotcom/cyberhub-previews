@@ -63,11 +63,10 @@ content:
     - name: team_tag
       label: 'Team drawing: tag'
       type: string
-      description: The small tag on the drawing of the team.
+      description: 'The small tag on the drawing of the team. Under this, Scrolling words along the bottom: The sport names scroll first on their own. Add more words here, one per line.'
     - name: ticker
       label: Scrolling words along the bottom
       type: string
-      description: The sport names scroll first on their own. Add more words here, one per line.
       list: true
   - name: story
     label: 2. Why we started (Amber's quote)
@@ -204,10 +203,10 @@ content:
     - name: intro
       label: Line under the heading
       type: text
+      description: 'Under this, Events: Tap Add an item for a new event. Drag to change the order.'
     - name: list
       label: Events
       type: object
-      description: Tap Add an item for a new event. Drag to change the order.
       fields:
       - name: title
         label: Event name
@@ -226,10 +225,10 @@ content:
       - name: place
         label: Where
         type: string
+        description: 'Under this, What to expect: One line each.'
       - name: details
         label: What to expect
         type: string
-        description: One line each.
         list: true
       - name: note
         label: Small print
@@ -280,11 +279,10 @@ content:
     - name: button
       label: Button under the heading
       type: string
-      description: It opens Contact.
+      description: 'It opens Contact. Under this, More questions: Tap Add an item for a new question. Drag to change the order.'
     - name: questions
       label: More questions
       type: object
-      description: Tap Add an item for a new question. Drag to change the order.
       fields:
       - name: question
         label: Question
@@ -379,10 +377,10 @@ content:
     - name: heading
       label: Heading
       type: string
+      description: 'Under this, Steps: Drag to change the order.'
     - name: list
       label: Steps
       type: object
-      description: Drag to change the order.
       fields:
       - name: title
         label: Step title
@@ -862,10 +860,10 @@ content:
       label: photos_word
       type: string
       hidden: true
+      description: 'Under this, Groups: Tap Add an item for a new group. Drag to change the order.'
     - name: groups
       label: Groups
       type: object
-      description: Tap Add an item for a new group. Drag to change the order.
       fields:
       - name: name
         label: Group name
@@ -875,7 +873,7 @@ content:
       - name: picture
         label: Drawing and colors
         type: select
-        description: The drawing on its card.
+        description: 'The drawing on its card. Under this, Photos: Add as many as you like. Drag to change the order. Only add photos of children after a parent or guardian signs the photo release.'
         required: true
         default: Cheering kids
         options:
@@ -889,7 +887,6 @@ content:
       - name: photos
         label: Photos
         type: object
-        description: Add as many as you like. Drag to change the order. Only add photos of children after a parent or guardian signs the photo release.
         fields:
         - name: photo
           label: Photo
@@ -992,10 +989,10 @@ content:
     - name: heading
       label: Heading
       type: string
+      description: 'Under this, Levels: Drag to change the order.'
     - name: list
       label: Levels
       type: object
-      description: Drag to change the order.
       fields:
       - name: amount
         label: Amount
@@ -1010,10 +1007,10 @@ content:
       - name: text
         label: Description
         type: text
+        description: 'Under this, What sponsors get: One line each.'
       - name: perks
         label: What sponsors get
         type: string
-        description: One line each.
         list: true
       - name: stand_out
         label: Make this level stand out
@@ -1075,10 +1072,10 @@ content:
     - name: topic_label
       label: Topic box label
       type: string
+      description: 'Under this, Topic choices: One per line. Open sports are added after the first choice on their own.'
     - name: topics
       label: Topic choices
       type: string
-      description: One per line. Open sports are added after the first choice on their own.
       list: true
     - name: message_label
       label: Message box label
@@ -1279,7 +1276,7 @@ content:
   - name: club
     label: 3. Club details
     type: object
-    description: 'Used across the site: Contact page, footer, buttons.'
+    description: 'Used across the site: Contact page, footer, buttons. Under this, 4. Club values: The four words in a strip on Home and Our Story. One per line.'
     fields:
     - name: email
       label: Club email
@@ -1316,7 +1313,6 @@ content:
   - name: values
     label: 4. Club values
     type: string
-    description: The four words in a strip on Home and Our Story. One per line.
     list: true
   - name: not_found
     label: 5. Page not found (rarely needed)
