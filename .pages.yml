@@ -51,10 +51,10 @@ content:
     - name: team_tag
       label: Card tag
       type: string
+      description: 'Scrolling words (just below): The words that slide across the bottom of the top section. One per line.'
     - name: ticker
       label: Scrolling words
       type: string
-      description: The words that slide across the bottom of the top section. One per line.
       list: true
   - name: story
     label: Story section
@@ -405,7 +405,7 @@ content:
   - name: soon_tag
     label: '"Coming later" tag words'
     type: string
-    description: The small tag on sports that aren't open yet.
+    description: 'The small tag on sports that aren''t open yet. Sports (just below): Add, edit, remove or drag to reorder. The sport set to This season gets the big card on the Home and Programs pages. Coming later sports show as smaller cards. Hidden ones stay saved but don''t show.'
   - name: sports
     label: Sports
     type: object
@@ -413,7 +413,6 @@ content:
       collapsible:
         collapsed: true
         summary: '{name} ({status})'
-    description: Add, edit, remove or drag to reorder. The sport set to This season gets the big card on the Home and Programs pages. Coming later sports show as smaller cards. Hidden ones stay saved but don't show.
     fields:
     - name: name
       label: Sport name
@@ -760,6 +759,7 @@ content:
   - name: photos_word
     label: Word after the count for more photos
     type: string
+    description: 'Photo groups (just below): Each group is one card on the Gallery page, like a sport, Buddies or Game Day. Add, remove or drag to reorder. The first group that has photos gets the big card on top. Only add photos of children after a parent or guardian signs the photo release.'
   - name: groups
     label: Photo groups
     type: object
@@ -767,7 +767,6 @@ content:
       collapsible:
         collapsed: true
         summary: '{name}'
-    description: Each group is one card on the Gallery page, like a sport, Buddies or Game Day. Add, remove or drag to reorder. The first group that has photos gets the big card on top. Only add photos of children after a parent or guardian signs the photo release.
     fields:
     - name: name
       label: Group name
@@ -778,7 +777,7 @@ content:
       type: select
       required: true
       default: Cheering kids
-      description: Which drawing and colors the card uses.
+      description: 'Which drawing and colors the card uses. Photos (just below): Add as many as you like. Drag to change the order they open in.'
       options:
         values:
         - Soccer
@@ -794,7 +793,6 @@ content:
         collapsible:
           collapsed: true
           summary: '{description}'
-      description: Add as many as you like. Drag to change the order they open in.
       fields:
       - name: photo
         label: Photo
@@ -869,10 +867,10 @@ content:
   - name: levels_heading
     label: 'Levels: heading'
     type: string
+    description: 'Sponsorship levels (just below): Drag to reorder.'
   - name: levels
     label: Sponsorship levels
     type: object
-    description: Drag to reorder.
     list:
       collapsible:
         collapsed: true
@@ -890,10 +888,10 @@ content:
     - name: text
       label: Description
       type: text
+      description: 'What sponsors get (just below): One line each.'
     - name: perks
       label: What sponsors get
       type: string
-      description: One line each.
       list: true
     - name: stand_out
       label: Make this level stand out
@@ -929,11 +927,10 @@ content:
   - name: intro
     label: Intro line
     type: text
-    description: The club email and contact name are under Club details.
+    description: 'The club email and contact name are under Club details. Topic choices on the form (just below): One per line. The first one is picked to start.'
   - name: topics
     label: Topic choices on the form
     type: string
-    description: One per line. The first one is picked to start.
     list: true
   - name: form
     label: Form words
@@ -1068,9 +1065,9 @@ content:
   - name: place
     label: Where
     type: string
+    description: 'What to expect (just below): One short line each.'
   - name: details
     label: What to expect
-    description: One short line each.
     type: string
     list: true
   - name: note
@@ -1212,7 +1209,7 @@ content:
   - name: footer
     label: Footer at the bottom
     type: object
-    description: The sentence under the logo is under Club details and links.
+    description: 'The sentence under the logo is under Club details and links. Club values (just below): The four values with icons, on the Home and Our story pages. Keep it to four.'
     fields:
     - name: explore_heading
       label: First column heading
@@ -1257,7 +1254,6 @@ content:
   - name: values
     label: Club values
     type: string
-    description: The four values with icons, on the Home and Our story pages. Keep it to four.
     list: true
   - name: not_found
     label: Page not found
