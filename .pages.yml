@@ -524,6 +524,24 @@ content:
       - Coming later
       - Season over
       - Hidden
+  - name: line
+    label: Short line on its small card
+    type: string
+    description: 'One short line, for example: Dribble, pass and shoot. Shown on the Home page sports cards and the Coming later cards.'
+  - name: picture
+    label: Drawing and colors
+    type: select
+    description: The drawing on its cards. For a sport with no drawing of its own, pick Cheering kids.
+    required: true
+    default: Cheering kids
+    options:
+      values:
+      - Soccer
+      - Basketball
+      - Baseball
+      - Flag football
+      - Buddies
+      - Cheering kids
   - name: season_name
     label: Season name (the big title of its box)
     type: string
@@ -623,24 +641,6 @@ content:
     pattern:
       regex: ^(https://\S+)?$
       message: Paste the full link, starting with https://, or leave it empty
-  - name: line
-    label: Short line on its small card
-    type: string
-    description: 'One short line, for example: Dribble, pass and shoot. Shown on the Home page sports cards and the Coming later cards.'
-  - name: picture
-    label: Drawing and colors
-    type: select
-    description: The drawing on its cards. For a sport with no drawing of its own, pick Cheering kids.
-    required: true
-    default: Cheering kids
-    options:
-      values:
-      - Soccer
-      - Basketball
-      - Baseball
-      - Flag football
-      - Buddies
-      - Cheering kids
 - name: aasc-about
   label: Our Story
   type: file

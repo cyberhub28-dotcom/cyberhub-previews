@@ -1,20 +1,20 @@
 ---
 name: Basketball
 status: Coming later
-season_name: ''
 line: Dribble, pass and shoot.
-description: ''
 picture: Basketball
+season_name: ''
+description: ''
 photo: ''
-day: ''
-times: ''
 signups_open: ''
 signups_close: ''
 first_day: ''
 last_day: ''
+day: ''
 sessions: ''
-ages: ''
+times: ''
 where: ''
+ages: ''
 fee: ''
 spots: ''
 how_to_pay: ''

@@ -1,20 +1,20 @@
 ---
 name: Flag football
 status: Coming later
-season_name: ''
 line: Flag-style fun and teamwork.
-description: ''
 picture: Flag football
+season_name: ''
+description: ''
 photo: ''
-day: ''
-times: ''
 signups_open: ''
 signups_close: ''
 first_day: ''
 last_day: ''
+day: ''
 sessions: ''
-ages: ''
+times: ''
 where: ''
+ages: ''
 fee: ''
 spots: ''
 how_to_pay: ''

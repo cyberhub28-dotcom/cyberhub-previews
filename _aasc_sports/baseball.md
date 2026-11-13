@@ -1,20 +1,20 @@
 ---
 name: Baseball
 status: Coming later
-season_name: ''
 line: Hit, run the bases, cheer.
-description: ''
 picture: Baseball
+season_name: ''
+description: ''
 photo: ''
-day: ''
-times: ''
 signups_open: ''
 signups_close: ''
 first_day: ''
 last_day: ''
+day: ''
 sessions: ''
-ages: ''
+times: ''
 where: ''
+ages: ''
 fee: ''
 spots: ''
 how_to_pay: ''
