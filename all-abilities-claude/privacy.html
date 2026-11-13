@@ -40,13 +40,13 @@
 
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
-    <div class="wrap"><p class="kicker">{{ p.kicker | escape }}</p><h1>{{ p.headline | escape }}</h1></div>
+    <div class="wrap"><p class="kicker">{{ p.top.kicker | escape }}</p><h1>{{ p.top.headline | escape }}</h1></div>
   </section>
   <section class="sec">
     <div class="wrap prose">
-      {{ p.body }}
-      <p class="muted">{{ p.updated_label | escape }} {{
- p.last_updated | date: "%B %-d, %Y" }}</p>
+      {% include aasc/rich.html text=p.body %}
+      <p class="muted">{{ p.updated.label | escape }} {{
+ p.updated.date | date: "%B %-d, %Y" }}</p>
     </div>
   </section>
 </main>

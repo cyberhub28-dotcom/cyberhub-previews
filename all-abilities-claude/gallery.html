@@ -41,9 +41,9 @@
 <main id="main" tabindex="-1">
   <section class="page-hero gal-hero on-navy">
     <div class="wrap">
-      <p class="kicker">{{ p.kicker | escape }}</p>
-      <h1>{{ p.headline | escape }}</h1>
-      <p class="sub">{{ p.intro | escape }}</p>
+      <p class="kicker">{{ p.top.kicker | escape }}</p>
+      <h1>{{ p.top.headline | escape }}</h1>
+      <p class="sub">{{ p.top.intro | escape }}</p>
     </div>
   </section>
   <section class="sec gal-sec">
@@ -54,19 +54,19 @@
 {%- endcomment -%}
 {%- assign season_name = main.name | default: "" | downcase | strip -%}
 {%- assign total = 0 -%}{%- assign big_i = -1 -%}{%- assign gn = 0 -%}
-{%- for g in p.groups -%}{%- assign gn = gn | plus: 1 -%}{%- assign cnt = 0 -%}{%- for x in g.photos -%}{%- if x.photo and x.photo != "" -%}{%- assign cnt = cnt | plus: 1 -%}{%- endif -%}{%- endfor -%}{%- assign total = total | plus: cnt -%}{%- if big_i == -1 and cnt > 0 -%}{%- assign big_i = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+{%- for g in p.album.groups -%}{%- assign gn = gn | plus: 1 -%}{%- assign cnt = 0 -%}{%- for x in g.photos -%}{%- if x.photo and x.photo != "" -%}{%- assign cnt = cnt | plus: 1 -%}{%- endif -%}{%- endfor -%}{%- assign total = total | plus: cnt -%}{%- if big_i == -1 and cnt > 0 -%}{%- assign big_i = forloop.index0 -%}{%- endif -%}{%- endfor -%}
 {%- assign small_n = gn -%}{%- if big_i != -1 -%}{%- assign small_n = gn | minus: 1 -%}{%- endif -%}
 {%- assign m3 = small_n | modulo: 3 -%}{%- if small_n <= 5 -%}{%- assign cols = small_n -%}{%- if cols < 2 -%}{%- assign cols = 2 -%}{%- endif -%}{%- elsif m3 == 0 -%}{%- assign cols = 3 -%}{%- else -%}{%- assign cols = 4 -%}{%- endif -%}
 {%- assign odd = small_n | modulo: 2 -%}
 {%- assign order = "" | split: "" -%}{%- if big_i != -1 -%}{%- assign order = order | push: big_i -%}{%- endif -%}
-{%- for g in p.groups -%}{%- if forloop.index0 != big_i -%}{%- assign order = order | push: forloop.index0 -%}{%- endif -%}{%- endfor %}
+{%- for g in p.album.groups -%}{%- if forloop.index0 != big_i -%}{%- assign order = order | push: forloop.index0 -%}{%- endif -%}{%- endfor %}
       <div class="gal-head">
-        <h2>{{ p.pick_heading | escape }}</h2>
-        <p>{% if total > 0 %}{{ p.has_photos_line | escape }}{% else %}{{ p.no_photos_line | escape }}{% endif %}</p>
+        <h2>{{ p.album.heading | escape }}</h2>
+        <p>{% if total > 0 %}{{ p.album.has_photos_line | escape }}{% else %}{{ p.album.no_photos_line | escape }}{% endif %}</p>
       </div>
-      <ul class="gallery{% if odd == 1 %} gal-odd{% endif %}" style="--gal-cols:{{ cols }}" aria-label="{{ p.pick_heading | escape }}">
+      <ul class="gallery{% if odd == 1 %} gal-odd{% endif %}" style="--gal-cols:{{ cols }}" aria-label="{{ p.album.heading | escape }}">
 {%- for k in order -%}
-{%- assign g = p.groups[k] -%}
+{%- assign g = p.album.groups[k] -%}
 {%- assign name = g.name | escape -%}
 {%- assign set = "" | split: "" -%}
 {%- for x in g.photos -%}{%- if x.photo and x.photo != "" -%}{%- assign set = set | push: x -%}{%- endif -%}{%- endfor -%}
@@ -76,10 +76,10 @@
 {%- assign gname = g.name | default: "" | downcase | strip %}
         <li class="sp sp-{{ sport_slug }}{% if big %} sp-feature{% endif %}">
 {%- if set.size > 0 %}
-          <button type="button" class="sp-card has-photos" aria-haspopup="dialog" data-sport="{{ name }}">{{ art }}<span class="sp-text">{% if big and gname == season_name %}<span class="sp-kick">{{ p.season_tag | escape }}</span>{% endif %}<span class="sp-name">{{ name }}</span><span class="sp-pill">{{ set.size }} {% if set.size == 1 %}{{ p.photo_word | default: "photo" | escape }}{% else %}{{ p.photos_word | default: "photos" | escape }}{% endif %}<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></button>
+          <button type="button" class="sp-card has-photos" aria-haspopup="dialog" data-sport="{{ name }}">{{ art }}<span class="sp-text">{% if big and gname == season_name %}<span class="sp-kick">{{ p.album.season_tag | escape }}</span>{% endif %}<span class="sp-name">{{ name }}</span><span class="sp-pill">{{ set.size }} {% if set.size == 1 %}{{ p.album.photo_word | default: "photo" | escape }}{% else %}{{ p.album.photos_word | default: "photos" | escape }}{% endif %}<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></button>
           <span class="sp-set" hidden>{% for x in set %}<span data-src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" data-alt="{{ x.description | escape }}" data-cap="{{ x.caption | escape }}"></span>{% endfor %}</span>
 {%- else %}
-          <div class="sp-card no-photos">{{ art }}<span class="sp-text"><span class="sp-name">{{ name }}</span><span class="sp-status">{{ p.coming_soon | escape }}</span></span></div>
+          <div class="sp-card no-photos">{{ art }}<span class="sp-text"><span class="sp-name">{{ name }}</span><span class="sp-status">{{ p.album.coming_soon | escape }}</span></span></div>
 {%- endif %}
         </li>
 {%- endfor %}

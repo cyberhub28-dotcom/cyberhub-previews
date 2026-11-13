@@ -1,0 +1,14 @@
+{%- comment -%}
+Prints a rich-text box from Pages CMS. Any "To confirm: ..." in it gets the yellow tag,
+up to the end of that line of text (a trailing full stop stays outside the tag).
+The editor's rich-text box drops the tag's styling when it saves, so the site adds it here.
+{%- endcomment -%}
+{%- assign _rt_parts = include.text | markdownify | split: "To confirm:" -%}
+{%- for _rp in _rt_parts -%}
+{%- if forloop.first -%}{{ _rp }}{%- else -%}
+{%- assign _rc = _rp | split: "<" | first | default: "" -%}{%- assign _rest = _rp | remove_first: _rc -%}
+{%- assign _rl = _rc | size | minus: 1 -%}{%- assign _last = _rc | slice: _rl -%}
+{%- if _last == "." -%}{%- assign _rc = _rc | slice: 0, _rl -%}{%- assign _rest = "." | append: _rest -%}{%- endif -%}
+<span class="ph">To confirm:{{ _rc }}</span>{{ _rest }}
+{%- endif -%}
+{%- endfor -%}

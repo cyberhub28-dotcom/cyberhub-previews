@@ -1,111 +1,25 @@
-# All Abilities Sports Club preview: Programs page. Edited in Pages CMS.
-kicker: Programs
-headline: Winter Indoor Soccer is first.
-intro: Six Sundays. Forty-eight athletes. Every ability welcome on the field.
-sports:
-- name: Soccer
-  status: Opening soon
-  season_name: Winter Indoor Soccer
-  line: Run, kick and score together.
-  description: Kids run, kick and score together at their own pace. No experience needed. Families in the Dayton, Ohio area are welcome.
-  picture: Soccer
-  photo: ''
-  day: Sunday
-  times: ''
-  signups_open: '2026-11-20'
-  signups_close: '2026-12-18'
-  first_day: '2027-01-10'
-  last_day: '2027-02-14'
-  sessions: 6
-  ages: From age 3
-  where: Dayton Functional Fitness in Beavercreek, Ohio
-  fee: $30
-  spots: 48
-  how_to_pay: ''
-  button: Register for winter soccer
-  signup_link: ''
-  payment_link: ''
-- name: Basketball
-  status: Coming later
-  season_name: ''
-  line: Dribble, pass and shoot.
-  description: ''
-  picture: Basketball
-  photo: ''
-  day: ''
-  times: ''
-  signups_open: ''
-  signups_close: ''
-  first_day: ''
-  last_day: ''
-  sessions: ''
-  ages: ''
-  where: ''
-  fee: ''
-  spots: ''
-  how_to_pay: ''
-  button: ''
-  signup_link: ''
-  payment_link: ''
-- name: Baseball
-  status: Coming later
-  season_name: ''
-  line: Hit, run the bases, cheer.
-  description: ''
-  picture: Baseball
-  photo: ''
-  day: ''
-  times: ''
-  signups_open: ''
-  signups_close: ''
-  first_day: ''
-  last_day: ''
-  sessions: ''
-  ages: ''
-  where: ''
-  fee: ''
-  spots: ''
-  how_to_pay: ''
-  button: ''
-  signup_link: ''
-  payment_link: ''
-- name: Flag football
-  status: Coming later
-  season_name: ''
-  line: Flag-style fun and teamwork.
-  description: ''
-  picture: Flag football
-  photo: ''
-  day: ''
-  times: ''
-  signups_open: ''
-  signups_close: ''
-  first_day: ''
-  last_day: ''
-  sessions: ''
-  ages: ''
-  where: ''
-  fee: ''
-  spots: ''
-  how_to_pay: ''
-  button: ''
-  signup_link: ''
-  payment_link: ''
-steps_heading: How to join
+top:
+  kicker: Programs
+  headline: Pick a sport. Come play.
+  intro: Every ability is welcome. Dates, places and fees for each sport are below.
 steps:
-- title: Pick a sport
-  text: Check the dates, place and fee for each sport.
-- title: Fill in the form
-  text: A parent or guardian registers each athlete.
-- title: Pay the fee
-  text: The club will share how to pay when sign-ups open.
-- title: Come play
-  text: See you at the first session.
-button: Go to sign-up
-later_kicker: Coming later
-later_heading: More sports are on the way.
-later_intro: These aren't open for sign-ups yet. Dates and fees will be posted when the club is ready.
-over_heading: Past seasons
+  heading: How to join
+  list:
+  - title: Pick a sport
+    text: Check the dates, place and fee for each sport.
+  - title: Fill in the form
+    text: A parent or guardian registers each athlete.
+  - title: Pay the fee
+    text: The club will share how to pay when sign-ups open.
+  - title: Come play
+    text: See you at the first session.
+  button: Go to sign-up
+later:
+  kicker: Coming later
+  heading: More sports are on the way.
+  intro: These aren't open for sign-ups yet. Dates and fees will be posted when the club is ready.
+over:
+  heading: Past seasons
 words:
   open: Sign-ups open now
   soon: Sign-ups open
@@ -121,6 +35,7 @@ words:
   spots: Spots
   pay: How to pay
   register: Register
+  sessions: Sessions
 page:
   tab_title: Programs | All Abilities Sports Club
-  description: 'Winter Indoor Soccer: six Sundays, January 10 to February 14, 2027. $30 per athlete, 48 spots. Basketball, baseball and flag football to follow.'
+  description: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. Dates, places and fees for each sport.

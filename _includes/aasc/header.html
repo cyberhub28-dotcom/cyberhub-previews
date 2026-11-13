@@ -13,7 +13,7 @@
         <li><a href="gallery.html"{% if include.current == "gallery" %} aria-current="page"{% endif %}>{{ m.gallery | escape }}</a></li>
         <li><a href="donate.html"{% if include.current == "donate" %} aria-current="page"{% endif %}>{{ m.donate | escape }}</a></li>
         <li><a href="contact.html"{% if include.current == "contact" %} aria-current="page"{% endif %}>{{ m.contact | escape }}</a></li>
-        <li class="nav-cta"><a href="get-involved.html">{{ m.menu_register | default: "Register" | escape }}</a></li>
+        <li class="nav-cta"><a href="get-involved.html">{{ register_words | escape }}</a></li>
       </ul>
     </nav>
     <a class="btn btn-sage btn-sm" href="get-involved.html">{{ m.register | escape }}</a>

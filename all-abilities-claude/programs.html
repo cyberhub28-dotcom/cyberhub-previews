@@ -41,9 +41,9 @@
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
     <div class="wrap">
-      <p class="kicker">{{ p.kicker | escape }}</p>
-      <h1>{{ p.headline | escape }}</h1>
-      <p class="sub">{{ p.intro | escape }}</p>
+      <p class="kicker">{{ p.top.kicker | escape }}</p>
+      <h1>{{ p.top.headline | escape }}</h1>
+      <p class="sub">{{ p.top.intro | escape }}</p>
     </div>
   </section>
   <section class="sec">
@@ -73,24 +73,24 @@
         </article>
 {%- endfor %}
 {%- if active_sports.size == 0 %}
-        <div class="panel"><h2>{{ p.later_heading | escape }}</h2><p class="muted">{{ p.later_intro | escape }}</p></div>
+        <div class="panel"><h2>{{ p.later.heading | escape }}</h2><p class="muted">{{ p.later.intro | escape }}</p></div>
 {%- endif %}
       </div>
       <div class="panel soft">
-        <h2>{{ p.steps_heading | escape }}</h2>
+        <h2>{{ p.steps.heading | escape }}</h2>
         <ol class="steps">
-{%- for step in p.steps %}
+{%- for step in p.steps.list %}
           <li><div><strong>{{ step.title | escape }}</strong><span>{{ step.text | escape }}</span></div></li>
 {%- endfor %}
         </ol>
-        <div class="btns"><a class="btn btn-navy" href="get-involved.html">{{ p.button | escape }}</a></div>
+        <div class="btns"><a class="btn btn-navy" href="get-involved.html">{{ p.steps.button | escape }}</a></div>
       </div>
     </div>
   </section>
 {%- if later_sports.size > 0 %}
   <section class="sec" style="padding-top:0">
     <div class="wrap">
-      <div class="sec-head"><p class="kicker">{{ p.later_kicker | escape }}</p><h2>{{ p.later_heading | escape }}</h2><p>{{ p.later_intro | escape }}</p></div>
+      <div class="sec-head"><p class="kicker">{{ p.later.kicker | escape }}</p><h2>{{ p.later.heading | escape }}</h2><p>{{ p.later.intro | escape }}</p></div>
       <div class="later">
 {%- for x in later_sports %}
 {%- include aasc/sport-style.html pic=x.picture %}
@@ -103,7 +103,7 @@
 {%- if over_sports.size > 0 %}
   <section class="sec" style="padding-top:0">
     <div class="wrap">
-      <div class="sec-head"><h2>{{ p.over_heading | default: "Past seasons" | escape }}</h2></div>
+      <div class="sec-head"><h2>{{ p.over.heading | default: "Past seasons" | escape }}</h2></div>
       <div class="later">
 {%- for x in over_sports %}
 {%- include aasc/sport-info.html x=x %}{%- include aasc/sport-style.html pic=x.picture %}

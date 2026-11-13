@@ -41,34 +41,34 @@
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
     <div class="wrap">
-      <p class="kicker">{{ p.kicker | escape }}</p>
-      <h1>{{ p.headline | escape }}</h1>
-      <p class="sub">{{ p.intro | escape }}</p>
+      <p class="kicker">{{ p.top.kicker | escape }}</p>
+      <h1>{{ p.top.headline | escape }}</h1>
+      <p class="sub">{{ p.top.intro | escape }}</p>
     </div>
   </section>
   <section class="sec">
     <div class="wrap two">
       <div class="panel">
-        <h2 class="big">{{ p.gift_heading | escape }}</h2>
-        <p class="muted">{{ p.gift_text | escape }}</p>
+        <h2 class="big">{{ p.gift.heading | escape }}</h2>
+        <p class="muted">{{ p.gift.text | escape }}</p>
         <div class="btns">
-          <a class="btn btn-navy" href="{{ c.donate_link | escape }}" target="_blank" rel="noopener" aria-describedby="zeffy-note">{{ p.donate_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>
+          <a class="btn btn-navy" href="{{ c.donate_link | escape }}" target="_blank" rel="noopener" aria-describedby="zeffy-note">{{ p.gift.button | escape }} <span class="arr" aria-hidden="true">↗</span></a>
         </div>
-        <p id="zeffy-note" class="muted" style="font-size:var(--fs-sm)">{{ p.donate_button_note | escape }}</p>
-        <p class="muted" style="font-size:var(--fs-sm)">{{ p.tax_note | escape }}</p>
+        <p id="zeffy-note" class="muted" style="font-size:var(--fs-sm)">{{ p.gift.button_note | escape }}</p>
+        <p class="muted" style="font-size:var(--fs-sm)">{{ p.gift.tax_note | escape }}</p>
       </div>
       <div class="panel soft">
-        <h2>{{ p.sponsor_heading | escape }}</h2>
-        <p class="muted">{{ p.sponsor_text | escape }}</p>
-        <div class="btns"><a class="btn btn-navy" href="contact.html">{{ p.sponsor_button | escape }}</a></div>
+        <h2>{{ p.sponsor.heading | escape }}</h2>
+        <p class="muted">{{ p.sponsor.text | escape }}</p>
+        <div class="btns"><a class="btn btn-navy" href="contact.html">{{ p.sponsor.button | escape }}</a></div>
       </div>
     </div>
     <div class="wrap" style="margin-top:var(--sec-pad)">
-      <div class="sec-head"><p class="kicker">{{ p.levels_kicker | escape }}</p><h2>{{ p.levels_heading | escape }}</h2></div>
-      <div class="tiers">{% for l in p.levels %}
+      <div class="sec-head"><p class="kicker">{{ p.levels.kicker | escape }}</p><h2>{{ p.levels.heading | escape }}</h2></div>
+      <div class="tiers">{% for l in p.levels.list %}
         <article class="tier{% if l.stand_out %} top{% endif %}"><p class="amt">{{ l.amount | escape }}</p><h3>{{ l.name | escape }}</h3><p>{{ l.text | escape }}</p><ul>{% for k in l.perks %}<li>{{ k | escape }}</li>{% endfor %}</ul></article>{% endfor %}
       </div>
-      <p class="sports-note">{{ p.thanks_note | escape }}</p>
+      <p class="sports-note">{{ p.levels.thanks_note | escape }}</p>
     </div>
   </section>
 </main>

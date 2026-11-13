@@ -1,23 +1,22 @@
-# All Abilities Sports Club preview: Get Involved page. Edited in Pages CMS.
-kicker: Get involved
-headline: Grab a spot, or grab a whistle.
-intro: Athletes and helpers are both part of the team. No experience needed.
-choose_heading: How would you like to join?
-athlete_heading: Sign up an athlete
-athlete_text: A parent or guardian registers each athlete on the club's online form.
-none_open: No sports are open for sign-ups right now. Check back soon.
-register_button: Register now
-pay_button: Pay the fee
-volunteer_heading: Volunteer
-volunteer_text: Volunteers sign up on the club's volunteer form.
-volunteer_card: Coach, buddy or event-day helper
-volunteer_button: Volunteer now
+top:
+  kicker: Get involved
+  headline: Grab a spot, or grab a whistle.
+  intro: Athletes and helpers are both part of the team. No experience needed.
+join:
+  heading: How would you like to join?
+  athlete:
+    heading: Sign up an athlete
+    text: A parent or guardian registers each athlete on the club's online form.
+    register_button: Register now
+    pay_button: Pay the fee
+    none_open: No sports are open for sign-ups right now. Check back soon.
+  volunteer:
+    heading: Volunteer
+    text: Volunteers sign up on the club's volunteer form.
+    line: Coach, buddy or event-day helper
+    button: Volunteer now
 side:
-  signups_label: Sign-ups
-  sessions_label: Sessions
-  fee_label: Fee
-  spots_label: Spots
   note: Sign-ups close when all spots are filled, so early is best.
 page:
   tab_title: Get Involved | All Abilities Sports Club
-  description: Register an athlete for Winter Indoor Soccer or volunteer as a coach, buddy or event-day helper.
+  description: Register an athlete, or volunteer as a coach, buddy or event-day helper.
