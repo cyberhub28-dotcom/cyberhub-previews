@@ -15,8 +15,8 @@
   answer: <p>The club will post this before the season starts.</p>
   coming_soon: true
 - question: Where are sessions held?
-  answer: <p>The club will post this before the season starts.</p>
-  coming_soon: true
+  answer: <p>At Dayton Functional Fitness in Beavercreek, Ohio.</p>
+  coming_soon: false
 - question: What time are the Sunday sessions?
   answer: <p>The club will post this before the season starts.</p>
   coming_soon: true
