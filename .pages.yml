@@ -1349,7 +1349,7 @@ content:
     - name: tab_title
       label: Browser tab title
       type: string
-      description: The bold title of this box.
+      description: The words in the browser tab.
     - name: description
       label: Short summary for Google and sharing
       type: text
