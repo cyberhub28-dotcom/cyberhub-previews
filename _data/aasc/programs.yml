@@ -1,4 +1,4 @@
-# All Abilities Sports Club preview: programs. Edited in Pages CMS.
+# All Abilities Sports Club preview: Programs page. Edited in Pages CMS.
 kicker: Programs
 headline: Winter Indoor Soccer is first.
 intro: Six Sundays. Forty-eight athletes. Every ability welcome on the field.
@@ -33,6 +33,24 @@ button: Go to sign-up
 later_kicker: Coming later
 later_heading: More sports are on the way.
 later_intro: These aren't open for sign-ups yet. Dates and fees will be posted when the club is ready.
+soon_tag: Coming later
+sports:
+- name: Soccer
+  status: This season
+  picture: Soccer
+  line: Run, kick and score together.
+- name: Basketball
+  status: Coming later
+  picture: Basketball
+  line: Dribble, pass and shoot.
+- name: Baseball
+  status: Coming later
+  picture: Baseball
+  line: Hit, run the bases, cheer.
+- name: Flag football
+  status: Coming later
+  picture: Flag football
+  line: Flag-style fun and teamwork.
 page:
   tab_title: Programs | All Abilities Sports Club
   description: '{season}: {sessions in words} {days}, {first day} to {last day year}. {fee} per athlete, {spots} spots. Basketball, baseball and flag football to follow.'

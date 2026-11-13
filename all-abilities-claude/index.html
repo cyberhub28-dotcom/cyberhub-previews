@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.club -%}{%- assign s = site.data.aasc.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.home -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.sports -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.home -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.programs -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -195,7 +195,7 @@
         <p>{{ p.faq.intro | escape }}</p>
         <div class="btns"><a class="btn btn-navy" href="contact.html">{{ p.faq.button | escape }}</a></div>
       </div>
-      <div class="faq-list reveal">{% for q in site.data.aasc.faq %}
+      <div class="faq-list reveal">{% for q in site.data.aasc.home.faq.questions %}
         <details>
           <summary>{{ q.question | escape }}{% if q.coming_soon %}<span class="soon">{{ p.faq.soon_tag | escape }}</span>{% endif %}</summary>
           <div class="ans">{{ q.answer }}</div>

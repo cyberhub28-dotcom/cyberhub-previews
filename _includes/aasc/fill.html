@@ -2,7 +2,7 @@
 Fills in the {words in curly brackets} that can be used in editable sentences, from Current season.
 Use: {% include aasc/fill.html t=some.text %}  The text is escaped first, so it is always safe.
 {%- endcomment -%}
-{%- assign _s = site.data.aasc.season -%}{%- assign _d = _s.session_day | default: "Sunday" -%}{%- capture _ds -%}{{ _d }}s{%- endcapture -%}
+{%- assign _s = site.data.aasc.site.season -%}{%- assign _d = _s.session_day | default: "Sunday" -%}{%- capture _ds -%}{{ _d }}s{%- endcapture -%}
 {%- assign _nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign _n = _s.sundays | plus: 0 -%}{%- capture _w -%}{%- if _n <= 20 -%}{{ _nw[_n] }}{%- else -%}{{ _n }}{%- endif -%}{%- endcapture -%}{%- assign _W = _w | capitalize -%}
 {%- capture _fee -%}${{ _s.fee }}{%- endcapture -%}{%- capture _sp -%}{{ _s.spots }}{%- endcapture -%}{%- capture _ses -%}{{ _s.sundays }}{%- endcapture -%}{%- capture _ya -%}{{ _s.youngest_age }}{%- endcapture -%}{%- capture _oa -%}{{ _s.oldest_age }}{%- endcapture -%}
 {%- assign _o1 = _s.registration_opens | date: "%B %-d" -%}{%- assign _o2 = _s.registration_opens | date: "%B %-d, %Y" -%}{%- assign _o3 = _s.registration_opens | date: "%b %-d" -%}{%- assign _o4 = _s.registration_opens | date: "%b %-d, %Y" -%}

@@ -8,7 +8,7 @@ media:
   - image
 content:
 - name: aasc-home
-  label: Home page
+  label: Home
   type: file
   path: _data/aasc/home.yml
   format: yaml
@@ -31,7 +31,7 @@ content:
     - name: season_dates
       label: Small line above the headline (after the season name)
       type: string
-      description: 'Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in. For example: {days} from {first day short}'
+      description: 'Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in. For example: {days} from {first day short}'
     - name: text
       label: Intro paragraph
       type: text
@@ -43,7 +43,7 @@ content:
     - name: countdown_start
       label: Countdown line before it loads
       type: string
-      description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
     - name: team_name
       label: Card title
       type: string
@@ -91,7 +91,7 @@ content:
   - name: glance
     label: Season scoreboard
     type: object
-    description: The numbers and dates here come from Current season.
+    description: The numbers and dates here come from Whole site > Season.
     fields:
     - name: opens_label
       label: Opens label
@@ -108,18 +108,18 @@ content:
     - name: sessions_label
       label: Sessions label
       type: string
-      description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
     - name: note
       label: Line under the scoreboard
       type: text
-      description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
     - name: faq_button
       label: Parent questions button words
       type: string
   - name: lineup
     label: Sports section
     type: object
-    description: The sport cards come from Sports and Current season.
+    description: The sport cards come from the Sports list on Programs and Whole site > Season.
     fields:
     - name: kicker
       label: Small label above the heading
@@ -140,7 +140,7 @@ content:
     - name: season_line
       label: Line on the big card
       type: text
-      description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
     - name: note
       label: Note under the cards
       type: text
@@ -175,7 +175,7 @@ content:
   - name: events
     label: Events section
     type: object
-    description: The events themselves are under Upcoming events.
+    description: Add, edit or remove events in the Events list at the bottom of this section. Past events hide on their own the day after.
     fields:
     - name: kicker
       label: Small label above the heading
@@ -197,10 +197,55 @@ content:
       label: Event button words if none are set
       type: string
       description: Used when an event has a link but no button words.
+    - name: list
+      label: Events
+      type: object
+      list:
+        collapsible:
+          collapsed: true
+          summary: '{title} ({date})'
+      fields:
+      - name: title
+        label: Event name
+        type: string
+        required: true
+      - name: date
+        label: Date
+        description: Past events hide from the site on their own the day after.
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: time
+        label: Time
+        description: 'For example: 5 to 7 PM'
+        type: string
+      - name: place
+        label: Where
+        type: string
+        description: 'What to expect (just below): One short line each.'
+      - name: details
+        label: What to expect
+        type: string
+        list: true
+      - name: note
+        label: Small print
+        type: text
+      - name: button
+        label: Button words
+        description: 'For example: Details and tickets'
+        type: string
+      - name: link
+        label: Button link
+        description: Paste the full link, starting with https://. Leave empty for no button.
+        type: string
+        pattern:
+          regex: ^(https://\S+)?$
+          message: Paste the full link, starting with https://, or leave it empty
   - name: faq
     label: Parent questions section
     type: object
-    description: The questions themselves are under Parent questions.
+    description: Add, edit, remove or drag questions in the Questions list at the bottom of this section.
     fields:
     - name: kicker
       label: Small label above the heading
@@ -218,6 +263,28 @@ content:
       label: '"Coming soon" tag words'
       type: string
       description: The small tag on questions marked Coming soon.
+    - name: questions
+      label: Questions
+      type: object
+      list:
+        collapsible:
+          collapsed: true
+          summary: '{question}'
+      fields:
+      - name: question
+        label: Question
+        type: string
+        required: true
+      - name: answer
+        label: Answer
+        type: rich-text
+        required: true
+        options:
+          format: html
+          media: false
+      - name: coming_soon
+        label: Show a "Coming soon" tag
+        type: boolean
   - name: join
     label: Join the team section
     type: object
@@ -261,9 +328,9 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
 - name: aasc-programs
-  label: Programs page
+  label: Programs
   type: file
   path: _data/aasc/programs.yml
   format: yaml
@@ -280,15 +347,15 @@ content:
   - name: soccer_text
     label: Season description
     type: text
-    description: Under the season name. The season facts come from Current season.
+    description: Under the season name. The season facts come from Whole site > Season.
   - name: open_tag
     label: Tag on the season box
     type: string
-    description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
   - name: facts
     label: Season facts box
     type: object
-    description: Labels and lines in the season box. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in. The place, times and ages come from Current season.
+    description: Labels and lines in the season box. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in. The place, times and ages come from Whole site > Season.
     fields:
     - name: opens_label
       label: Opens label
@@ -341,7 +408,7 @@ content:
   - name: step1_title
     label: Step 1 title
     type: string
-    description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
   - name: step1_text
     label: Step 1 text
     type: text
@@ -355,53 +422,34 @@ content:
   - name: step3_title
     label: Step 3 title
     type: string
-    description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
   - name: step3_text
     label: Step 3 text until How to pay is filled in
     type: text
-    description: Once How to pay is filled in under Current season, that shows here instead.
+    description: Once How to pay is filled in under Whole site > Season, that shows here instead.
   - name: step4_title
     label: Step 4 title
     type: string
-    description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
   - name: step4_text
     label: Step 4 text
     type: text
-    description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
   - name: button
     label: Button words
     type: string
   - name: later_kicker
     label: 'Coming later: small label'
     type: string
-    description: The Coming later sports themselves are under Sports.
+    description: The Coming later sports themselves are in the Sports list at the bottom of this page.
   - name: later_heading
     label: 'Coming later: heading'
     type: string
-    description: The Coming later sports themselves are under Sports.
+    description: The Coming later sports themselves are in the Sports list at the bottom of this page.
   - name: later_intro
     label: Coming later intro
     type: text
-    description: The Coming later sports themselves are under Sports.
-  - name: page
-    label: Browser tab and Google
-    type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
-    fields:
-    - name: tab_title
-      label: Browser tab title
-      type: string
-      description: 'For example: Programs | All Abilities Sports Club'
-    - name: description
-      label: Short summary for Google and sharing
-      type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
-- name: aasc-sports
-  label: Sports (Programs and Home)
-  type: file
-  path: _data/aasc/sports.yml
-  format: yaml
-  fields:
+    description: The Coming later sports themselves are in the Sports list at the bottom of this page.
   - name: soon_tag
     label: '"Coming later" tag words'
     type: string
@@ -447,122 +495,21 @@ content:
       label: Short line
       type: string
       description: 'One short line, for example: Dribble, pass and shoot.'
-- name: aasc-season
-  label: Current season (dates, fee, spots)
-  type: file
-  path: _data/aasc/season.yml
-  format: yaml
-  fields:
-  - name: name
-    label: Season name
-    type: string
-    description: Shown all over the site, for example Winter Indoor Soccer or Spring Basketball. Pick which sport gets the big card under Sports.
-    required: true
-  - name: session_day
-    label: Day of the week
-    type: select
-    description: The day sessions happen. The site says "Sundays", "Saturdays" and so on from this.
-    required: true
-    options:
-      values:
-      - Sunday
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
-      - Saturday
-  - name: button
-    label: Big Register button words
-    type: string
-    description: 'For example: Register for winter soccer. All Register buttons go to the sign-up page.'
-  - name: menu_button
-    label: Menu Register words
-    type: string
-    description: 'The shorter Register words in the menu, for example: Register for soccer.'
-  - name: registration_opens
-    label: Registration opens
-    type: date
-    description: The home page countdown counts down to this day, then switches to "Registration is open now" on its own. These dates also update the scoreboard, schedule and sign-up page. Check Parent questions too, since those answers are written out by hand.
-    required: true
-    options:
-      format: yyyy-MM-dd
-  - name: registration_closes
-    label: Registration closes
-    type: date
-    required: true
-    options:
-      format: yyyy-MM-dd
-  - name: first_sunday
-    label: First session day
-    type: date
-    required: true
-    options:
-      format: yyyy-MM-dd
-  - name: last_sunday
-    label: Last session day
-    type: date
-    required: true
-    options:
-      format: yyyy-MM-dd
-  - name: sundays
-    label: Number of sessions
-    type: number
-    required: true
-  - name: spots
-    label: Number of spots
-    type: number
-    required: true
-  - name: fee
-    label: Fee per athlete, in dollars
-    type: number
-    description: Numbers only, like 30.
-    required: true
-  - name: youngest_age
-    label: Youngest age
-    type: number
-    required: true
-  - name: oldest_age
-    label: Oldest age
-    type: number
-    description: Leave empty if there is no top age yet.
-  - name: where
-    label: Where
-    type: string
-    description: The venue. Leave empty until it's set.
-  - name: session_times
-    label: Session times
-    type: string
-    description: 'For example: 1 to 2 PM'
-  - name: how_to_pay
-    label: How to pay
-    type: text
-    description: One or two sentences families see on the Programs page.
-  - name: countdown_before
-    label: Countdown words
-    type: string
-    description: Shown after the number of days, for example "8 days until registration opens November 20". The date fills in on its own.
-  - name: countdown_day
-    label: Countdown word for one day
-    type: string
-    description: 'Under the number when there is 1 day left, like: day'
-  - name: countdown_days
-    label: Countdown word for more days
-    type: string
-    description: 'Under the number, like: days'
-  - name: countdown_tomorrow
-    label: Countdown word for the last day
-    type: string
-    description: 'Shown the day before sign-ups open, like: tomorrow,'
-  - name: countdown_open
-    label: Countdown words once registration is open
-    type: string
-    description: 'Shown on the home page while sign-ups are open. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in. Fill-ins: {closes} {spots}'
-  - name: countdown_closed
-    label: Countdown words after registration closes
-    type: text
+  - name: page
+    label: Browser tab and Google
+    type: object
+    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    fields:
+    - name: tab_title
+      label: Browser tab title
+      type: string
+      description: 'For example: Programs | All Abilities Sports Club'
+    - name: description
+      label: Short summary for Google and sharing
+      type: text
+      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
 - name: aasc-about
-  label: Our Story page
+  label: Our Story
   type: file
   path: _data/aasc/about.yml
   format: yaml
@@ -627,9 +574,9 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
 - name: aasc-get-involved
-  label: Get Involved page
+  label: Get Involved
   type: file
   path: _data/aasc/get_involved.yml
   format: yaml
@@ -655,15 +602,15 @@ content:
   - name: opens_line
     label: Opens line in the athlete box
     type: string
-    description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
   - name: register_button
     label: Register button words
     type: string
-    description: The link is Registration link, under Club details and links.
+    description: The link is Registration link, under Whole site > Club details and links.
   - name: pay_button
     label: Pay button words
     type: string
-    description: Only shows when Payment link is filled in, under Club details and links.
+    description: Only shows when Payment link is filled in, under Whole site > Club details and links.
   - name: volunteer_heading
     label: Volunteer heading
     type: string
@@ -676,11 +623,11 @@ content:
   - name: volunteer_button
     label: Volunteer button words
     type: string
-    description: The link is Volunteer form link, under Club details and links.
+    description: The link is Volunteer form link, under Whole site > Club details and links.
   - name: side
     label: Season box on the right
     type: object
-    description: Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
     fields:
     - name: signups_label
       label: Sign-ups label
@@ -721,9 +668,9 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
 - name: aasc-gallery
-  label: Gallery page and photos
+  label: Gallery
   type: file
   path: _data/aasc/gallery.yml
   format: yaml
@@ -752,7 +699,7 @@ content:
   - name: season_tag
     label: Tag on the big card
     type: string
-    description: Shows on the big card when it is the sport set to This season under Sports.
+    description: Shows on the big card when it is the sport set to This season under Programs > Sports.
   - name: photo_word
     label: Word after the count for 1 photo
     type: string
@@ -819,9 +766,9 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
 - name: aasc-donate
-  label: Donate page
+  label: Donate
   type: file
   path: _data/aasc/donate.yml
   format: yaml
@@ -844,7 +791,7 @@ content:
   - name: donate_button
     label: Donate button words
     type: string
-    description: The link is Donate button link, under Club details and links.
+    description: The link is Donate button link, under Whole site > Club details and links.
   - name: donate_button_note
     label: Line under the Donate button
     type: string
@@ -911,9 +858,9 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
 - name: aasc-contact
-  label: Contact page
+  label: Contact
   type: file
   path: _data/aasc/contact.yml
   format: yaml
@@ -927,7 +874,7 @@ content:
   - name: intro
     label: Intro line
     type: text
-    description: 'The club email and contact name are under Club details. Topic choices on the form (just below): One per line. The first one is picked to start.'
+    description: 'The club email and contact name are under Whole site > Club details. Topic choices on the form (just below): One per line. The first one is picked to start.'
   - name: topics
     label: Topic choices on the form
     type: string
@@ -996,9 +943,9 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
+      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
 - name: aasc-privacy
-  label: Privacy page
+  label: Privacy
   type: file
   path: _data/aasc/privacy.yml
   format: yaml
@@ -1036,147 +983,188 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Current season, so leave the brackets in.
-- name: aasc-events
-  label: Upcoming events
-  type: file
-  path: all-abilities-claude/content/events.json
-  format: json
-  list:
-    collapsible:
-      collapsed: true
-      summary: '{title} ({date})'
-  fields:
-  - name: title
-    label: Event name
-    type: string
-    required: true
-  - name: date
-    label: Date
-    description: Past events hide from the site on their own the day after.
-    type: date
-    required: true
-    options:
-      format: yyyy-MM-dd
-  - name: time
-    label: Time
-    description: 'For example: 5 to 7 PM'
-    type: string
-  - name: place
-    label: Where
-    type: string
-    description: 'What to expect (just below): One short line each.'
-  - name: details
-    label: What to expect
-    type: string
-    list: true
-  - name: note
-    label: Small print
-    type: text
-  - name: button
-    label: Button words
-    description: 'For example: Details and tickets'
-    type: string
-  - name: link
-    label: Button link
-    description: Paste the full link, starting with https://. Leave empty for no button.
-    type: string
-    pattern:
-      regex: ^(https://\S+)?$
-      message: Paste the full link, starting with https://, or leave it empty
-- name: aasc-faq
-  label: Parent questions
-  type: file
-  path: _data/aasc/faq.yml
-  format: yaml
-  list:
-    collapsible:
-      collapsed: true
-      summary: '{question}'
-  fields:
-  - name: question
-    label: Question
-    type: string
-    required: true
-  - name: answer
-    label: Answer
-    type: rich-text
-    required: true
-    options:
-      format: html
-      media: false
-  - name: coming_soon
-    label: Show a "Coming soon" tag
-    type: boolean
-- name: aasc-club
-  label: Club details and links
-  type: file
-  path: _data/aasc/club.yml
-  format: yaml
-  fields:
-  - name: email
-    label: Club email
-    type: string
-    description: Shown on the Contact page. Messages from the site forms go here.
-    required: true
-  - name: contact_person
-    label: Contact name
-    type: string
-    description: Shown on the Contact page, under "Email the club".
-  - name: area_line
-    label: Area line
-    type: string
-    description: Shown on the Contact page.
-  - name: footer_about
-    label: Footer sentence
-    type: text
-    description: The short line under the logo at the bottom of every page.
-  - name: facebook
-    label: Facebook page link
-    type: string
-    required: true
-    pattern:
-      regex: ^https://\S+$
-      message: Paste the full link, starting with https://
-  - name: donate_link
-    label: Donate button link
-    type: string
-    description: Where the Donate on Zeffy button goes.
-    required: true
-    pattern:
-      regex: ^https://\S+$
-      message: Paste the full link, starting with https://
-  - name: registration_form
-    label: Registration link
-    type: string
-    description: Where families sign up. This can be a Google Form or a Zeffy registration page. Every Register now button uses it. Leave empty until it's ready, and the button stays switched off.
-    pattern:
-      regex: ^(https://\S+)?$
-      message: Paste the full link, starting with https://, or leave it empty
-  - name: payment_link
-    label: Payment link (optional)
-    type: string
-    description: Only if families pay the fee on a separate page, like a Zeffy payment page. When it's filled in, a Pay the fee button shows next to Register now. Leave empty if payment is part of the registration form.
-    pattern:
-      regex: ^(https://\S+)?$
-      message: Paste the full link, starting with https://, or leave it empty
-  - name: volunteer_form
-    label: Volunteer form link
-    type: string
-    description: The online form volunteers fill in. Leave empty until it's ready, and the Volunteer now button stays switched off.
-    pattern:
-      regex: ^(https://\S+)?$
-      message: Paste the full link, starting with https://, or leave it empty
+      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
 - name: aasc-site
-  label: Menu, footer and small words
+  label: Whole site
   type: file
   path: _data/aasc/site.yml
   format: yaml
   fields:
+  - name: season
+    label: Season dates, fee and spots
+    type: object
+    description: 'Change these once and every page updates: dates, fee, spots, ages and the countdown.'
+    fields:
+    - name: name
+      label: Season name
+      type: string
+      description: Shown all over the site, for example Winter Indoor Soccer or Spring Basketball. Pick which sport gets the big card under Programs > Sports.
+      required: true
+    - name: session_day
+      label: Day of the week
+      type: select
+      description: The day sessions happen. The site says "Sundays", "Saturdays" and so on from this.
+      required: true
+      options:
+        values:
+        - Sunday
+        - Monday
+        - Tuesday
+        - Wednesday
+        - Thursday
+        - Friday
+        - Saturday
+    - name: button
+      label: Big Register button words
+      type: string
+      description: 'For example: Register for winter soccer. All Register buttons go to the sign-up page.'
+    - name: menu_button
+      label: Menu Register words
+      type: string
+      description: 'The shorter Register words in the menu, for example: Register for soccer.'
+    - name: registration_opens
+      label: Registration opens
+      type: date
+      description: The home page countdown counts down to this day, then switches to "Registration is open now" on its own. These dates also update the scoreboard, schedule and Get Involved page. Check Home > Parent questions too, since those answers are written out by hand.
+      required: true
+      options:
+        format: yyyy-MM-dd
+    - name: registration_closes
+      label: Registration closes
+      type: date
+      required: true
+      options:
+        format: yyyy-MM-dd
+    - name: first_sunday
+      label: First session day
+      type: date
+      required: true
+      options:
+        format: yyyy-MM-dd
+    - name: last_sunday
+      label: Last session day
+      type: date
+      required: true
+      options:
+        format: yyyy-MM-dd
+    - name: sundays
+      label: Number of sessions
+      type: number
+      required: true
+    - name: spots
+      label: Number of spots
+      type: number
+      required: true
+    - name: fee
+      label: Fee per athlete, in dollars
+      type: number
+      description: Numbers only, like 30.
+      required: true
+    - name: youngest_age
+      label: Youngest age
+      type: number
+      required: true
+    - name: oldest_age
+      label: Oldest age
+      type: number
+      description: Leave empty if there is no top age yet.
+    - name: where
+      label: Where
+      type: string
+      description: The venue. Leave empty until it's set.
+    - name: session_times
+      label: Session times
+      type: string
+      description: 'For example: 1 to 2 PM'
+    - name: how_to_pay
+      label: How to pay
+      type: text
+      description: One or two sentences families see on the Programs page.
+    - name: countdown_before
+      label: Countdown words
+      type: string
+      description: Shown after the number of days, for example "8 days until registration opens November 20". The date fills in on its own.
+    - name: countdown_day
+      label: Countdown word for one day
+      type: string
+      description: 'Under the number when there is 1 day left, like: day'
+    - name: countdown_days
+      label: Countdown word for more days
+      type: string
+      description: 'Under the number, like: days'
+    - name: countdown_tomorrow
+      label: Countdown word for the last day
+      type: string
+      description: 'Shown the day before sign-ups open, like: tomorrow,'
+    - name: countdown_open
+      label: Countdown words once registration is open
+      type: string
+      description: 'Shown on the home page while sign-ups are open. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in. Fill-ins: {closes} {spots}'
+    - name: countdown_closed
+      label: Countdown words after registration closes
+      type: text
+  - name: club
+    label: Club details and links
+    type: object
+    description: Email, contact name and the links behind the Register, Donate and Volunteer buttons.
+    fields:
+    - name: email
+      label: Club email
+      type: string
+      description: Shown on the Contact page. Messages from the site forms go here.
+      required: true
+    - name: contact_person
+      label: Contact name
+      type: string
+      description: Shown on the Contact page, under "Email the club".
+    - name: area_line
+      label: Area line
+      type: string
+      description: Shown on the Contact page.
+    - name: footer_about
+      label: Footer sentence
+      type: text
+      description: The short line under the logo at the bottom of every page.
+    - name: facebook
+      label: Facebook page link
+      type: string
+      required: true
+      pattern:
+        regex: ^https://\S+$
+        message: Paste the full link, starting with https://
+    - name: donate_link
+      label: Donate button link
+      type: string
+      description: Where the Donate on Zeffy button goes.
+      required: true
+      pattern:
+        regex: ^https://\S+$
+        message: Paste the full link, starting with https://
+    - name: registration_form
+      label: Registration link
+      type: string
+      description: Where families sign up. This can be a Google Form or a Zeffy registration page. Every Register now button uses it. Leave empty until it's ready, and the button stays switched off.
+      pattern:
+        regex: ^(https://\S+)?$
+        message: Paste the full link, starting with https://, or leave it empty
+    - name: payment_link
+      label: Payment link (optional)
+      type: string
+      description: Only if families pay the fee on a separate page, like a Zeffy payment page. When it's filled in, a Pay the fee button shows next to Register now. Leave empty if payment is part of the registration form.
+      pattern:
+        regex: ^(https://\S+)?$
+        message: Paste the full link, starting with https://, or leave it empty
+    - name: volunteer_form
+      label: Volunteer form link
+      type: string
+      description: The online form volunteers fill in. Leave empty until it's ready, and the Volunteer now button stays switched off.
+      pattern:
+        regex: ^(https://\S+)?$
+        message: Paste the full link, starting with https://, or leave it empty
   - name: menu
     label: Menu at the top
     type: object
-    description: Only the words change here. The Register words in the menu list are under Current season.
+    description: Only the words change here. The Register words in the menu list are under Whole site > Season.
     fields:
     - name: programs
       label: Programs link
@@ -1209,7 +1197,7 @@ content:
   - name: footer
     label: Footer at the bottom
     type: object
-    description: 'The sentence under the logo is under Club details and links. Club values (just below): The four values with icons, on the Home and Our story pages. Keep it to four.'
+    description: 'The sentence under the logo is under Whole site > Club details and links. Club values (just below): The four values with icons, on the Home and Our story pages. Keep it to four.'
     fields:
     - name: explore_heading
       label: First column heading

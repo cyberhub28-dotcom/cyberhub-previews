@@ -1,16 +1,4 @@
-[
-  {
-    "title": "Launch Party",
-    "date": "2026-11-20",
-    "time": "5 to 7 PM",
-    "place": "Hosted with our friends at Capabilities, Play for ALL Abilities, in Dayton.",
-    "details": [
-      "One hour of free play for kids, 5 to 6 PM or 6 to 7 PM",
-      "Light refreshments",
-      "Club shirts, cups and more for sale"
-    ],
-    "note": "Each child who will play needs a free ticket. Adults and infants don't.",
-    "button": "Details and tickets",
-    "link": "https://www.facebook.com/events/1828441874838201/"
-  }
-]
+---
+# Built from the Home page data (_data/aasc/home.yml, events > list). Edit events in Pages CMS > Home.
+---
+{{ site.data.aasc.home.events.list | jsonify }}
