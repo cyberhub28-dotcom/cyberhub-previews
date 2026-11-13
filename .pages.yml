@@ -1017,7 +1017,7 @@ content:
     - name: button
       label: Big Register button words
       type: string
-      description: 'For example: Register for winter soccer. All Register buttons go to the sign-up page.'
+      description: 'For example: Register for winter soccer. All Register buttons go to the Get Involved page.'
     - name: menu_button
       label: Menu Register words
       type: string
