@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.site.not_found -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.description %}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign p = site.data.aasc.site.not_found -%}{%- assign sp = site.data.aasc.programs -%}{%- include aasc/lineup.html -%}{%- assign page_title = p.tab_title | escape -%}{%- assign page_desc = p.description | escape -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -33,7 +33,7 @@
 <body data-page="404">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | default: "Skip to main content" | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="" %}
@@ -45,7 +45,7 @@
       <p class="kicker" style="color:var(--green)">{{ p.kicker | escape }}</p>
       <h1 style="font-size:var(--fs-h2)">{{ p.heading | escape }}</h1>
       <p class="muted">{{ p.text | escape }}</p>
-      <div class="btns"><a class="btn btn-navy" href="index.html">{{ p.home_button | escape }}</a><a class="btn btn-line-dark" href="get-involved.html">{{ s.menu_button | escape }}</a></div>
+      <div class="btns"><a class="btn btn-navy" href="index.html">{{ p.home_button | escape }}</a><a class="btn btn-line-dark" href="get-involved.html">{{ site.data.aasc.site.menu.menu_register | default: "Register" | escape }}</a></div>
     </div>
   </section>
 </main>

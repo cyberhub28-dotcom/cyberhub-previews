@@ -2,6 +2,8 @@
 # Each entry below shows up in the Pages CMS sidebar. The All Abilities entries edit the
 # files in _data/aasc (and the events file); GitHub Pages builds the pages from them.
 media:
+- name: images
+  label: Photos
   input: all-abilities-claude/images
   output: /all-abilities-claude/images
   categories:
@@ -24,14 +26,11 @@ content:
     - name: headline_2
       label: Headline, second line
       type: string
+      description: The second line of the big headline, before the underlined word.
     - name: headline_mark
       label: Underlined word
       type: string
       description: Shown at the end of the second line, with the green underline.
-    - name: season_dates
-      label: Small line above the headline (after the season name)
-      type: string
-      description: 'Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in. For example: {days} from {first day short}'
     - name: text
       label: Intro paragraph
       type: text
@@ -40,10 +39,23 @@ content:
       label: Small link words
       type: string
       description: The link next to the Register button. It jumps to the story below.
-    - name: countdown_start
-      label: Countdown line before it loads
-      type: string
-      description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+    - name: countdown
+      label: Countdown words
+      type: object
+      description: The countdown under the Register button. Its dates come from the first sport that is Open now or Opening soon on the Programs page.
+      fields:
+      - name: before
+        label: Before sign-ups open
+        type: string
+        description: 'Shown after the number of days, for example: until registration opens'
+      - name: open
+        label: While sign-ups are open
+        type: string
+        description: The closing date and number of spots are added on their own.
+      - name: closed
+        label: After sign-ups close
+        type: text
+        description: Shown once the sign-up close date has passed.
     - name: team_name
       label: Card title
       type: string
@@ -51,11 +63,12 @@ content:
     - name: team_tag
       label: Card tag
       type: string
-      description: 'Scrolling words (just below): The words that slide across the bottom of the top section. One per line.'
+      description: 'The small tag on the drawing of the team. Scrolling words (just below): the words that slide across the bottom of the top section, one per line.'
     - name: ticker
       label: Scrolling words
       type: string
       list: true
+    description: The big navy section at the top of the Home page.
   - name: story
     label: Story section
     type: object
@@ -63,9 +76,11 @@ content:
     - name: kicker
       label: Small label above the heading
       type: string
+      description: The small capital-letter words just above the heading.
     - name: heading
       label: Heading
       type: string
+      description: The big title of this section.
     - name: photo
       label: Photo
       type: image
@@ -77,6 +92,7 @@ content:
     - name: quote
       label: Founder quote
       type: text
+      description: Amber's words, shown in quotation marks.
     - name: quote_highlight
       label: Highlighted words
       type: text
@@ -84,66 +100,70 @@ content:
     - name: quote_by
       label: Quote by
       type: string
+      description: The name under the quote.
     - name: button
       label: Second button words
       type: string
       description: The button next to Register. It opens the Our story page.
+    description: The founder story on the Home page.
   - name: glance
-    label: Season scoreboard
+    label: Scoreboard (the navy numbers band)
     type: object
-    description: The numbers and dates here come from Whole site > Season.
+    description: The dates, spots, fee and sessions come from the first sport that is Open now or Opening soon on the Programs page. Only the small labels change here.
     fields:
     - name: opens_label
-      label: Opens label
+      label: Label before sign-ups open
       type: string
+      description: 'For example: Opens'
+    - name: closes_label
+      label: Label while sign-ups are open
+      type: string
+      description: 'For example: Closes'
     - name: spots_label
       label: Spots label
       type: string
+      description: 'For example: Spots'
     - name: fee_label
       label: Fee label
       type: string
+      description: 'For example: Fee'
     - name: fee_each
       label: Small word after the fee
       type: string
+      description: 'For example: EACH'
     - name: sessions_label
       label: Sessions label
       type: string
-      description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
-    - name: note
-      label: Line under the scoreboard
-      type: text
-      description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: The day of the week is added in front, like Sunday sessions.
     - name: faq_button
       label: Parent questions button words
       type: string
+      description: The second button in the scoreboard.
   - name: lineup
     label: Sports section
     type: object
-    description: The sport cards come from the Sports list on Programs and Whole site > Season.
+    description: The sport cards come from the Sports list on the Programs page, so add or change sports there.
     fields:
     - name: kicker
       label: Small label above the heading
       type: string
+      description: The small capital-letter words just above the heading.
     - name: heading
       label: Heading
       type: string
+      description: The big title of this section.
     - name: intro
       label: Intro line
       type: text
-    - name: open_tag
-      label: Tag words on the open sport
-      type: string
-      description: The opening date fills in after these words.
+      description: The sentence under the heading.
     - name: season_link
-      label: Link words on the big card
+      label: Link words on open sports
       type: string
-    - name: season_line
-      label: Line on the big card
-      type: text
-      description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: 'For example: See the season. Shown on the big cards for sports that are Open now or Opening soon.'
     - name: note
-      label: Note under the cards
+      label: Line under the sport cards
       type: text
+      description: A short note under the sport cards.
   - name: gameday
     label: Game day section
     type: object
@@ -151,27 +171,36 @@ content:
     - name: kicker
       label: Small label above the heading
       type: string
+      description: The small capital-letter words just above the heading.
     - name: heading
       label: Heading
       type: string
+      description: The big title of this section.
     - name: programs_title
       label: First card title
       type: string
+      description: The bold title of this box.
     - name: programs_text
       label: First card text
       type: text
+      description: The sentence under that title.
     - name: programs_link
       label: First card link words
       type: string
+      description: The words on this button or link.
     - name: donate_title
       label: Second card title
       type: string
+      description: The bold title of this box.
     - name: donate_text
       label: Second card text
       type: text
+      description: The sentence under that title.
     - name: donate_link
       label: Second card link words
       type: string
+      description: The words on this button or link.
+    description: The two cards about game day on the Home page.
   - name: events
     label: Events section
     type: object
@@ -180,12 +209,15 @@ content:
     - name: kicker
       label: Small label above the heading
       type: string
+      description: The small capital-letter words just above the heading.
     - name: heading
       label: Heading
       type: string
+      description: The big title of this section.
     - name: intro
       label: Intro line
       type: text
+      description: The sentence under the heading.
     - name: note
       label: Note under the events
       type: text
@@ -193,6 +225,7 @@ content:
     - name: empty
       label: Words when no events are coming up
       type: text
+      description: Shown when there are no events in the list below.
     - name: details_button
       label: Event button words if none are set
       type: string
@@ -209,6 +242,7 @@ content:
         label: Event name
         type: string
         required: true
+        description: 'For example: Launch Party.'
       - name: date
         label: Date
         description: Past events hide from the site on their own the day after.
@@ -231,6 +265,7 @@ content:
       - name: note
         label: Small print
         type: text
+        description: Optional. A small line at the bottom of the event card.
       - name: button
         label: Button words
         description: 'For example: Details and tickets'
@@ -250,15 +285,19 @@ content:
     - name: kicker
       label: Small label above the heading
       type: string
+      description: The small capital-letter words just above the heading.
     - name: heading
       label: Heading
       type: string
+      description: The big title of this section.
     - name: intro
       label: Intro line
       type: text
+      description: The sentence under the heading.
     - name: button
       label: Button words
       type: string
+      description: The words on this button or link.
     - name: soon_tag
       label: '"Coming soon" tag words'
       type: string
@@ -275,6 +314,7 @@ content:
         label: Question
         type: string
         required: true
+        description: The question parents ask.
       - name: answer
         label: Answer
         type: rich-text
@@ -282,9 +322,11 @@ content:
         options:
           format: html
           media: false
+        description: The answer. You can use bold, lists and links.
       - name: coming_soon
         label: Show a "Coming soon" tag
         type: boolean
+        description: Turn on to add a small Coming soon tag to this question.
   - name: join
     label: Join the team section
     type: object
@@ -292,34 +334,44 @@ content:
     - name: kicker
       label: Small label above the heading
       type: string
+      description: The small capital-letter words just above the heading.
     - name: heading
       label: Heading
       type: string
+      description: The big title of this section.
     - name: intro
       label: Intro line
       type: text
+      description: The sentence under the heading.
     - name: play_title
       label: First box title
       type: string
+      description: The bold title of this box.
     - name: play_text
       label: First box text
       type: string
+      description: The sentence under that title.
     - name: volunteer_title
       label: Second box title
       type: string
+      description: The bold title of this box.
     - name: volunteer_text
       label: Second box text
       type: string
+      description: The sentence under that title.
     - name: give_title
       label: Third box title
       type: string
+      description: The bold title of this box.
     - name: give_text
       label: Third box text
       type: string
+      description: The sentence under that title.
+    description: The three boxes near the bottom of the Home page.
   - name: page
-    label: Browser tab and Google
+    label: Browser tab and Google (rarely needed)
     type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    description: Rarely needed. The words in the browser tab, and the short summary Google and Facebook show when this page is shared.
     fields:
     - name: tab_title
       label: Browser tab title
@@ -328,7 +380,7 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: One or two sentences about this page.
 - name: aasc-programs
   label: Programs
   type: file
@@ -338,125 +390,19 @@ content:
   - name: kicker
     label: Small label above the headline
     type: string
+    description: The small capital-letter words at the top of the page.
   - name: headline
     label: Headline
     type: string
+    description: The big title at the top of the Programs page.
   - name: intro
     label: Intro line
     type: text
-  - name: soccer_text
-    label: Season description
-    type: text
-    description: Under the season name. The season facts come from Whole site > Season.
-  - name: open_tag
-    label: Tag on the season box
-    type: string
-    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
-  - name: facts
-    label: Season facts box
-    type: object
-    description: Labels and lines in the season box. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in. The place, times and ages come from Whole site > Season.
-    fields:
-    - name: opens_label
-      label: Opens label
-      type: string
-    - name: opens
-      label: Opens line
-      type: string
-    - name: closes_label
-      label: Closes label
-      type: string
-    - name: closes
-      label: Closes line
-      type: string
-    - name: sessions_label
-      label: Sessions label
-      type: string
-    - name: sessions
-      label: Sessions line
-      type: string
-    - name: fee_label
-      label: Fee label
-      type: string
-    - name: fee
-      label: Fee line
-      type: string
-    - name: spots_label
-      label: Spots label
-      type: string
-    - name: spots
-      label: Spots line
-      type: string
-    - name: where_label
-      label: Where label
-      type: string
-    - name: times_label
-      label: Session times label
-      type: string
-    - name: ages_label
-      label: Ages label
-      type: string
-    - name: ages
-      label: Ages line
-      type: string
-    - name: ages_no_top
-      label: Ages line when there is no oldest age
-      type: string
-  - name: steps_heading
-    label: Steps heading
-    type: string
-  - name: step1_title
-    label: Step 1 title
-    type: string
-    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
-  - name: step1_text
-    label: Step 1 text
-    type: text
-    description: Step 1's title shows the opening date on its own.
-  - name: step2_title
-    label: Step 2 title
-    type: string
-  - name: step2_text
-    label: Step 2 text
-    type: text
-  - name: step3_title
-    label: Step 3 title
-    type: string
-    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
-  - name: step3_text
-    label: Step 3 text until How to pay is filled in
-    type: text
-    description: Once How to pay is filled in under Whole site > Season, that shows here instead.
-  - name: step4_title
-    label: Step 4 title
-    type: string
-    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
-  - name: step4_text
-    label: Step 4 text
-    type: text
-    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
-  - name: button
-    label: Button words
-    type: string
-  - name: later_kicker
-    label: 'Coming later: small label'
-    type: string
-    description: The Coming later sports themselves are in the Sports list at the bottom of this page.
-  - name: later_heading
-    label: 'Coming later: heading'
-    type: string
-    description: The Coming later sports themselves are in the Sports list at the bottom of this page.
-  - name: later_intro
-    label: Coming later intro
-    type: text
-    description: The Coming later sports themselves are in the Sports list at the bottom of this page.
-  - name: soon_tag
-    label: '"Coming later" tag words'
-    type: string
-    description: 'The small tag on sports that aren''t open yet. Sports (just below): Add, edit, remove or drag to reorder. The sport set to This season gets the big card on the Home and Programs pages. Coming later sports show as smaller cards. Hidden ones stay saved but don''t show.'
+    description: The sentence under the headline.
   - name: sports
     label: Sports
     type: object
+    description: One box per sport. Tap Add an entry for a new sport, drag to change the order, and set each one's Status. Open now sports show first, then Opening soon, then Coming later.
     list:
       collapsible:
         collapsed: true
@@ -465,24 +411,39 @@ content:
     - name: name
       label: Sport name
       type: string
+      description: 'For example: Basketball.'
       required: true
     - name: status
       label: Status
       type: select
       required: true
       default: Coming later
-      description: Set only one sport to This season.
+      description: 'Open now: families can sign up. Opening soon: dates are set but sign-ups are not open yet. Coming later: a small card, no dates yet. Season over: moves to Past seasons. Hidden: kept here but not on the site.'
       options:
         values:
-        - This season
+        - Open now
+        - Opening soon
         - Coming later
+        - Season over
         - Hidden
+    - name: season_name
+      label: Season name
+      type: string
+      description: 'For example: Spring Basketball. Leave empty to use the sport name.'
+    - name: line
+      label: Short line for the small card
+      type: string
+      description: 'One short line, for example: Dribble, pass and shoot.'
+    - name: description
+      label: Description
+      type: text
+      description: A few sentences families read on the Programs page.
     - name: picture
       label: Drawing
       type: select
       required: true
       default: Cheering kids
-      description: Which drawing and colors the card uses. For a new sport with no drawing of its own, pick Cheering kids.
+      description: Which drawing and colors the cards use. For a sport with no drawing of its own, pick Cheering kids.
       options:
         values:
         - Soccer
@@ -491,14 +452,183 @@ content:
         - Flag football
         - Buddies
         - Cheering kids
-    - name: line
-      label: Short line
+    - name: photo
+      label: Photo (optional)
+      type: image
+      description: Shows at the top of this sport on the Programs page. Only add photos of children after a parent or guardian signs the photo release.
+    - name: day
+      label: Day of the week
+      type: select
+      description: The day sessions happen. The site says Sundays, Saturdays and so on from this.
+      options:
+        values:
+        - Sunday
+        - Monday
+        - Tuesday
+        - Wednesday
+        - Thursday
+        - Friday
+        - Saturday
+    - name: times
+      label: Session times
       type: string
-      description: 'One short line, for example: Dribble, pass and shoot.'
-  - name: page
-    label: Browser tab and Google
+      description: 'For example: 1 to 2 PM. Leave empty until it is set.'
+    - name: signups_open
+      label: Sign-ups open
+      type: date
+      description: The Home page counts down to this day.
+      options:
+        format: yyyy-MM-dd
+    - name: signups_close
+      label: Sign-ups close
+      type: date
+      description: The last day families can sign up.
+      options:
+        format: yyyy-MM-dd
+    - name: first_day
+      label: First session
+      type: date
+      description: The first day of play.
+      options:
+        format: yyyy-MM-dd
+    - name: last_day
+      label: Last session
+      type: date
+      description: The last day of play.
+      options:
+        format: yyyy-MM-dd
+    - name: sessions
+      label: Number of sessions
+      type: number
+      description: Numbers only, like 6.
+    - name: ages
+      label: Ages
+      type: string
+      description: 'For example: Ages 3 to 12, or From age 3.'
+    - name: where
+      label: Where
+      type: string
+      description: 'The place, for example: Dayton Functional Fitness in Beavercreek, Ohio.'
+    - name: fee
+      label: Fee
+      type: string
+      description: 'For example: $30. The site adds "per athlete" after it.'
+    - name: spots
+      label: Number of spots
+      type: number
+      description: Numbers only, like 48. Leave empty for no limit.
+    - name: how_to_pay
+      label: How to pay
+      type: text
+      description: One or two sentences families see under this sport.
+    - name: button
+      label: Register button words
+      type: string
+      description: 'For example: Register for spring basketball.'
+    - name: signup_link
+      label: Sign-up form link
+      type: string
+      description: The online form families fill in, like a Google Form or Zeffy page. Leave empty until it is ready, and the Register button stays switched off on Get Involved.
+      pattern: &id001
+        regex: ^(https://\S+)?$
+        message: Paste the full link, starting with https://, or leave it empty
+    - name: payment_link
+      label: Payment link (optional)
+      type: string
+      description: Only if families pay on a separate page. A Pay the fee button then shows next to Register.
+      pattern: *id001
+  - name: steps_heading
+    label: Steps heading
+    type: string
+    description: 'The heading of the How to join box. How to join steps (just below): add, remove or drag to reorder.'
+  - name: steps
+    label: How to join steps
     type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{title}'
+    fields:
+    - name: title
+      label: Step title
+      type: string
+      description: 'A few words, for example: Fill in the form.'
+      required: true
+    - name: text
+      label: Step text
+      type: text
+      description: One short sentence.
+  - name: button
+    label: Button under the steps
+    type: string
+    description: The button at the bottom of the How to join box. It opens Get Involved.
+  - name: later_kicker
+    label: 'Coming later: small label'
+    type: string
+    description: Above the Coming later sports. It only shows if a sport is set to Coming later.
+  - name: later_heading
+    label: 'Coming later: heading'
+    type: string
+    description: The heading above the Coming later sports.
+  - name: later_intro
+    label: 'Coming later: intro'
+    type: text
+    description: The sentence under that heading.
+  - name: over_heading
+    label: Past seasons heading
+    type: string
+    description: Only shows if a sport is set to Season over.
+  - name: words
+    label: Small words on the sport boxes
+    type: object
+    hidden: true
+    fields:
+    - name: open
+      label: open
+      type: string
+    - name: soon
+      label: soon
+      type: string
+    - name: later
+      label: later
+      type: string
+    - name: over
+      label: over
+      type: string
+    - name: signups
+      label: signups
+      type: string
+    - name: season
+      label: season
+      type: string
+    - name: times
+      label: times
+      type: string
+    - name: where
+      label: where
+      type: string
+    - name: ages
+      label: ages
+      type: string
+    - name: fee
+      label: fee
+      type: string
+    - name: per_athlete
+      label: per_athlete
+      type: string
+    - name: spots
+      label: spots
+      type: string
+    - name: pay
+      label: pay
+      type: string
+    - name: register
+      label: register
+      type: string
+  - name: page
+    label: Browser tab and Google (rarely needed)
+    type: object
+    description: Rarely needed. The words in the browser tab, and the short summary Google and Facebook show when this page is shared.
     fields:
     - name: tab_title
       label: Browser tab title
@@ -507,7 +637,7 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: One or two sentences about this page.
 - name: aasc-about
   label: Our Story
   type: file
@@ -517,9 +647,11 @@ content:
   - name: kicker
     label: Small label above the headline
     type: string
+    description: The small capital-letter words just above the heading.
   - name: headline
     label: Headline
     type: string
+    description: The big title at the top of this page.
   - name: photo
     label: Family photo
     type: image
@@ -531,15 +663,18 @@ content:
   - name: why_heading
     label: First heading
     type: string
+    description: A heading on this page.
   - name: why_text
     label: Why we started
     type: rich-text
     options:
       format: html
       media: false
+    description: The first part of the story.
   - name: bennett_heading
     label: Second heading
     type: string
+    description: A heading on this page.
   - name: bennett_story
     label: Bennett's story
     type: rich-text
@@ -550,22 +685,26 @@ content:
   - name: what_heading
     label: Third heading
     type: string
+    description: A heading on this page.
   - name: what_we_do
     label: What the club does
     type: rich-text
     options:
       format: html
       media: false
+    description: The last part of the story.
   - name: programs_button
     label: First button words
     type: string
+    description: The words on this button or link.
   - name: involved_button
     label: Second button words
     type: string
+    description: The words on this button or link.
   - name: page
-    label: Browser tab and Google
+    label: Browser tab and Google (rarely needed)
     type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    description: Rarely needed. The words in the browser tab, and the short summary Google and Facebook show when this page is shared.
     fields:
     - name: tab_title
       label: Browser tab title
@@ -574,7 +713,7 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: One or two sentences about this page.
 - name: aasc-get-involved
   label: Get Involved
   type: file
@@ -584,42 +723,51 @@ content:
   - name: kicker
     label: Small label above the headline
     type: string
+    description: The small capital-letter words just above the heading.
   - name: headline
     label: Headline
     type: string
+    description: The big title at the top of this page.
   - name: intro
     label: Intro line
     type: text
+    description: The sentence under the heading.
   - name: choose_heading
     label: Box heading
     type: string
+    description: The heading at the top of the sign-up box.
   - name: athlete_heading
     label: Athlete heading
     type: string
+    description: A heading on this page.
   - name: athlete_text
     label: Athlete text
     type: text
-  - name: opens_line
-    label: Opens line in the athlete box
-    type: string
-    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+    description: The sentence under Sign up an athlete.
+  - name: none_open
+    label: Words when no sport is open
+    type: text
+    description: Shown in the athlete box when no sport is Open now or Opening soon.
   - name: register_button
     label: Register button words
     type: string
-    description: The link is Registration link, under Whole site > Club details and links.
+    description: Each sport's sign-up link is set on the Programs page, under that sport.
   - name: pay_button
     label: Pay button words
     type: string
-    description: Only shows when Payment link is filled in, under Whole site > Club details and links.
+    description: Only shows for a sport whose Payment link is filled in on the Programs page.
   - name: volunteer_heading
     label: Volunteer heading
     type: string
+    description: A heading on this page.
   - name: volunteer_text
     label: Volunteer text
     type: text
+    description: The sentence under Volunteer.
   - name: volunteer_card
     label: Volunteer box line
     type: string
+    description: The bold line in the volunteer box.
   - name: volunteer_button
     label: Volunteer button words
     type: string
@@ -627,39 +775,32 @@ content:
   - name: side
     label: Season box on the right
     type: object
-    description: Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+    description: One box per sport that is Open now or Opening soon. The dates, fee and spots come from that sport on the Programs page.
     fields:
     - name: signups_label
       label: Sign-ups label
       type: string
-    - name: signups
-      label: Sign-ups line
-      type: string
+      description: The small label on the box.
     - name: sessions_label
       label: Sessions label
       type: string
-    - name: sessions
-      label: Sessions line
-      type: string
+      description: The small label on the box.
     - name: fee_label
       label: Fee label
       type: string
-    - name: fee
-      label: Fee line
-      type: string
+      description: The small label on the box.
     - name: spots_label
       label: Spots label
       type: string
-    - name: spots
-      label: Spots line
-      type: string
+      description: The small label on the box.
     - name: note
       label: Line under the box
       type: text
+      description: A short note at the bottom of the box.
   - name: page
-    label: Browser tab and Google
+    label: Browser tab and Google (rarely needed)
     type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    description: Rarely needed. The words in the browser tab, and the short summary Google and Facebook show when this page is shared.
     fields:
     - name: tab_title
       label: Browser tab title
@@ -668,7 +809,7 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: One or two sentences about this page.
 - name: aasc-gallery
   label: Gallery
   type: file
@@ -678,35 +819,44 @@ content:
   - name: kicker
     label: Small label above the headline
     type: string
+    description: The small capital-letter words just above the heading.
   - name: headline
     label: Headline
     type: string
+    description: The big title at the top of this page.
   - name: intro
     label: Intro line
     type: text
+    description: The sentence under the heading.
   - name: pick_heading
     label: Heading above the photo groups
     type: string
+    description: The heading above the photo group cards.
   - name: has_photos_line
     label: Line when there are photos
     type: string
+    description: Shown under the headline once photos are added.
   - name: no_photos_line
     label: Line when there are no photos yet
     type: string
+    description: Shown under the headline before any photos are added.
   - name: coming_soon
     label: Words on a group with no photos
     type: string
+    description: Shown on a photo group card that has no photos yet.
   - name: season_tag
     label: Tag on the big card
     type: string
-    description: Shows on the big card when it is the sport set to This season under Programs > Sports.
+    description: Shows on the big card when that photo group has the same name as the sport that is Open now or Opening soon.
   - name: photo_word
     label: Word after the count for 1 photo
     type: string
+    hidden: true
   - name: photos_word
     label: Word after the count for more photos
     type: string
     description: 'Photo groups (just below): Each group is one card on the Gallery page, like a sport, Buddies or Game Day. Add, remove or drag to reorder. The first group that has photos gets the big card on top. Only add photos of children after a parent or guardian signs the photo release.'
+    hidden: true
   - name: groups
     label: Photo groups
     type: object
@@ -719,6 +869,7 @@ content:
       label: Group name
       type: string
       required: true
+      description: 'For example: Soccer, Buddies or Game Day.'
     - name: picture
       label: Drawing
       type: select
@@ -755,9 +906,9 @@ content:
         type: string
         description: Optional. A few words shown under the photo when it's open.
   - name: page
-    label: Browser tab and Google
+    label: Browser tab and Google (rarely needed)
     type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    description: Rarely needed. The words in the browser tab, and the short summary Google and Facebook show when this page is shared.
     fields:
     - name: tab_title
       label: Browser tab title
@@ -766,7 +917,7 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: One or two sentences about this page.
 - name: aasc-donate
   label: Donate
   type: file
@@ -776,18 +927,23 @@ content:
   - name: kicker
     label: Small label above the headline
     type: string
+    description: The small capital-letter words just above the heading.
   - name: headline
     label: Headline
     type: string
+    description: The big title at the top of this page.
   - name: intro
     label: Intro line
     type: text
+    description: The sentence under the heading.
   - name: gift_heading
     label: Gift heading
     type: string
+    description: A heading on this page.
   - name: gift_text
     label: Make a gift text
     type: text
+    description: The sentence under the gift heading.
   - name: donate_button
     label: Donate button words
     type: string
@@ -795,6 +951,7 @@ content:
   - name: donate_button_note
     label: Line under the Donate button
     type: string
+    description: A short note under the Donate button.
   - name: tax_note
     label: Tax line
     type: text
@@ -802,15 +959,19 @@ content:
   - name: sponsor_heading
     label: Sponsor heading
     type: string
+    description: A heading on this page.
   - name: sponsor_text
     label: Partner with us text
     type: text
+    description: The sentence under the sponsor heading.
   - name: sponsor_button
     label: Sponsor button words
     type: string
+    description: The words on this button or link.
   - name: levels_kicker
     label: 'Levels: small label'
     type: string
+    description: The small label on the box.
   - name: levels_heading
     label: 'Levels: heading'
     type: string
@@ -832,6 +993,7 @@ content:
       label: Level name
       type: string
       required: true
+      description: 'For example: Gold.'
     - name: text
       label: Description
       type: text
@@ -843,13 +1005,15 @@ content:
     - name: stand_out
       label: Make this level stand out
       type: boolean
+      description: Turn on to give this level the navy highlight.
   - name: thanks_note
     label: Note under the levels
     type: text
+    description: A short line under the sponsorship levels.
   - name: page
-    label: Browser tab and Google
+    label: Browser tab and Google (rarely needed)
     type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    description: Rarely needed. The words in the browser tab, and the short summary Google and Facebook show when this page is shared.
     fields:
     - name: tab_title
       label: Browser tab title
@@ -858,7 +1022,7 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: One or two sentences about this page.
 - name: aasc-contact
   label: Contact
   type: file
@@ -868,9 +1032,11 @@ content:
   - name: kicker
     label: Small label above the headline
     type: string
+    description: The small capital-letter words just above the heading.
   - name: headline
     label: Headline
     type: string
+    description: The big title at the top of this page.
   - name: intro
     label: Intro line
     type: text
@@ -886,18 +1052,23 @@ content:
     - name: name_label
       label: Name label
       type: string
+      description: The small label on the form.
     - name: email_label
       label: Email label
       type: string
+      description: The small label on the form.
     - name: topic_label
       label: Topic label
       type: string
+      description: The small label on the form.
     - name: message_label
       label: Message label
       type: string
+      description: The small label on the form.
     - name: send_button
       label: Send button words
       type: string
+      description: The words on this button or link.
     - name: email_subject
       label: Email subject line
       type: string
@@ -905,36 +1076,45 @@ content:
     - name: missing_one
       label: Message when one field is missing
       type: string
+      hidden: true
     - name: missing_many
       label: Message when several fields are missing
       type: string
       description: Keep {count}. It becomes the number of missing fields.
+      hidden: true
+    description: The labels and button on the contact form.
   - name: form_hint
     label: Line above the Send button
     type: text
+    description: A short note just above the Send button.
   - name: form_done
     label: Message after tapping Send
     type: text
+    description: Shown after someone taps Send.
   - name: email_heading
     label: Email box heading
     type: string
+    description: The heading of the box with the club email.
   - name: copy_button
     label: Copy button words
     type: string
+    description: The words on this button or link.
   - name: copied
     label: Copy button after copying
     type: string
+    description: What the Copy button says after it is tapped.
   - name: selected
     label: Copy button when the phone can only select
     type: string
+    hidden: true
   - name: facebook_line
     label: Facebook line
     type: text
     description: Put words in [square brackets] to turn them into a link to the club's Facebook page.
   - name: page
-    label: Browser tab and Google
+    label: Browser tab and Google (rarely needed)
     type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    description: Rarely needed. The words in the browser tab, and the short summary Google and Facebook show when this page is shared.
     fields:
     - name: tab_title
       label: Browser tab title
@@ -943,7 +1123,7 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: One or two sentences about this page.
 - name: aasc-privacy
   label: Privacy
   type: file
@@ -953,9 +1133,11 @@ content:
   - name: kicker
     label: Small label above the headline
     type: string
+    description: The small capital-letter words just above the heading.
   - name: headline
     label: Headline
     type: string
+    description: The big title at the top of this page.
   - name: body
     label: Privacy policy
     type: rich-text
@@ -968,13 +1150,15 @@ content:
     type: date
     options:
       format: yyyy-MM-dd
+    description: Change this date whenever the privacy policy changes.
   - name: updated_label
     label: Words before the date
     type: string
+    description: 'For example: Last updated.'
   - name: page
-    label: Browser tab and Google
+    label: Browser tab and Google (rarely needed)
     type: object
-    description: The words in the browser tab, and the short summary Google and Facebook show when the page is shared.
+    description: Rarely needed. The words in the browser tab, and the short summary Google and Facebook show when this page is shared.
     fields:
     - name: tab_title
       label: Browser tab title
@@ -983,130 +1167,17 @@ content:
     - name: description
       label: Short summary for Google and sharing
       type: text
-      description: One or two sentences. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in.
+      description: One or two sentences about this page.
 - name: aasc-site
   label: Whole site
   type: file
   path: _data/aasc/site.yml
   format: yaml
   fields:
-  - name: season
-    label: Season dates, fee and spots
-    type: object
-    description: 'Change these once and every page updates: dates, fee, spots, ages and the countdown.'
-    fields:
-    - name: name
-      label: Season name
-      type: string
-      description: Shown all over the site, for example Winter Indoor Soccer or Spring Basketball. Pick which sport gets the big card under Programs > Sports.
-      required: true
-    - name: session_day
-      label: Day of the week
-      type: select
-      description: The day sessions happen. The site says "Sundays", "Saturdays" and so on from this.
-      required: true
-      options:
-        values:
-        - Sunday
-        - Monday
-        - Tuesday
-        - Wednesday
-        - Thursday
-        - Friday
-        - Saturday
-    - name: button
-      label: Big Register button words
-      type: string
-      description: 'For example: Register for winter soccer. All Register buttons go to the Get Involved page.'
-    - name: menu_button
-      label: Menu Register words
-      type: string
-      description: 'The shorter Register words in the menu, for example: Register for soccer.'
-    - name: registration_opens
-      label: Registration opens
-      type: date
-      description: The home page countdown counts down to this day, then switches to "Registration is open now" on its own. These dates also update the scoreboard, schedule and Get Involved page. Check Home > Parent questions too, since those answers are written out by hand.
-      required: true
-      options:
-        format: yyyy-MM-dd
-    - name: registration_closes
-      label: Registration closes
-      type: date
-      required: true
-      options:
-        format: yyyy-MM-dd
-    - name: first_sunday
-      label: First session day
-      type: date
-      required: true
-      options:
-        format: yyyy-MM-dd
-    - name: last_sunday
-      label: Last session day
-      type: date
-      required: true
-      options:
-        format: yyyy-MM-dd
-    - name: sundays
-      label: Number of sessions
-      type: number
-      required: true
-    - name: spots
-      label: Number of spots
-      type: number
-      required: true
-    - name: fee
-      label: Fee per athlete, in dollars
-      type: number
-      description: Numbers only, like 30.
-      required: true
-    - name: youngest_age
-      label: Youngest age
-      type: number
-      required: true
-    - name: oldest_age
-      label: Oldest age
-      type: number
-      description: Leave empty if there is no top age yet.
-    - name: where
-      label: Where
-      type: string
-      description: The venue. Leave empty until it's set.
-    - name: session_times
-      label: Session times
-      type: string
-      description: 'For example: 1 to 2 PM'
-    - name: how_to_pay
-      label: How to pay
-      type: text
-      description: One or two sentences families see on the Programs page.
-    - name: countdown_before
-      label: Countdown words
-      type: string
-      description: Shown after the number of days, for example "8 days until registration opens November 20". The date fills in on its own.
-    - name: countdown_day
-      label: Countdown word for one day
-      type: string
-      description: 'Under the number when there is 1 day left, like: day'
-    - name: countdown_days
-      label: Countdown word for more days
-      type: string
-      description: 'Under the number, like: days'
-    - name: countdown_tomorrow
-      label: Countdown word for the last day
-      type: string
-      description: 'Shown the day before sign-ups open, like: tomorrow,'
-    - name: countdown_open
-      label: Countdown words once registration is open
-      type: string
-      description: 'Shown on the home page while sign-ups are open. Words in {curly brackets} fill in by themselves from Whole site > Season, so leave the brackets in. Fill-ins: {closes} {spots}'
-    - name: countdown_closed
-      label: Countdown words after registration closes
-      type: text
   - name: club
     label: Club details and links
     type: object
-    description: Email, contact name and the links behind the Register, Donate and Volunteer buttons.
+    description: Email, contact name and the links behind the Donate and Volunteer buttons. Each sport's sign-up link is on the Programs page.
     fields:
     - name: email
       label: Club email
@@ -1132,6 +1203,7 @@ content:
       pattern:
         regex: ^https://\S+$
         message: Paste the full link, starting with https://
+      description: The club's Facebook page. Paste the full link, starting with https://.
     - name: donate_link
       label: Donate button link
       type: string
@@ -1140,20 +1212,6 @@ content:
       pattern:
         regex: ^https://\S+$
         message: Paste the full link, starting with https://
-    - name: registration_form
-      label: Registration link
-      type: string
-      description: Where families sign up. This can be a Google Form or a Zeffy registration page. Every Register now button uses it. Leave empty until it's ready, and the button stays switched off.
-      pattern:
-        regex: ^(https://\S+)?$
-        message: Paste the full link, starting with https://, or leave it empty
-    - name: payment_link
-      label: Payment link (optional)
-      type: string
-      description: Only if families pay the fee on a separate page, like a Zeffy payment page. When it's filled in, a Pay the fee button shows next to Register now. Leave empty if payment is part of the registration form.
-      pattern:
-        regex: ^(https://\S+)?$
-        message: Paste the full link, starting with https://, or leave it empty
     - name: volunteer_form
       label: Volunteer form link
       type: string
@@ -1164,77 +1222,102 @@ content:
   - name: menu
     label: Menu at the top
     type: object
-    description: Only the words change here. The Register words in the menu list are under Whole site > Season.
+    description: The words in the menu at the top of every page.
     fields:
     - name: programs
       label: Programs link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: story
       label: Our story link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: involved
       label: Get involved link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: gallery
       label: Gallery link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: donate
       label: Donate link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: contact
       label: Contact link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
+    - name: menu_register
+      label: Register words in the phone menu
+      type: string
+      description: 'The longer Register words at the bottom of the menu on phones, for example: Register for soccer.'
     - name: register
       label: Small Register button
       type: string
+      description: The small green button at the top right.
     - name: menu_button
       label: Menu button words (phones)
       type: string
+      hidden: true
     - name: skip_link
       label: Skip link words
       type: string
       description: Read out by screen readers and shown when someone uses a keyboard.
+      hidden: true
   - name: footer
     label: Footer at the bottom
     type: object
-    description: 'The sentence under the logo is under Whole site > Club details and links. Club values (just below): The four values with icons, on the Home and Our story pages. Keep it to four.'
+    description: 'The sentence under the logo is in Club details and links, above. Club values (just below): The four values with icons, on the Home and Our story pages. Keep it to four.'
     fields:
     - name: explore_heading
       label: First column heading
       type: string
+      description: The heading of the first list of links in the footer.
     - name: programs
       label: Programs link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: story
       label: Our story link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: sign_up
       label: Sign up link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: volunteer
       label: Volunteer link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: faq
       label: Parent questions link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: gallery
       label: Gallery link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: connect_heading
       label: Second column heading
       type: string
+      description: The heading of the second list of links in the footer.
     - name: donate
       label: Donate link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: contact
       label: Contact link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: facebook
       label: Facebook link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: privacy
       label: Privacy link
       type: string
+      description: Only the words change here. Where the link goes stays the same.
     - name: copyright_name
       label: Name after the © sign
       type: string
@@ -1244,25 +1327,31 @@ content:
     type: string
     list: true
   - name: not_found
-    label: Page not found
+    label: Page not found (rarely needed)
     type: object
     description: Shown when someone opens a link that doesn't exist.
     fields:
     - name: kicker
       label: Small label
       type: string
+      description: The small capital-letter words just above the heading.
     - name: heading
       label: Heading
       type: string
+      description: The big title of this section.
     - name: text
       label: Text
       type: text
+      description: The sentence under the heading.
     - name: home_button
       label: Home button words
       type: string
+      description: The words on this button or link.
     - name: tab_title
       label: Browser tab title
       type: string
+      description: The bold title of this box.
     - name: description
       label: Short summary for Google and sharing
       type: text
+      description: One or two sentences about this page.

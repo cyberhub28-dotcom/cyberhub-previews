@@ -1,0 +1,10 @@
+{%- comment -%}
+Sorts the sports from Programs (edited in Pages CMS) by status.
+main = the first "Open now" sport, else the first "Opening soon" one (it drives the Home page countdown and scoreboard).
+active_sports = Open now sports, then Opening soon ones. later_sports = Coming later. over_sports = Season over. Hidden ones are left out.
+{%- endcomment -%}
+{%- assign main = nil -%}{%- assign _open = "" | split: "" -%}{%- assign _soon = "" | split: "" -%}{%- assign later_sports = "" | split: "" -%}{%- assign over_sports = "" | split: "" -%}
+{%- for x in site.data.aasc.programs.sports -%}{%- assign _st = x.status | default: "later" | downcase | strip | split: " " | first -%}{%- if _st == "opening" -%}{%- assign _st = "soon" -%}{%- elsif _st == "coming" -%}{%- assign _st = "later" -%}{%- elsif _st == "season" -%}{%- assign _st = "over" -%}{%- endif -%}
+{%- if _st == "open" -%}{%- assign _open = _open | push: x -%}{%- elsif _st == "soon" -%}{%- assign _soon = _soon | push: x -%}{%- elsif _st == "over" -%}{%- assign over_sports = over_sports | push: x -%}{%- elsif _st != "hidden" -%}{%- assign later_sports = later_sports | push: x -%}{%- endif -%}
+{%- endfor -%}
+{%- assign active_sports = _open | concat: _soon -%}{%- assign main = active_sports | first -%}

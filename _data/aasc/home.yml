@@ -15,8 +15,10 @@ hero:
   - Every ability
   - Every athlete
   - Every opportunity
-  season_dates: '{days} from {first day short}'
-  countdown_start: Registration opens {opens}
+  countdown:
+    before: until registration opens
+    open: Registration is open now
+    closed: Winter registration has closed. Contact us about the next season.
 story:
   kicker: Why we started
   heading: It started with a team for Bennett.
@@ -28,20 +30,18 @@ story:
   button: Read our story
 glance:
   opens_label: Opens
+  closes_label: Closes
   spots_label: Spots
   fee_label: Fee
   fee_each: EACH
-  sessions_label: '{day} sessions'
-  note: '{days}, {first day} through {last day year}. Registration closes when all {spots} spots are filled or on {closes year}, whichever comes first.'
+  sessions_label: Sessions
   faq_button: Parent questions
 lineup:
   kicker: The lineup
   heading: Four sports. Every pace.
   intro: Every athlete plays at their own pace, with coaches and buddies right beside them.
-  open_tag: Signing up
   season_link: See the season
   note: Basketball, baseball and flag football aren't open for sign-ups yet. Dates and fees will be posted here first.
-  season_line: '{season}. {Sessions in words} {days}, {spots} spots, {fee}.'
 gameday:
   kicker: Game day, every day
   heading: Everything you need for game day.
@@ -122,4 +122,4 @@ join:
   give_text: Donate or sponsor so every child can play.
 page:
   tab_title: All Abilities Sports Club | Inclusive youth sports
-  description: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. {season} registration opens {opens year}.
+  description: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. Winter Indoor Soccer registration opens November 20, 2026.

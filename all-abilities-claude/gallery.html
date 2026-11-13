@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.gallery -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.programs -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign p = site.data.aasc.gallery -%}{%- assign sp = site.data.aasc.programs -%}{%- include aasc/lineup.html -%}{%- assign page_title = p.page.tab_title | escape -%}{%- assign page_desc = p.page.description | escape -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -33,7 +33,7 @@
 <body data-page="gallery">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | default: "Skip to main content" | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="gallery" %}
@@ -52,7 +52,7 @@
   One card per photo group, in the order of the Photo groups list in Pages CMS.
   The first group that has photos gets the big navy card on top. Each group's Drawing sets its picture and colors.
 {%- endcomment -%}
-{%- include aasc/featured-sport.html -%}{%- assign season_name = feat.name | default: "" | downcase | strip -%}
+{%- assign season_name = main.name | default: "" | downcase | strip -%}
 {%- assign total = 0 -%}{%- assign big_i = -1 -%}{%- assign gn = 0 -%}
 {%- for g in p.groups -%}{%- assign gn = gn | plus: 1 -%}{%- assign cnt = 0 -%}{%- for x in g.photos -%}{%- if x.photo and x.photo != "" -%}{%- assign cnt = cnt | plus: 1 -%}{%- endif -%}{%- endfor -%}{%- assign total = total | plus: cnt -%}{%- if big_i == -1 and cnt > 0 -%}{%- assign big_i = forloop.index0 -%}{%- endif -%}{%- endfor -%}
 {%- assign small_n = gn -%}{%- if big_i != -1 -%}{%- assign small_n = gn | minus: 1 -%}{%- endif -%}
@@ -76,7 +76,7 @@
 {%- assign gname = g.name | default: "" | downcase | strip %}
         <li class="sp sp-{{ sport_slug }}{% if big %} sp-feature{% endif %}">
 {%- if set.size > 0 %}
-          <button type="button" class="sp-card has-photos" aria-haspopup="dialog" data-sport="{{ name }}">{{ art }}<span class="sp-text">{% if big and gname == season_name %}<span class="sp-kick">{{ p.season_tag | escape }}</span>{% endif %}<span class="sp-name">{{ name }}</span><span class="sp-pill">{{ set.size }} {% if set.size == 1 %}{{ p.photo_word | escape }}{% else %}{{ p.photos_word | escape }}{% endif %}<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></button>
+          <button type="button" class="sp-card has-photos" aria-haspopup="dialog" data-sport="{{ name }}">{{ art }}<span class="sp-text">{% if big and gname == season_name %}<span class="sp-kick">{{ p.season_tag | escape }}</span>{% endif %}<span class="sp-name">{{ name }}</span><span class="sp-pill">{{ set.size }} {% if set.size == 1 %}{{ p.photo_word | default: "photo" | escape }}{% else %}{{ p.photos_word | default: "photos" | escape }}{% endif %}<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></button>
           <span class="sp-set" hidden>{% for x in set %}<span data-src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" data-alt="{{ x.description | escape }}" data-cap="{{ x.caption | escape }}"></span>{% endfor %}</span>
 {%- else %}
           <div class="sp-card no-photos">{{ art }}<span class="sp-text"><span class="sp-name">{{ name }}</span><span class="sp-status">{{ p.coming_soon | escape }}</span></span></div>

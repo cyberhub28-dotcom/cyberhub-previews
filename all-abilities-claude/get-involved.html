@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.get_involved -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.programs -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign p = site.data.aasc.get_involved -%}{%- assign sp = site.data.aasc.programs -%}{%- include aasc/lineup.html -%}{%- assign page_title = p.page.tab_title | escape -%}{%- assign page_desc = p.page.description | escape -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -33,7 +33,7 @@
 <body data-page="signup">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | default: "Skip to main content" | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="involved" %}
@@ -47,18 +47,24 @@
     </div>
   </section>
   <section class="sec">
-    <div class="wrap two">
+    <div class="wrap{% if active_sports.size > 0 %} two{% endif %}">
       <div class="panel">
         <h2 class="join-h">{{ p.choose_heading | escape }}</h2>
         <div class="signups">
           <div class="signup handoff" id="athlete">
             <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-acc:#3F7D2A"><use href="#pg-soccer"/></svg>{{ p.athlete_heading | escape }}</h3>
             <p class="muted">{{ p.athlete_text | escape }}</p>
-            <div class="ho-card">
-              <strong>{% include aasc/fill.html t=p.opens_line %}</strong>
-              {% if c.registration_form and c.registration_form != "" %}<div><a class="btn btn-navy" href="{{ c.registration_form | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% if c.payment_link and c.payment_link != "" %} <a class="btn btn-line-dark" href="{{ c.payment_link | escape }}" target="_blank" rel="noopener">{{ p.pay_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% endif %}</div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
+{%- for x in active_sports %}
+{%- include aasc/sport-info.html x=x %}
+            <div class="ho-card" id="register-{{ si_slug }}">
+              <strong>{{ si_title | escape }}: {{ si_pill | escape }}</strong>
+              {% if x.signup_link and x.signup_link != "" %}<div><a class="btn btn-navy" href="{{ x.signup_link | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% if x.payment_link and x.payment_link != "" %} <a class="btn btn-line-dark" href="{{ x.payment_link | escape }}" target="_blank" rel="noopener">{{ p.pay_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% endif %}</div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
             </div>
-            {% unless c.registration_form and c.registration_form != "" %}<p class="ph-note"><span aria-hidden="true">✎</span><span>To confirm: the link to the club's Google registration form. This button opens it in a new tab once it's added.</span></p>{% endunless %}
+            {% unless x.signup_link and x.signup_link != "" %}<p class="ph-note"><span aria-hidden="true">✎</span><span>To confirm: the link to the club's sign-up form for {{ x.name | escape }}. This button opens it in a new tab once it's added.</span></p>{% endunless %}
+{%- endfor %}
+{%- if active_sports.size == 0 %}
+            <div class="ho-card"><strong>{{ p.none_open | default: "No sports are open for sign-ups right now. Check back soon." | escape }}</strong></div>
+{%- endif %}
           </div>
           <div class="signup handoff" id="volunteer">
             <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-buddy:#0287B0"><use href="#pg-buddy"/></svg>{{ p.volunteer_heading | escape }}</h3>
@@ -71,17 +77,21 @@
           </div>
         </div>
       </div>
+{%- if active_sports.size > 0 %}
       <aside class="panel dark">
-        <h2>{{ s.name | escape }}</h2>
+{%- for x in active_sports %}
+{%- include aasc/sport-info.html x=x %}
+        <h2>{{ si_title | escape }}</h2>
         <dl class="sched">
-          <div><dt>{{ p.side.signups_label | escape }}</dt><dd>{% include aasc/fill.html t=p.side.signups %}</dd></div>
-          <div><dt>{{ p.side.sessions_label | escape }}</dt><dd>{% include aasc/fill.html t=p.side.sessions %}</dd></div>
-          <div><dt>{{ p.side.fee_label | escape }}</dt><dd>{% include aasc/fill.html t=p.side.fee %}</dd></div>
-          <div><dt>{{ p.side.spots_label | escape }}</dt><dd>{% include aasc/fill.html t=p.side.spots %}</dd></div>
+          {%- if si_signups != "" %}<div><dt>{{ p.side.signups_label | escape }}</dt><dd>{{ si_signups_short | escape }}</dd></div>{% endif %}
+          {%- if si_season != "" or si_days != "" %}<div><dt>{{ p.side.sessions_label | escape }}</dt><dd>{% if si_days != "" %}{{ si_days | escape }}{% if si_season != "" %}, {% endif %}{% endif %}{{ si_season_short | escape }}</dd></div>{% endif %}
+          {%- if si_fee != "" %}<div><dt>{{ p.side.fee_label | escape }}</dt><dd>{{ si_fee | escape }} {{ sp.words.per_athlete | default: "per athlete" | escape }}</dd></div>{% endif %}
+          {%- if x.spots and x.spots != "" %}<div><dt>{{ p.side.spots_label | escape }}</dt><dd>{{ x.spots }}</dd></div>{% endif %}
         </dl>
-        <p>{% include aasc/fill.html t=p.side.note %}</p>
-
+{%- endfor %}
+        <p>{{ p.side.note | escape }}</p>
       </aside>
+{%- endif %}
     </div>
   </section>
 </main>

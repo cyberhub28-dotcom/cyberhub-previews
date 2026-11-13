@@ -1,6 +1,6 @@
 ---
 ---
-{%- assign c = site.data.aasc.site.club -%}{%- assign s = site.data.aasc.site.season -%}{%- assign pg = site.data.aasc.programs -%}{%- assign p = site.data.aasc.programs -%}{%- assign day = s.session_day | default: "Sunday" -%}{%- assign sp = site.data.aasc.programs -%}{%- assign st = site.data.aasc.site -%}{%- assign nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}{%- assign sn = s.sundays | plus: 0 -%}{%- capture sundays_word -%}{%- if sn <= 20 -%}{{ nw[sn] }}{%- else -%}{{ sn }}{%- endif -%}{%- endcapture -%}{%- capture page_title -%}{% include aasc/fill.html t=p.page.tab_title %}{%- endcapture -%}{%- capture page_desc -%}{% include aasc/fill.html t=p.page.description %}{%- endcapture -%}<!doctype html>
+{%- assign c = site.data.aasc.site.club -%}{%- assign p = site.data.aasc.programs -%}{%- assign sp = site.data.aasc.programs -%}{%- include aasc/lineup.html -%}{%- assign page_title = p.page.tab_title | escape -%}{%- assign page_desc = p.page.description | escape -%}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -33,7 +33,7 @@
 <body data-page="programs">
 {% include aasc/symbols.html %}
 
-<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | escape }}</a>
+<a class="skip" href="#main">{{ site.data.aasc.site.menu.skip_link | default: "Skip to main content" | escape }}</a>
 <div class="ribbon"><p class="wrap">Preview for Amber, not public yet. Tap <strong>Review</strong> on any page to approve it or ask for changes. <span class="ph">Tags like this</span> mark details we still need.</p></div>
 
 {% include aasc/header.html current="programs" %}
@@ -48,47 +48,71 @@
   </section>
   <section class="sec">
     <div class="wrap two">
-      <div class="panel">
-        <span class="pill open">{% include aasc/fill.html t=p.open_tag %}</span>
-        <h2 class="big">{{ s.name | escape }}</h2>
-        <p class="muted">{{ p.soccer_text | escape }}</p>
-        <dl class="facts">
-          {%- assign fx = p.facts %}
-          <div><dt>{{ fx.opens_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.opens %}</dd></div>
-          <div><dt>{{ fx.closes_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.closes %}</dd></div>
-          <div><dt>{{ fx.sessions_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.sessions %}</dd></div>
-          <div><dt>{{ fx.fee_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.fee %}</dd></div>
-          <div><dt>{{ fx.spots_label | escape }}</dt><dd>{% include aasc/fill.html t=fx.spots %}</dd></div>
-          <div><dt>{{ fx.where_label | escape }}</dt><dd>{% if s.where and s.where != "" %}{{ s.where | escape }}{% else %}<span class="ph">To confirm: venue</span>{% endif %}</dd></div>
-          <div><dt>{{ fx.times_label | escape }}</dt><dd>{% if s.session_times and s.session_times != "" %}{{ s.session_times | escape }}{% else %}<span class="ph">To confirm: times</span>{% endif %}</dd></div>
-          <div><dt>{{ fx.ages_label | escape }}</dt><dd>{% if s.oldest_age and s.oldest_age != "" %}{% include aasc/fill.html t=fx.ages %}{% else %}{% include aasc/fill.html t=fx.ages_no_top %} <span class="ph">To confirm: top age</span>{% endif %}</dd></div>
-        </dl>
+      <div class="stack">
+{%- assign w = p.words -%}
+{%- for x in active_sports %}
+{%- include aasc/sport-info.html x=x %}{%- include aasc/sport-style.html pic=x.picture %}
+        <article class="panel sport-block" id="{{ si_slug }}">
+          {%- if x.photo and x.photo != "" %}
+          <img class="sb-photo" src="{{ x.photo | remove_first: '/all-abilities-claude/' | remove_first: 'all-abilities-claude/' | escape }}" alt="{{ x.name | escape }} at All Abilities Sports Club" loading="lazy">
+          {%- endif %}
+          <span class="pill open">{{ si_pill | escape }}</span>
+          <h2 class="big">{{ si_title | escape }}</h2>
+          {%- if x.description and x.description != "" %}<p class="muted">{{ x.description | escape }}</p>{% elsif x.line and x.line != "" %}<p class="muted">{{ x.line | escape }}</p>{% endif %}
+          <dl class="facts">
+            {%- if si_signups != "" %}<div><dt>{{ w.signups | default: "Sign-ups" | escape }}</dt><dd>{{ si_signups | escape }}</dd></div>{% endif %}
+            {%- if si_season != "" or si_days != "" %}<div><dt>{{ w.season | default: "Season" | escape }}</dt><dd>{% if si_days != "" %}{{ si_days | escape }}{% if si_season != "" %}, {% endif %}{% endif %}{{ si_season | escape }}{% if x.sessions and x.sessions != "" %} ({{ x.sessions }} sessions){% endif %}</dd></div>{% endif %}
+            <div><dt>{{ w.times | default: "Session times" | escape }}</dt><dd>{% if x.times and x.times != "" %}{{ x.times | escape }}{% else %}<span class="ph">To confirm: times</span>{% endif %}</dd></div>
+            <div><dt>{{ w.where | default: "Where" | escape }}</dt><dd>{% if x.where and x.where != "" %}{{ x.where | escape }}{% else %}<span class="ph">To confirm: venue</span>{% endif %}</dd></div>
+            {%- if x.ages and x.ages != "" %}<div><dt>{{ w.ages | default: "Ages" | escape }}</dt><dd>{{ x.ages | escape }}</dd></div>{% endif %}
+            {%- if si_fee != "" %}<div><dt>{{ w.fee | default: "Fee" | escape }}</dt><dd>{{ si_fee | escape }} {{ w.per_athlete | default: "per athlete" | escape }}</dd></div>{% endif %}
+            {%- if x.spots and x.spots != "" %}<div><dt>{{ w.spots | default: "Spots" | escape }}</dt><dd>{{ x.spots }} athletes</dd></div>{% endif %}
+            <div><dt>{{ w.pay | default: "How to pay" | escape }}</dt><dd>{% if x.how_to_pay and x.how_to_pay != "" %}{{ x.how_to_pay | escape }}{% else %}<span class="ph">To confirm: how to pay</span>{% endif %}</dd></div>
+          </dl>
+          <div class="btns"><a class="btn btn-navy" href="{{ si_link | escape }}"{% if si_ext %} target="_blank" rel="noopener"{% endif %}>{% if x.button and x.button != "" %}{{ x.button | escape }}{% else %}{{ w.register | default: "Register" | escape }} for {{ si_title | escape }}{% endif %}</a></div>
+        </article>
+{%- endfor %}
+{%- if active_sports.size == 0 %}
+        <div class="panel"><h2>{{ p.later_heading | escape }}</h2><p class="muted">{{ p.later_intro | escape }}</p></div>
+{%- endif %}
       </div>
       <div class="panel soft">
         <h2>{{ p.steps_heading | escape }}</h2>
         <ol class="steps">
-          <li><div><strong>{% include aasc/fill.html t=p.step1_title %}</strong><span>{{ p.step1_text | escape }}</span></div></li>
-          <li><div><strong>{{ p.step2_title | escape }}</strong><span>{{ p.step2_text | escape }}</span></div></li>
-          <li><div><strong>{% include aasc/fill.html t=p.step3_title %}</strong><span>{% if s.how_to_pay and s.how_to_pay != "" %}{{ s.how_to_pay | escape }}{% else %}{% include aasc/fill.html t=p.step3_text %} <span class="ph">To confirm: how to pay</span>{% endif %}</span></div></li>
-          <li><div><strong>{% include aasc/fill.html t=p.step4_title %}</strong><span>{% include aasc/fill.html t=p.step4_text %}</span></div></li>
+{%- for step in p.steps %}
+          <li><div><strong>{{ step.title | escape }}</strong><span>{{ step.text | escape }}</span></div></li>
+{%- endfor %}
         </ol>
         <div class="btns"><a class="btn btn-navy" href="get-involved.html">{{ p.button | escape }}</a></div>
       </div>
     </div>
   </section>
+{%- if later_sports.size > 0 %}
   <section class="sec" style="padding-top:0">
     <div class="wrap">
       <div class="sec-head"><p class="kicker">{{ p.later_kicker | escape }}</p><h2>{{ p.later_heading | escape }}</h2><p>{{ p.later_intro | escape }}</p></div>
       <div class="later">
-{%- include aasc/featured-sport.html -%}
 {%- for x in later_sports %}
 {%- include aasc/sport-style.html pic=x.picture %}
-        <article class="sport" style="{{ sport_style }}"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="{{ sport_color }}"><use href="#pg-{{ sport_art }}"/></svg></div><span class="pill">{{ sp.soon_tag | escape }}</span><h3>{{ x.name | escape }}</h3><p>{{ x.line | escape }}</p></article>
+        <article class="sport" style="{{ sport_style }}"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="{{ sport_color }}"><use href="#pg-{{ sport_art }}"/></svg></div><span class="pill">{{ w.later | default: "Coming later" | escape }}</span><h3>{{ x.name | escape }}</h3><p>{{ x.line | escape }}</p></article>
 {%- endfor %}
-
       </div>
     </div>
   </section>
+{%- endif %}
+{%- if over_sports.size > 0 %}
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2>{{ p.over_heading | default: "Past seasons" | escape }}</h2></div>
+      <div class="later">
+{%- for x in over_sports %}
+{%- include aasc/sport-info.html x=x %}{%- include aasc/sport-style.html pic=x.picture %}
+        <article class="sport is-over" style="{{ sport_style }}"><div class="art" aria-hidden="true"><svg viewBox="0 0 120 120" style="{{ sport_color }}"><use href="#pg-{{ sport_art }}"/></svg></div><span class="pill">{{ w.over | default: "Season over" | escape }}</span><h3>{{ si_title | escape }}</h3><p>{% if si_season != "" %}{{ si_season | escape }}{% else %}{{ x.line | escape }}{% endif %}</p></article>
+{%- endfor %}
+      </div>
+    </div>
+  </section>
+{%- endif %}
 </main>
 
 {% include aasc/footer.html %}
