@@ -2,3 +2,9 @@
 # can read the text, dates and photos that are edited in Pages CMS
 # (the files in _data/aasc). Every other folder is copied as it is.
 title: CyberHub previews
+
+# Each sport is its own file in _aasc_sports, so Pages CMS shows a "Sports" list
+# with one short form per sport. They feed the pages only; no page of their own.
+collections:
+  aasc_sports:
+    output: false

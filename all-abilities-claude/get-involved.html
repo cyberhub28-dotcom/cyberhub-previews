@@ -41,37 +41,37 @@
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
     <div class="wrap">
-      <p class="kicker">{{ p.kicker | escape }}</p>
-      <h1>{{ p.headline | escape }}</h1>
-      <p class="sub">{{ p.intro | escape }}</p>
+      <p class="kicker">{{ p.top.kicker | escape }}</p>
+      <h1>{{ p.top.headline | escape }}</h1>
+      <p class="sub">{{ p.top.intro | escape }}</p>
     </div>
   </section>
   <section class="sec">
     <div class="wrap{% if active_sports.size > 0 %} two{% endif %}">
       <div class="panel">
-        <h2 class="join-h">{{ p.choose_heading | escape }}</h2>
+        <h2 class="join-h">{{ p.join.heading | escape }}</h2>
         <div class="signups">
           <div class="signup handoff" id="athlete">
-            <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-acc:#3F7D2A"><use href="#pg-soccer"/></svg>{{ p.athlete_heading | escape }}</h3>
-            <p class="muted">{{ p.athlete_text | escape }}</p>
+            <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-acc:#3F7D2A"><use href="#pg-soccer"/></svg>{{ p.join.athlete.heading | escape }}</h3>
+            <p class="muted">{{ p.join.athlete.text | escape }}</p>
 {%- for x in active_sports %}
 {%- include aasc/sport-info.html x=x %}
             <div class="ho-card" id="register-{{ si_slug }}">
               <strong>{{ si_title | escape }}: {{ si_pill | escape }}</strong>
-              {% if x.signup_link and x.signup_link != "" %}<div><a class="btn btn-navy" href="{{ x.signup_link | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% if x.payment_link and x.payment_link != "" %} <a class="btn btn-line-dark" href="{{ x.payment_link | escape }}" target="_blank" rel="noopener">{{ p.pay_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% endif %}</div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
+              {% if x.signup_link and x.signup_link != "" %}<div><a class="btn btn-navy" href="{{ x.signup_link | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.join.athlete.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% if x.payment_link and x.payment_link != "" %} <a class="btn btn-line-dark" href="{{ x.payment_link | escape }}" target="_blank" rel="noopener">{{ p.join.athlete.pay_button | escape }} <span class="arr" aria-hidden="true">↗</span></a>{% endif %}</div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.join.athlete.register_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
             </div>
             {% unless x.signup_link and x.signup_link != "" %}<p class="ph-note"><span aria-hidden="true">✎</span><span>To confirm: the link to the club's sign-up form for {{ x.name | escape }}. This button opens it in a new tab once it's added.</span></p>{% endunless %}
 {%- endfor %}
 {%- if active_sports.size == 0 %}
-            <div class="ho-card"><strong>{{ p.none_open | default: "No sports are open for sign-ups right now. Check back soon." | escape }}</strong></div>
+            <div class="ho-card"><strong>{{ p.join.athlete.none_open | default: "No sports are open for sign-ups right now. Check back soon." | escape }}</strong></div>
 {%- endif %}
           </div>
           <div class="signup handoff" id="volunteer">
-            <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-buddy:#0287B0"><use href="#pg-buddy"/></svg>{{ p.volunteer_heading | escape }}</h3>
-            <p class="muted">{{ p.volunteer_text | escape }}</p>
+            <h3 class="signup-h"><svg viewBox="0 0 120 120" aria-hidden="true" style="color:#0A2342;--pg-buddy:#0287B0"><use href="#pg-buddy"/></svg>{{ p.join.volunteer.heading | escape }}</h3>
+            <p class="muted">{{ p.join.volunteer.text | escape }}</p>
             <div class="ho-card">
-              <strong>{{ p.volunteer_card | escape }}</strong>
-              {% if c.volunteer_form and c.volunteer_form != "" %}<div><a class="btn btn-navy" href="{{ c.volunteer_form | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.volunteer_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.volunteer_button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
+              <strong>{{ p.join.volunteer.line | escape }}</strong>
+              {% if c.volunteer_form and c.volunteer_form != "" %}<div><a class="btn btn-navy" href="{{ c.volunteer_form | escape }}" target="_blank" rel="noopener" data-form-link>{{ p.join.volunteer.button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% else %}<div><a class="btn btn-navy" href="#" data-form-link aria-disabled="true">{{ p.join.volunteer.button | escape }} <span class="arr" aria-hidden="true">↗</span></a></div>{% endif %}
             </div>
             {% unless c.volunteer_form and c.volunteer_form != "" %}<p class="ph-note"><span aria-hidden="true">✎</span><span>To confirm: the link to the club's volunteer sign-up form. This button opens it in a new tab once it's added.</span></p>{% endunless %}
           </div>
@@ -83,10 +83,10 @@
 {%- include aasc/sport-info.html x=x %}
         <h2>{{ si_title | escape }}</h2>
         <dl class="sched">
-          {%- if si_signups != "" %}<div><dt>{{ p.side.signups_label | escape }}</dt><dd>{{ si_signups_short | escape }}</dd></div>{% endif %}
-          {%- if si_season != "" or si_days != "" %}<div><dt>{{ p.side.sessions_label | escape }}</dt><dd>{% if si_days != "" %}{{ si_days | escape }}{% if si_season != "" %}, {% endif %}{% endif %}{{ si_season_short | escape }}</dd></div>{% endif %}
-          {%- if si_fee != "" %}<div><dt>{{ p.side.fee_label | escape }}</dt><dd>{{ si_fee | escape }} {{ sp.words.per_athlete | default: "per athlete" | escape }}</dd></div>{% endif %}
-          {%- if si_spots > 0 %}<div><dt>{{ p.side.spots_label | escape }}</dt><dd>{{ si_spots }}</dd></div>{% endif %}
+          {%- if si_signups != "" %}<div><dt>{{ sp.words.signups | escape }}</dt><dd>{{ si_signups_short | escape }}</dd></div>{% endif %}
+          {%- if si_season != "" or si_days != "" %}<div><dt>{{ sp.words.sessions | escape }}</dt><dd>{% if si_days != "" %}{{ si_days | escape }}{% if si_season != "" %}, {% endif %}{% endif %}{{ si_season_short | escape }}</dd></div>{% endif %}
+          {%- if si_fee != "" %}<div><dt>{{ sp.words.fee | escape }}</dt><dd>{{ si_fee | escape }} {{ sp.words.per_athlete | default: "per athlete" | escape }}</dd></div>{% endif %}
+          {%- if si_spots > 0 %}<div><dt>{{ sp.words.spots | escape }}</dt><dd>{{ si_spots }}</dd></div>{% endif %}
         </dl>
 {%- endfor %}
         <p>{{ p.side.note | escape }}</p>

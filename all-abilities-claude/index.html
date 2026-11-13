@@ -69,7 +69,7 @@
       </figure>
     </div>
    </div>
-    <div class="ticker" aria-hidden="true"><div class="ticker-track">{%- capture tick -%}<ul>{% for t in p.hero.ticker %}<li>{{ t | escape }}</li>{% endfor %}</ul>{%- endcapture -%}{{ tick }}{{ tick }}</div></div>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track">{%- capture tick -%}<ul>{% for x in active_sports %}<li>{{ x.name | escape }}</li>{% endfor %}{% for x in later_sports %}<li>{{ x.name | escape }}</li>{% endfor %}{% for t in p.hero.ticker %}<li>{{ t | escape }}</li>{% endfor %}</ul>{%- endcapture -%}{{ tick }}{{ tick }}</div></div>
   </section>
 
   <section class="heart sec" id="story" aria-labelledby="story-h">
@@ -201,7 +201,40 @@
         <p>{{ p.faq.intro | escape }}</p>
         <div class="btns"><a class="btn btn-navy" href="contact.html">{{ p.faq.button | escape }}</a></div>
       </div>
-      <div class="faq-list reveal">{% for q in site.data.aasc.home.faq.questions %}
+      <div class="faq-list reveal">
+{%- comment -%} Season questions are filled in from the first open sport in Sports, so its dates, fee, place and times are typed only once. {%- endcomment -%}
+{%- if main -%}
+{%- assign _nw = "zero,one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,twenty" | split: "," -%}
+{%- capture a_what -%}{% if main.description and main.description != "" %}{{ main.description | escape }}{% else %}{{ main.line | escape }}{% endif %}{% if m_first != "" and m_last != "" %} It runs {% if m_sessions > 0 %}{% if m_sessions <= 20 %}{{ _nw[m_sessions] }}{% else %}{{ m_sessions }}{% endif %} {% if m_days != "" %}{{ m_days }}{% else %}sessions{% endif %}, {% endif %}from {{ m_first | date: "%B %-d" }} to {{ m_last | date: "%B %-d, %Y" }}.{% endif %}{%- endcapture -%}
+{%- assign a_what = a_what | strip -%}
+        {%- if a_what != "" %}
+        <details>
+          <summary>What is {{ m_title | escape }}?</summary>
+          <div class="ans"><p>{{ a_what }}</p></div>
+        </details>{% endif %}
+        {%- if m_open != "" or m_close != "" %}
+        <details>
+          <summary>When does registration open and close?</summary>
+          <div class="ans"><p>{% if m_st == "open" %}Registration is open now.{% elsif m_open != "" %}Registration opens {{ m_open | date: "%B %-d, %Y" }}.{% endif %}{% if m_close != "" %} It closes {{ m_close | date: "%B %-d, %Y" }}{% if m_spots > 0 %}, or sooner if all {{ m_spots }} spots are filled{% endif %}.{% endif %}</p></div>
+        </details>{% endif %}
+        {%- if m_fee != "" %}
+        <details>
+          <summary>How much does it cost?</summary>
+          <div class="ans"><p>The registration fee is {{ m_fee | escape }} {{ sp.words.per_athlete | default: "per athlete" | escape }}.</p></div>
+        </details>{% endif %}
+        <details>
+          <summary>How do I pay{% if m_fee != "" %} the {{ m_fee | escape }} fee{% endif %}?{% unless main.how_to_pay and main.how_to_pay != "" %}<span class="soon">{{ p.faq.soon_tag | escape }}</span>{% endunless %}</summary>
+          <div class="ans"><p>{% if main.how_to_pay and main.how_to_pay != "" %}{{ main.how_to_pay | escape }}{% else %}The club will post this before the season starts.{% endif %}</p></div>
+        </details>
+        <details>
+          <summary>Where are sessions held?{% unless main.where and main.where != "" %}<span class="soon">{{ p.faq.soon_tag | escape }}</span>{% endunless %}</summary>
+          <div class="ans"><p>{% if main.where and main.where != "" %}At {{ main.where | escape }}.{% else %}The club will post this before the season starts.{% endif %}</p></div>
+        </details>
+        <details>
+          <summary>What time are the {% if main.day and main.day != "" %}{{ main.day | escape }} {% endif %}sessions?{% unless main.times and main.times != "" %}<span class="soon">{{ p.faq.soon_tag | escape }}</span>{% endunless %}</summary>
+          <div class="ans"><p>{% if main.times and main.times != "" %}{{ main.times | escape }}{% else %}The club will post this before the season starts.{% endif %}</p></div>
+        </details>
+{%- endif %}{% for q in site.data.aasc.home.faq.questions %}
         <details>
           <summary>{{ q.question | escape }}{% if q.coming_soon %}<span class="soon">{{ p.faq.soon_tag | escape }}</span>{% endif %}</summary>
           <div class="ans">{{ q.answer }}</div>

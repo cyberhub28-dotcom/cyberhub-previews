@@ -1,24 +1,19 @@
-# All Abilities Sports Club preview: Home page. Edited in Pages CMS.
 hero:
   headline_1: Everybody plays
   headline_2: Everybody
   headline_mark: belongs.
-  text: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. Soccer comes first, with basketball, baseball and flag football to follow. No experience needed.
+  text: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. No experience needed.
   story_link: Why we started
   team_name: Team All Abilities
   team_tag: Every ability welcome
   ticker:
-  - Soccer
-  - Basketball
-  - Baseball
-  - Flag football
   - Every ability
   - Every athlete
   - Every opportunity
   countdown:
     before: until registration opens
     open: Registration is open now
-    closed: Winter registration has closed. Contact us about the next season.
+    closed: Registration has closed. Contact us about the next season.
 story:
   kicker: Why we started
   heading: It started with a team for Bennett.
@@ -38,15 +33,15 @@ glance:
   faq_button: Parent questions
 lineup:
   kicker: The lineup
-  heading: Four sports. Every pace.
+  heading: Every sport. Every pace.
   intro: Every athlete plays at their own pace, with coaches and buddies right beside them.
   season_link: See the season
-  note: Basketball, baseball and flag football aren't open for sign-ups yet. Dates and fees will be posted here first.
+  note: Sports marked Coming later aren't open for sign-ups yet. Dates and fees will be posted here first.
 gameday:
   kicker: Game day, every day
   heading: Everything you need for game day.
   programs_title: Programs
-  programs_text: Soccer first. Basketball, baseball and flag football to follow, each adapted so every athlete can join in.
+  programs_text: Every sport is adapted so every athlete can join in, with coaches and buddies close by.
   programs_link: View programs
   donate_title: Donate
   donate_text: Help pay for coaching, adaptive equipment and affordable spots, to help keep cost from being the reason a child sits out.
@@ -73,35 +68,17 @@ events:
 faq:
   kicker: Parent questions
   heading: Good to know before you sign up.
-  intro: Quick answers about Winter Indoor Soccer. Can't find yours? Email the club and Amber will get back to you.
+  intro: Quick answers for families. Can't find yours? Email the club and Amber will get back to you.
   button: Ask a question
   soon_tag: Coming soon
   questions:
-  - question: What is Winter Indoor Soccer?
-    answer: <p>An indoor soccer season for children of all abilities. It runs six Sundays, from January 10 to February 14, 2027.</p>
-    coming_soon: false
-  - question: When does registration open and close?
-    answer: <p>Registration opens November 20, 2026. It closes December 18, 2026, or sooner if all 48 spots are filled.</p>
-    coming_soon: false
   - question: How do I register my child?
     answer: <p>A parent or guardian registers each athlete on the club's online registration form. The link goes live on the <a href="get-involved.html">sign-up page</a> when registration opens.</p>
     coming_soon: false
-  - question: How much does it cost?
-    answer: <p>The registration fee is $30 per athlete.</p>
-    coming_soon: false
-  - question: How do I pay the $30 fee?
-    answer: <p>The club will post this before the season starts.</p>
-    coming_soon: true
-  - question: Where are sessions held?
-    answer: <p>At Dayton Functional Fitness in Beavercreek, Ohio.</p>
-    coming_soon: false
-  - question: What time are the Sunday sessions?
-    answer: <p>The club will post this before the season starts.</p>
-    coming_soon: true
   - question: What ages can play?
-    answer: '<p>Winter Indoor Soccer starts at age 3. If your child is a little younger and ready to join in, they''re welcome too. <span class="ph">To confirm: top age</span></p>'
+    answer: '<p>Children from age 3 can play. If your child is a little younger and ready to join in, they''re welcome too. <span class="ph">To confirm: top age</span></p>'
     coming_soon: false
-  - question: Does my child need soccer experience?
+  - question: Does my child need any experience?
     answer: <p>No. No experience is needed.</p>
     coming_soon: false
   - question: Can I help without signing up an athlete?
@@ -115,11 +92,11 @@ join:
   heading: There's a place on the field for you.
   intro: Sign up an athlete, lend a hand on game day, or help another family say yes.
   play_title: Play
-  play_text: Sign up your athlete for Winter Indoor Soccer.
+  play_text: Sign up your athlete for a sport.
   volunteer_title: Volunteer
   volunteer_text: Be a coach, a buddy or an event-day helper.
   give_title: Give
   give_text: Donate or sponsor so every child can play.
 page:
   tab_title: All Abilities Sports Club | Inclusive youth sports
-  description: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. Winter Indoor Soccer registration opens November 20, 2026.
+  description: Inclusive youth sports for children of all abilities in the Dayton, Ohio area. No experience needed.

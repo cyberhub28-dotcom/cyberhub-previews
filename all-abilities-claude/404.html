@@ -45,7 +45,7 @@
       <p class="kicker" style="color:var(--green)">{{ p.kicker | escape }}</p>
       <h1 style="font-size:var(--fs-h2)">{{ p.heading | escape }}</h1>
       <p class="muted">{{ p.text | escape }}</p>
-      <div class="btns"><a class="btn btn-navy" href="index.html">{{ p.home_button | escape }}</a><a class="btn btn-line-dark" href="get-involved.html">{{ site.data.aasc.site.menu.menu_register | default: "Register" | escape }}</a></div>
+      <div class="btns"><a class="btn btn-navy" href="index.html">{{ p.home_button | escape }}</a><a class="btn btn-line-dark" href="get-involved.html">{{ register_words | escape }}</a></div>
     </div>
   </section>
 </main>

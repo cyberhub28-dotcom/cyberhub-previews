@@ -41,9 +41,9 @@
 <main id="main" tabindex="-1">
   <section class="page-hero on-navy">
     <div class="wrap">
-      <p class="kicker">{{ p.kicker | escape }}</p>
-      <h1>{{ p.headline | escape }}</h1>
-      <p class="sub">{{ p.intro | escape }}</p>
+      <p class="kicker">{{ p.top.kicker | escape }}</p>
+      <h1>{{ p.top.headline | escape }}</h1>
+      <p class="sub">{{ p.top.intro | escape }}</p>
     </div>
   </section>
   <section class="sec">
@@ -54,22 +54,22 @@
             <div class="fl"><label for="c-name">{{ p.form.name_label | escape }} <span class="req" aria-hidden="true">*</span></label><input id="c-name" name="name" autocomplete="name" required></div>
             <div class="fl"><label for="c-email">{{ p.form.email_label | escape }} <span class="req" aria-hidden="true">*</span></label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
           </div>
-          <div class="fl"><label for="c-topic">{{ p.form.topic_label | escape }}</label><select id="c-topic" name="topic">{% for t in p.topics %}<option>{{ t | escape }}</option>{% endfor %}</select></div>
+          <div class="fl"><label for="c-topic">{{ p.form.topic_label | escape }}</label><select id="c-topic" name="topic">{% for t in p.form.topics %}<option>{{ t | escape }}</option>{% if forloop.first %}{% for x in active_sports %}{% include aasc/sport-info.html x=x %}<option>{{ si_title | escape }}</option>{% endfor %}{% endif %}{% endfor %}</select></div>
           <div class="fl"><label for="c-msg">{{ p.form.message_label | escape }} <span class="req" aria-hidden="true">*</span></label><textarea id="c-msg" name="message" required></textarea></div>
           <p class="err" id="c-err" role="alert" hidden></p>
-          <p class="form-hint">{{ p.form_hint | escape }}</p>
+          <p class="form-hint">{{ p.form.hint | escape }}</p>
           <div class="send-row"><button class="btn btn-navy" type="submit">{{ p.form.send_button | escape }}</button></div>
-          <div class="form-done" id="c-done" role="status" hidden><span aria-hidden="true">✓</span><span>{{ p.form_done | escape }}</span></div>
+          <div class="form-done" id="c-done" role="status" hidden><span aria-hidden="true">✓</span><span>{{ p.form.done | escape }}</span></div>
         </form>
       </div>
       <aside class="panel soft">
-        <h2>{{ p.email_heading | escape }}</h2>
+        <h2>{{ p.email_box.heading | escape }}</h2>
         <p class="muted">{{ c.contact_person | escape }}</p>
-        <div class="copy-row"><code class="email" id="club-email">{{ c.email | escape | replace: "@", "@<wbr>" }}</code><button class="btn btn-line-dark btn-sm" type="button" id="copy-email" data-copied="{{ p.copied | escape }}" data-selected="{{ p.selected | default: "Selected" | escape }}">{{ p.copy_button | escape }}</button>
+        <div class="copy-row"><code class="email" id="club-email">{{ c.email | escape | replace: "@", "@<wbr>" }}</code><button class="btn btn-line-dark btn-sm" type="button" id="copy-email" data-copied="{{ p.email_box.copied | escape }}" data-selected="{{ p.email_box.selected | default: "Selected" | escape }}">{{ p.email_box.copy_button | escape }}</button>
 </div>
         <p class="muted">{{ c.area_line | escape }}</p>
         {%- capture fb_open -%}<a href="{{ c.facebook | escape }}" target="_blank" rel="noopener">{%- endcapture %}
-        <p class="muted">{{ p.facebook_line | escape | replace: "[", fb_open | replace: "]", "</a>" }}</p>
+        <p class="muted">{{ p.email_box.facebook_line | escape | replace: "[", fb_open | replace: "]", "</a>" }}</p>
       </aside>
     </div>
   </section>

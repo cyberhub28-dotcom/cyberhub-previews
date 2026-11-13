@@ -1,54 +1,57 @@
-# All Abilities Sports Club preview: donate. Edited in Pages CMS.
-kicker: Donate and sponsor
-headline: Your support creates opportunities.
-intro: Inclusive sports. Stronger community. Brighter futures.
-gift_heading: Make a gift
-gift_text: Gifts help pay for programs, supportive coaching, adaptive equipment and affordable participation. Donations go through the club's own Zeffy form.
-donate_button: Donate on Zeffy
-donate_button_note: Opens the club's Zeffy donation page in a new tab.
-tax_note: Gifts to All Abilities Sports Club are not tax-deductible at this time.
-sponsor_heading: Partner with us
-sponsor_text: Local businesses can sponsor a level below. Let's build a more inclusive community together.
-sponsor_button: Talk about sponsoring
-levels_kicker: Sponsorship levels
-levels_heading: Pick the way you'd like to help.
+top:
+  kicker: Donate and sponsor
+  headline: Your support creates opportunities.
+  intro: Inclusive sports. Stronger community. Brighter futures.
+gift:
+  heading: Make a gift
+  text: Gifts help pay for programs, supportive coaching, adaptive equipment and affordable participation. Donations go through the club's own Zeffy form.
+  button: Donate on Zeffy
+  button_note: Opens the club's Zeffy donation page in a new tab.
+  tax_note: Gifts to All Abilities Sports Club are not tax-deductible at this time.
+sponsor:
+  heading: Partner with us
+  text: Local businesses can sponsor a level below. Let's build a more inclusive community together.
+  button: Talk about sponsoring
 levels:
-- amount: $500
-  name: Event Sponsor
-  text: Helps host special events and extra activities, such as sensory-friendly events, family activities, skills clinics and community gatherings.
-  perks:
-  - Recognition on social media
-  - Recognition at club events
-  - Shown as an Event Sponsor on our website
-  stand_out: false
-- amount: $1,000
-  name: Facility Sponsor
-  text: Supports the spaces where athletes of all abilities learn, play and belong.
-  perks:
-  - Recognition on social media
-  - Recognition on our website
-  - Acknowledgment in program materials
-  - Featured as a Facility Sponsor
-  stand_out: false
-- amount: $2,000
-  name: Program Sponsor
-  text: Directly supports our programs, coaching, adaptive equipment and affordable participation.
-  perks:
-  - Recognition on social media and our website
-  - Acknowledgment in all program communications
-  - Featured as a Program Sponsor
-  - Invitation to a special program event
-  stand_out: false
-- amount: $7,500+
-  name: Founding Sponsor
-  text: Be a founding partner and help shape the future of inclusive sports in our community.
-  perks:
-  - Premier name and logo placement on most marketing materials
-  - Featured on our website and social media
-  - Recognition in press releases and community outreach
-  - Invitation to exclusive events and program experiences
-  stand_out: true
-thanks_note: Sponsors will be thanked here as they join.
+  kicker: Sponsorship levels
+  heading: Pick the way you'd like to help.
+  list:
+  - amount: $500
+    name: Event Sponsor
+    text: Helps host special events and extra activities, such as sensory-friendly events, family activities, skills clinics and community gatherings.
+    perks:
+    - Recognition on social media
+    - Recognition at club events
+    - Shown as an Event Sponsor on our website
+    stand_out: false
+  - amount: $1,000
+    name: Facility Sponsor
+    text: Supports the spaces where athletes of all abilities learn, play and belong.
+    perks:
+    - Recognition on social media
+    - Recognition on our website
+    - Acknowledgment in program materials
+    - Featured as a Facility Sponsor
+    stand_out: false
+  - amount: $2,000
+    name: Program Sponsor
+    text: Directly supports our programs, coaching, adaptive equipment and affordable participation.
+    perks:
+    - Recognition on social media and our website
+    - Acknowledgment in all program communications
+    - Featured as a Program Sponsor
+    - Invitation to a special program event
+    stand_out: false
+  - amount: $7,500+
+    name: Founding Sponsor
+    text: Be a founding partner and help shape the future of inclusive sports in our community.
+    perks:
+    - Premier name and logo placement on most marketing materials
+    - Featured on our website and social media
+    - Recognition in press releases and community outreach
+    - Invitation to exclusive events and program experiences
+    stand_out: true
+  thanks_note: Sponsors will be thanked here as they join.
 page:
   tab_title: Donate and Sponsor | All Abilities Sports Club
   description: Support inclusive youth sports with a gift or a sponsorship.

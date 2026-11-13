@@ -1,29 +1,29 @@
-# All Abilities Sports Club preview: contact. Edited in Pages CMS.
-kicker: Contact
-headline: Say hello.
-intro: Questions about soccer, volunteering or sponsoring come straight to the club.
-topics:
-- General question
-- Winter Indoor Soccer
-- Volunteering
-- Sponsoring
-- Donations
-form_hint: Tapping the button opens your email app with your message filled in. Press Send there to reach the club.
-form_done: Your email app should be open with your message ready. Press Send there. If nothing opened, use the address on this page.
-email_heading: Email the club
-facebook_line: Follow the club on [Facebook] for news and events.
+top:
+  kicker: Contact
+  headline: Say hello.
+  intro: Questions about sports, volunteering or sponsoring come straight to the club.
 form:
   name_label: Your name
   email_label: Email
   topic_label: Topic
+  topics:
+  - General question
+  - Volunteering
+  - Sponsoring
+  - Donations
   message_label: Message
+  hint: Tapping the button opens your email app with your message filled in. Press Send there to reach the club.
   send_button: Send message
+  done: Your email app should be open with your message ready. Press Send there. If nothing opened, use the address on this page.
   email_subject: Website message
   missing_one: One thing is missing. Please check the highlighted field.
   missing_many: '{count} things are missing. Please check the highlighted fields.'
-copy_button: Copy
-copied: Copied
-selected: Selected
+email_box:
+  heading: Email the club
+  copy_button: Copy
+  copied: Copied
+  selected: Selected
+  facebook_line: Follow the club on [Facebook] for news and events.
 page:
   tab_title: Contact | All Abilities Sports Club
-  description: Questions about soccer, volunteering or sponsoring? Contact All Abilities Sports Club.
+  description: Questions about sports, volunteering or sponsoring? Contact All Abilities Sports Club.

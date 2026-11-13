@@ -1,10 +1,19 @@
 {%- comment -%}
-Sorts the sports from Programs (edited in Pages CMS) by status.
-main = the first "Open now" sport, else the first "Opening soon" one (it drives the Home page countdown and scoreboard).
-active_sports = Open now sports, then Opening soon ones. later_sports = Coming later. over_sports = Season over. Hidden ones are left out.
+Sorts the sports (one file each in _aasc_sports, edited in Pages CMS > Sports) by status.
+active_sports = Open now sports, then Opening soon ones, each soonest sign-up date first.
+main = the first active sport (it drives the Home page countdown, scoreboard and season questions).
+later_sports = Coming later, over_sports = Season over, both A to Z. Hidden ones are left out.
+Dates are turned into numbers here, so a date saved by the editor and one typed in a file sort the same way.
 {%- endcomment -%}
-{%- assign main = nil -%}{%- assign _open = "" | split: "" -%}{%- assign _soon = "" | split: "" -%}{%- assign later_sports = "" | split: "" -%}{%- assign over_sports = "" | split: "" -%}
-{%- for x in site.data.aasc.programs.sports -%}{%- assign _st = x.status | default: "later" | downcase | strip | split: " " | first -%}{%- if _st == "opening" -%}{%- assign _st = "soon" -%}{%- elsif _st == "coming" -%}{%- assign _st = "later" -%}{%- elsif _st == "season" -%}{%- assign _st = "over" -%}{%- endif -%}
-{%- if _st == "open" -%}{%- assign _open = _open | push: x -%}{%- elsif _st == "soon" -%}{%- assign _soon = _soon | push: x -%}{%- elsif _st == "over" -%}{%- assign over_sports = over_sports | push: x -%}{%- elsif _st != "hidden" -%}{%- assign later_sports = later_sports | push: x -%}{%- endif -%}
+{%- assign main = nil -%}{%- assign _keys = "" | split: "" -%}{%- assign _all = site.aasc_sports -%}
+{%- for x in _all -%}{%- assign _st = x.status | default: "later" | downcase | strip | split: " " | first -%}{%- if _st == "opening" -%}{%- assign _st = "soon" -%}{%- elsif _st == "coming" -%}{%- assign _st = "later" -%}{%- elsif _st == "season" -%}{%- assign _st = "over" -%}{%- endif -%}
+{%- if _st != "hidden" -%}{%- assign _b = "3" -%}{%- if _st == "open" -%}{%- assign _b = "1" -%}{%- elsif _st == "soon" -%}{%- assign _b = "2" -%}{%- elsif _st == "over" -%}{%- assign _b = "4" -%}{%- endif -%}
+{%- assign _d = "99999999" -%}{%- if _b == "1" or _b == "2" -%}{%- if x.signups_open and x.signups_open != "" -%}{%- assign _d = x.signups_open | date: "%Y%m%d" -%}{%- endif -%}{%- endif -%}
+{%- capture _k -%}{{ _b }}{{ _d }}{{ x.name | default: "" | downcase | strip | slice: 0, 40 }}~{{ forloop.index0 }}{%- endcapture -%}{%- assign _keys = _keys | push: _k -%}{%- endif -%}
+{%- endfor -%}
+{%- assign _keys = _keys | sort -%}{%- assign _open = "" | split: "" -%}{%- assign _soon = "" | split: "" -%}{%- assign later_sports = "" | split: "" -%}{%- assign over_sports = "" | split: "" -%}
+{%- for _k in _keys -%}{%- assign _i = _k | split: "~" | last | plus: 0 -%}{%- assign x = _all[_i] -%}{%- assign _b = _k | slice: 0 -%}
+{%- if _b == "1" -%}{%- assign _open = _open | push: x -%}{%- elsif _b == "2" -%}{%- assign _soon = _soon | push: x -%}{%- elsif _b == "4" -%}{%- assign over_sports = over_sports | push: x -%}{%- else -%}{%- assign later_sports = later_sports | push: x -%}{%- endif -%}
 {%- endfor -%}
 {%- assign active_sports = _open | concat: _soon -%}{%- assign main = active_sports | first -%}
+{%- capture register_words -%}{{ site.data.aasc.site.menu.register | default: "Register" }}{% if main %} for {{ main.name | downcase }}{% endif %}{%- endcapture -%}

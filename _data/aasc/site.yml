@@ -1,9 +1,7 @@
-# All Abilities Sports Club preview: whole site (club details, menu, footer). Edited in Pages CMS.
 club:
   email: amber.davidson@allabilitiessportsclub.com
   contact_person: Amber Davidson, Founder
   area_line: Serving the Dayton, Ohio area.
-  footer_about: A nonprofit organization offering inclusive youth sports in the Dayton, Ohio area.
   facebook: https://www.facebook.com/profile.php?id=61595151791769
   donate_link: https://www.zeffy.com/en-us/donation-form/all-abilities-sports-club
   volunteer_form: https://docs.google.com/forms/d/e/1FAIpQLSfBk7Kx87qGP7kwyWo0PvftAu6aM9_gew9dFRFaLMTjJS3ceg/viewform?usp=header
@@ -17,8 +15,8 @@ menu:
   register: Register
   menu_button: Menu
   skip_link: Skip to main content
-  menu_register: Register for soccer
 footer:
+  about: A nonprofit organization offering inclusive youth sports in the Dayton, Ohio area.
   explore_heading: Explore
   programs: Programs
   story: Our story
