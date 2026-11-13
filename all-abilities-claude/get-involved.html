@@ -86,7 +86,7 @@
           {%- if si_signups != "" %}<div><dt>{{ p.side.signups_label | escape }}</dt><dd>{{ si_signups_short | escape }}</dd></div>{% endif %}
           {%- if si_season != "" or si_days != "" %}<div><dt>{{ p.side.sessions_label | escape }}</dt><dd>{% if si_days != "" %}{{ si_days | escape }}{% if si_season != "" %}, {% endif %}{% endif %}{{ si_season_short | escape }}</dd></div>{% endif %}
           {%- if si_fee != "" %}<div><dt>{{ p.side.fee_label | escape }}</dt><dd>{{ si_fee | escape }} {{ sp.words.per_athlete | default: "per athlete" | escape }}</dd></div>{% endif %}
-          {%- if x.spots and x.spots != "" %}<div><dt>{{ p.side.spots_label | escape }}</dt><dd>{{ x.spots }}</dd></div>{% endif %}
+          {%- if si_spots > 0 %}<div><dt>{{ p.side.spots_label | escape }}</dt><dd>{{ si_spots }}</dd></div>{% endif %}
         </dl>
 {%- endfor %}
         <p>{{ p.side.note | escape }}</p>

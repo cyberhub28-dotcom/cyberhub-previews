@@ -61,12 +61,12 @@
           {%- if x.description and x.description != "" %}<p class="muted">{{ x.description | escape }}</p>{% elsif x.line and x.line != "" %}<p class="muted">{{ x.line | escape }}</p>{% endif %}
           <dl class="facts">
             {%- if si_signups != "" %}<div><dt>{{ w.signups | default: "Sign-ups" | escape }}</dt><dd>{{ si_signups | escape }}</dd></div>{% endif %}
-            {%- if si_season != "" or si_days != "" %}<div><dt>{{ w.season | default: "Season" | escape }}</dt><dd>{% if si_days != "" %}{{ si_days | escape }}{% if si_season != "" %}, {% endif %}{% endif %}{{ si_season | escape }}{% if x.sessions and x.sessions != "" %} ({{ x.sessions }} sessions){% endif %}</dd></div>{% endif %}
+            {%- if si_season != "" or si_days != "" %}<div><dt>{{ w.season | default: "Season" | escape }}</dt><dd>{% if si_days != "" %}{{ si_days | escape }}{% if si_season != "" %}, {% endif %}{% endif %}{{ si_season | escape }}{% if si_sessions > 0 %} ({{ si_sessions }} sessions){% endif %}</dd></div>{% endif %}
             <div><dt>{{ w.times | default: "Session times" | escape }}</dt><dd>{% if x.times and x.times != "" %}{{ x.times | escape }}{% else %}<span class="ph">To confirm: times</span>{% endif %}</dd></div>
             <div><dt>{{ w.where | default: "Where" | escape }}</dt><dd>{% if x.where and x.where != "" %}{{ x.where | escape }}{% else %}<span class="ph">To confirm: venue</span>{% endif %}</dd></div>
             {%- if x.ages and x.ages != "" %}<div><dt>{{ w.ages | default: "Ages" | escape }}</dt><dd>{{ x.ages | escape }}</dd></div>{% endif %}
             {%- if si_fee != "" %}<div><dt>{{ w.fee | default: "Fee" | escape }}</dt><dd>{{ si_fee | escape }} {{ w.per_athlete | default: "per athlete" | escape }}</dd></div>{% endif %}
-            {%- if x.spots and x.spots != "" %}<div><dt>{{ w.spots | default: "Spots" | escape }}</dt><dd>{{ x.spots }} athletes</dd></div>{% endif %}
+            {%- if si_spots > 0 %}<div><dt>{{ w.spots | default: "Spots" | escape }}</dt><dd>{{ si_spots }} athletes</dd></div>{% endif %}
             <div><dt>{{ w.pay | default: "How to pay" | escape }}</dt><dd>{% if x.how_to_pay and x.how_to_pay != "" %}{{ x.how_to_pay | escape }}{% else %}<span class="ph">To confirm: how to pay</span>{% endif %}</dd></div>
           </dl>
           <div class="btns"><a class="btn btn-navy" href="{{ si_link | escape }}"{% if si_ext %} target="_blank" rel="noopener"{% endif %}>{% if x.button and x.button != "" %}{{ x.button | escape }}{% else %}{{ w.register | default: "Register" | escape }} for {{ si_title | escape }}{% endif %}</a></div>
