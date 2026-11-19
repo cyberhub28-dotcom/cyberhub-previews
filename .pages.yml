@@ -1206,22 +1206,22 @@ content:
     description: On every page.
     fields:
     - name: programs
-      label: Programs link
+      label: Programs link words
       type: string
     - name: story
-      label: Our Story link
+      label: Our Story link words
       type: string
     - name: involved
-      label: Get Involved link
+      label: Get Involved link words
       type: string
     - name: gallery
-      label: Gallery link
+      label: Gallery link words
       type: string
     - name: donate
-      label: Donate link
+      label: Donate link words
       type: string
     - name: contact
-      label: Contact link
+      label: Contact link words
       type: string
     - name: register
       label: Register button
@@ -1247,37 +1247,37 @@ content:
       label: First column heading
       type: string
     - name: programs
-      label: Programs link
+      label: Programs link words
       type: string
     - name: story
-      label: Our Story link
+      label: Our Story link words
       type: string
     - name: sign_up
-      label: Sign up link
+      label: Sign up link words
       type: string
     - name: volunteer
-      label: Volunteer link
+      label: Volunteer link words
       type: string
     - name: faq
-      label: Parent questions link
+      label: Parent questions link words
       type: string
     - name: gallery
-      label: Gallery link
+      label: Gallery link words
       type: string
     - name: connect_heading
       label: Second column heading
       type: string
     - name: donate
-      label: Donate link
+      label: Donate link words
       type: string
     - name: contact
-      label: Contact link
+      label: Contact link words
       type: string
     - name: facebook
-      label: Facebook link
+      label: Facebook link words
       type: string
     - name: privacy
-      label: Privacy link
+      label: Privacy link words
       type: string
     - name: copyright_name
       label: Name after the © sign
