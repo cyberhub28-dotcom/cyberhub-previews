@@ -19,6 +19,4 @@ fee: ''
 spots: ''
 how_to_pay: ''
 button: ''
-signup_link: ''
-payment_link: ''
 ---

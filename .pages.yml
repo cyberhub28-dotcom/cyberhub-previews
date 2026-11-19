@@ -629,20 +629,6 @@ content:
     label: Register button words
     type: string
     description: 'For example: Register for spring basketball. Leave empty for "Register for" plus the season name.'
-  - name: signup_link
-    label: Sign-up form link
-    type: string
-    description: The page where families sign up, like the club's Zeffy page. Every Register button for this sport opens it. Until it is added, the Register button on Get Involved stays switched off.
-    pattern:
-      regex: ^(https://\S+)?$
-      message: Paste the full link, starting with https://, or leave it empty
-  - name: payment_link
-    label: Payment link (optional)
-    type: string
-    description: Only if families pay on a separate page. Leave empty when they pay on the sign-up page, like Zeffy. If filled in, a Pay the fee button shows next to Register on Get Involved.
-    pattern:
-      regex: ^(https://\S+)?$
-      message: Paste the full link, starting with https://, or leave it empty
 - name: aasc-about
   label: Our Story
   type: file
@@ -764,7 +750,7 @@ content:
   - name: join
     label: 2. How would you like to join? (big box)
     type: object
-    description: Each sport that is Open now or Opening soon gets its own Register button here, with the links from Sports.
+    description: Each sport that is Open now or Opening soon gets its own Register button here, that opens the sign-up link in Whole site, Club details.
     fields:
     - name: heading
       label: Heading
@@ -785,7 +771,7 @@ content:
       - name: pay_button
         label: Pay button words
         type: string
-        description: Only shows when a sport has a payment link.
+        description: Only shows when Whole site, Club details has a payment link.
       - name: none_open
         label: Words when no sport is open
         type: text
@@ -1299,7 +1285,7 @@ content:
   - name: club
     label: 3. Club details
     type: object
-    description: 'Used across the site: Contact page, footer, buttons. Under this, 4. Club values: The four words in a strip on Home and Our Story. One per line.'
+    description: 'Used across the site: Contact page, footer, buttons, and the Register, Donate and Volunteer links. Under this, 4. Club values: The four words in a strip on Home and Our Story. One per line.'
     fields:
     - name: email
       label: Club email
@@ -1323,6 +1309,20 @@ content:
       label: Donate button link
       type: string
       description: The page the Donate button opens.
+      pattern:
+        regex: ^(https://\S+)?$
+        message: Paste the full link, starting with https://, or leave it empty
+    - name: signup_link
+      label: Sign-up link (Zeffy)
+      type: string
+      description: The club's Zeffy page where families register athletes and pay. Every Register button on the site opens it. When a new season gets its own Zeffy page, paste the new link here. Until it is added, the Register button on Get Involved stays switched off.
+      pattern:
+        regex: ^(https://\S+)?$
+        message: Paste the full link, starting with https://, or leave it empty
+    - name: payment_link
+      label: Payment link (optional)
+      type: string
+      description: Only if families pay on a separate page. Leave empty when they pay on the Zeffy sign-up page. If filled in, a Pay the fee button shows next to Register on Get Involved.
       pattern:
         regex: ^(https://\S+)?$
         message: Paste the full link, starting with https://, or leave it empty

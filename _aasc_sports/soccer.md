@@ -19,6 +19,4 @@ fee: $35
 spots: ''
 how_to_pay: Pay online on the club's Zeffy sign-up form when you register.
 button: Register for winter soccer
-signup_link: https://www.zeffy.com/en-US/ticketing/indoor-winter-soccer
-payment_link: ''
 ---
