@@ -1163,7 +1163,7 @@ content:
   - name: body
     label: 2. Privacy policy
     type: rich-text
-    description: The whole policy. It names the places families sign up, pay and donate (Zeffy and the volunteer Google Form). If any of those change, this needs to change too. Tell Zack before changing it.
+    description: The whole policy. It names the places families sign up, pay and donate (Zeffy and the volunteer Google Form) and lists the questions those forms ask. If a form's questions or those places change, this needs to change too. Each yellow To confirm line needs your answer before the site goes public. Tell Zack before changing it.
     options:
       format: html
       switcher: false
