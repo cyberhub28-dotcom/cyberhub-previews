@@ -3,15 +3,15 @@ top:
   headline: How this site handles your information.
 body: '<h2>What we collect</h2>
 
-  <p>This site doesn''t store what you type. The contact form opens your own email app, and nothing reaches the club until you press Send. We use your message to reply to you and run club programs. Athlete registration happens on the club''s Google Form, and gifts are made on Zeffy. Those services'' own privacy policies also apply.</p>
+  <p>This site doesn''t store what you type. The contact form opens your own email app, and nothing reaches the club until you press Send. We use your message to reply to you and run club programs. Athlete registration and the sign-up fee are handled on the club''s Zeffy page. Volunteers sign up on the club''s Google Form, and donations are made on Zeffy. Those services'' own privacy policies also apply, including to payment details you enter on Zeffy.</p>
 
   <h2>Sign-ups</h2>
 
-  <p>Volunteers sign up on the club''s Google Form. Parents and guardians register athletes on the club''s Google Form too.</p>
+  <p>Parents and guardians register athletes and pay on the club''s Zeffy page. Volunteers sign up on the club''s Google Form.</p>
 
   <ul>
 
-  <li>What the form asks: To confirm: the questions on the club''s form</li>
+  <li>What the forms ask: To confirm: the questions on the club''s Zeffy athlete form and volunteer form</li>
 
   <li>Who sees it: To confirm: who at the club can see answers</li>
 
@@ -21,7 +21,9 @@ body: '<h2>What we collect</h2>
 
   <h2>Children</h2>
 
-  <p>A parent, guardian or adult volunteer fills in every form. Forms on this site don''t ask for details about children. Please don''t send medical records through the site.</p>
+  <p>This website itself doesn''t ask for information about children. When a parent or guardian registers an athlete on the club''s Zeffy page, the club receives the athlete''s details that form asks for. The club uses them only to run its programs and keep athletes safe. To see, correct or remove an athlete''s details, a parent or guardian can contact the club.</p>
+
+  <p>Please don''t send medical records through the site.</p>
 
   <p>This site is for parents and adults. We don''t knowingly collect information from children under 13.</p>
 
@@ -50,7 +52,7 @@ body: '<h2>What we collect</h2>
   <p>To see or delete information you''ve sent the club, email To confirm: club email for privacy requests.</p>'
 updated:
   label: 'Last updated:'
-  date: '2026-11-12'
+  date: '2026-11-19'
 page:
   tab_title: Privacy | All Abilities Sports Club
   description: How the All Abilities Sports Club website handles your information.
