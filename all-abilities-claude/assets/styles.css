@@ -771,3 +771,6 @@ html.lb-open,html.lb-open body{background:#06101F}
   .reveal{opacity:1!important;transform:none!important}
   .pg *{animation:none!important}
 }
+/* numbers band fits however many boxes are filled in (1 to 4), with no empty box */
+@media (min-width:700px){.board{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:1fr}}
+@media (max-width:699px){.board div:last-child:nth-child(odd){grid-column:1 / -1}}

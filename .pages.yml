@@ -618,7 +618,7 @@ content:
   - name: spots
     label: Number of spots
     type: number
-    description: Numbers only, like 48. Leave empty for no limit.
+    description: Numbers only, like 48. Leave empty to hide the spots count on the site.
   - name: how_to_pay
     label: How to pay
     type: text
