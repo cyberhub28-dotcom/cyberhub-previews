@@ -119,6 +119,7 @@ content:
     - name: spots_label
       label: Spots label
       type: string
+      description: Only shows when a sport has a number of spots.
     - name: fee_label
       label: Fee label
       type: string
@@ -469,6 +470,7 @@ content:
     - name: spots
       label: Spots label
       type: string
+      description: Only shows when a sport has a number of spots.
     - name: pay
       label: How to pay label
       type: string
@@ -614,7 +616,7 @@ content:
   - name: fee
     label: Fee
     type: string
-    description: 'For example: $30. The site adds "per athlete" after it.'
+    description: 'For example: $35. The site adds "per athlete" after it.'
   - name: spots
     label: Number of spots
     type: number
@@ -622,7 +624,7 @@ content:
   - name: how_to_pay
     label: How to pay
     type: text
-    description: One or two sentences. Leave empty until it is set. The site shows "To confirm" until then.
+    description: 'One or two sentences, for example: Pay online on the club''s Zeffy sign-up form when you register. Leave empty until it is set. The site shows "To confirm" until then.'
   - name: button
     label: Register button words
     type: string
@@ -630,14 +632,14 @@ content:
   - name: signup_link
     label: Sign-up form link
     type: string
-    description: The online form families fill in, like a Google Form or Zeffy page. Until it is added, the Register button on Get Involved stays switched off.
+    description: The page where families sign up, like the club's Zeffy page. Every Register button for this sport opens it. Until it is added, the Register button on Get Involved stays switched off.
     pattern:
       regex: ^(https://\S+)?$
       message: Paste the full link, starting with https://, or leave it empty
   - name: payment_link
     label: Payment link (optional)
     type: string
-    description: Only if families pay on a separate page. A Pay the fee button then shows next to Register on Get Involved.
+    description: Only if families pay on a separate page. Leave empty when they pay on the sign-up page, like Zeffy. If filled in, a Pay the fee button shows next to Register on Get Involved.
     pattern:
       regex: ^(https://\S+)?$
       message: Paste the full link, starting with https://, or leave it empty
@@ -1175,7 +1177,7 @@ content:
   - name: body
     label: 2. Privacy policy
     type: rich-text
-    description: The whole policy. Tell Zack before changing it.
+    description: The whole policy. It names the places families sign up, pay and donate (Zeffy and the volunteer Google Form). If any of those change, this needs to change too. Tell Zack before changing it.
     options:
       format: html
       switcher: false
